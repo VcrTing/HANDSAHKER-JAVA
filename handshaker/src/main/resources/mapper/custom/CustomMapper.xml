@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.handshaker.moduie.custom.mapper.CustomerMapper">
+
+    <!-- 最后一个 -->
+    <select id="lastEntity" resultType="com.qiong.handshaker.moduie.custom.Customer">
+        SELECT * FROM custom_customer ORDER BY id DESC LIMIT 1;
+    </select>
+
+    <!-- 多对一 -->
+    <resultMap id="many_with_deep" type="com.qiong.handshaker.moduie.custom.Customer">
+        <id column="id" jdbcType="INTEGER" property="id" />
+
+        <result property="phone_no" column="phone_no"/>
+        <result column="email" property="email"/>
+        <result column="name" property="name"/>
+
+        <result column="remarks" property="remarks"/>
+        <result column="create_date" property="create_date"/>
+
+        <result column="birthdate" property="birthdate"/>
+        <result column="sex" property="sex"/>
+
+        <result column="member_id" property="member_id"/>
+        <result column="address" property="address"/>
+        <result column="member_level_id" property="member_level_id"/>
+
+        <!-- 有多个 这种，就写多个 association -->
+        <association property="member_level" column="member_level_id" select="com.qiong.handshaker.moduie.custom.mapper.MemberLevelMapper.selectById">
+            <id property="id" column="id"/>
+            <result property="discount" column="discount"/>
+        </association>
+    </resultMap>
+
+    <!-- IIST MP -->
+    <select id="pageDeep" resultMap="many_with_deep">
+        select * from custom_customer as me
+            left join custom_member_level as one on me.member_level_id = one.id
+            ${ ew.customSqlSegment }
+    </select>
+    <select id="pageDeepCount" resultType="Long">
+        select count(*) from custom_customer as me ${ ew.customSqlSegment }
+    </select>
+
+    <!-- ONE  resultType="com.qiong.handshaker.moduie.custom.Customer" -->
+    <select id="oneDeep" resultMap="many_with_deep">
+        select * from custom_customer as me
+            left join custom_member_level as one on me.member_level_id = one.id
+            where me.id = #{id}
+    </select>
+</mapper>

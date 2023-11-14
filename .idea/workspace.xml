@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f4aafe6c-0312-4d12-8be6-fa2f313047b1" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="AnnotationType" />
+        <option value="Kotlin Class" />
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2Xq6BGykqnDdB9LZ367b7cohRYe" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;zulu-1.8&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zengyingqiong/JAVAS/SpringBoot/MY_PROJECT/HANDSHAKER/handshaker/src/main/resources/mapper/product&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;22a0dba343fda26384f96164e5241396&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/handshaker/src/main/resources/mapper/product" />
+      <recent name="$PROJECT_DIR$/handshaker/src/main/resources/mapper/test" />
+      <recent name="$PROJECT_DIR$/utils/src/main/java/com/qiong/handshaker/define/query" />
+      <recent name="$PROJECT_DIR$/handshaker/src/main/resources" />
+      <recent name="$PROJECT_DIR$/utils/src/main/java/com/qiong/handshaker/define/exception/vaiid" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/handshaker/src/main/resources/mapper/sys" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.qiong.handshaker.vo.product" />
+      <recent name="com.qiong.handshaker.moduie.product.controller" />
+      <recent name="com.qiong.handshaker.moduie.product.serive" />
+      <recent name="com.qiong.handshaker.moduie.product.mapper" />
+      <recent name="com.qiong.handshaker.moduie.order.controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.App">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="zulu-1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.qiong.handshaker.App" />
+      <module name="handshaker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qiong.handshaker.moduie.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppTest.code" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="handshaker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qiong.handshaker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.qiong.handshaker" />
+      <option name="MAIN_CLASS_NAME" value="com.qiong.handshaker.AppTest" />
+      <option name="METHOD_NAME" value="code" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppTest.jackson" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="handshaker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qiong.handshaker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.qiong.handshaker" />
+      <option name="MAIN_CLASS_NAME" value="com.qiong.handshaker.AppTest" />
+      <option name="METHOD_NAME" value="jackson" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppTest.json" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="handshaker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qiong.handshaker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.qiong.handshaker" />
+      <option name="MAIN_CLASS_NAME" value="com.qiong.handshaker.AppTest" />
+      <option name="METHOD_NAME" value="json" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SecurityTool.pass" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="handshaker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qiong.handshaker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.qiong.handshaker" />
+      <option name="MAIN_CLASS_NAME" value="com.qiong.handshaker.SecurityTool" />
+      <option name="METHOD_NAME" value="pass" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="handshaker" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.qiong.handshaker.App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HandshakeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="handshake" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.qiong.handshake.HandshakeApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.SecurityTool.pass" />
+        <item itemvalue="JUnit.AppTest.jackson" />
+        <item itemvalue="JUnit.AppTest.json" />
+        <item itemvalue="JUnit.AppTest.code" />
+        <item itemvalue="Application.App" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f4aafe6c-0312-4d12-8be6-fa2f313047b1" name="Changes" comment="" />
+      <created>1699344125803</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699344125803</updated>
+      <workItem from="1699344126904" duration="5723000" />
+      <workItem from="1699349944328" duration="581000" />
+      <workItem from="1699350535676" duration="11851000" />
+      <workItem from="1699408935172" duration="11541000" />
+      <workItem from="1699426111114" duration="113044000" />
+      <workItem from="1699844025272" duration="26819000" />
+      <workItem from="1699937581910" duration="2595000" />
+      <workItem from="1699952726227" duration="2648000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

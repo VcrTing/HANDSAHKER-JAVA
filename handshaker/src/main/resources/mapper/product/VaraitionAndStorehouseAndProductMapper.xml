@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.handshaker.moduie.product.mapper.VariationAndStorehouseAndProductMapper">
+
+    <!-- 深度 -->
+    <resultMap id="one_deep" type="com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct">
+        <id property="id" column="id" />
+        <result property="quantity" column="quantity" />
+
+        <association property="variation" javaType="com.qiong.handshaker.moduie.product.Variation">
+            <id property="id" column="v_id" />
+            <result property="name" column="v_name"/>
+        </association>
+
+        <association property="storehouse" javaType="com.qiong.handshaker.moduie.base.Storehouse">
+            <id property="id" column="s_id" />
+            <result property="name" column="s_name"/>
+        </association>
+    </resultMap>
+
+    <select id="productVariationDeep" resultMap="one_deep">
+        SELECT me.id, me.quantity,
+            one.id as v_id,one.name as v_name,
+            two.id as s_id,two.name as s_name
+        from prod_variation_and_storehouse_and_product as me
+                 LEFT JOIN prod_variation as one on me.variation_sql_id=one.id
+                 LEFT JOIN base_storehouse as two on me.storehouse_sql_id=two.id
+        where me.product_sql_id=#{id};
+    </select>
+
+    <!-- 浅层 -->
+    <resultMap id="one" type="com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct">
+        <id property="id" column="id" />
+        <association property="variation" javaType="com.qiong.handshaker.moduie.product.Variation">
+            <id property="id" column="v_id" />
+            <result property="name" column="v_name"/>
+        </association>
+    </resultMap>
+
+    <select id="productVariations" resultMap="one">
+        SELECT me.id, one.id as v_id,one.name as v_name
+        from prod_variation_and_storehouse_and_product as me
+                 LEFT JOIN prod_variation as one on me.variation_sql_id=one.id
+        where me.product_sql_id=#{id};
+    </select>
+</mapper>

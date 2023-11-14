@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.handshaker.test.product.TestProductMapper">
+
+    <!-- 多对多 -->
+    <resultMap id="many_with_label" type="com.qiong.handshaker.moduie.product.Product">
+        <id column="p_id" jdbcType="INTEGER" property="id" />
+        <result column="p_name" property="name"/>
+
+        <result column="create_date" property="create_date"/>
+        <result column="product_id" property="product_id"/>
+        <result column="remarks" property="remarks"/>
+
+        <collection property="labels" column="label_sql_id" ofType="com.qiong.handshaker.moduie.product.Label">
+            <id column="l_id" jdbcType="INTEGER" property="id" />
+            <result column="l_name" property="name"/>
+        </collection>
+    </resultMap>
+
+    <!-- IIST MP -->
+    <select id="pageDeep" resultMap="many_with_label">
+        <!-- select * from prod_product as me left join custom_member_level as one on me.member_level_id = one.id -->
+
+        select
+        me.id as p_id, me.create_date, me.product_id, me.name as p_name, me.remarks,
+        three.id as l_id, three.name as l_name
+
+        from prod_product as me
+        left join prod_product_and_label as two on me.id = two.product_sql_id
+        left join prod_label as three on two.label_sql_id = three.id
+        ${ ew.customSqlSegment }
+        <!-- ${ ew.customSqlSegment } -->
+    </select>
+</mapper>
+
+        <!-- 有多个 这种，就写多个 association
+
+
+        <result column="remarks" property="remarks"/>
+        <result column="create_date" property="create_date"/>
+        <result column="product_id" property="product_id"/>
+
+        <association property="member_level" column="member_level_id" select="com.qiong.handshaker.moduie.custom.mapper.MemberLevelMapper.selectById">
+            <id property="id" column="id"/>
+            <result property="discount" column="discount"/>
+        </association>
+
+        <collection ofType="com.qiong.handshaker.moduie.product.Label"
+        -->

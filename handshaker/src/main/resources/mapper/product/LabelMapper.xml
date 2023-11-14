@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.handshaker.moduie.product.mapper.ProductMapper">
+
+
+    <resultMap id="one_with_deep" type="com.qiong.handshaker.moduie.product.Label">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result property="name" column="name"/>
+        <result property="isShow" column="is_show"/>
+        <collection property="products" javaType="com.qiong.handshaker.moduie.product.Product">
+            <id column="id" jdbcType="INTEGER" property="id" />
+            <result property="product_id" column="product_id" />
+            <result property="name" column="name" />
+        </collection>
+    </resultMap>
+
+    <select id="oneDeep" resultMap="one_with_deep">
+        select * from prod_label as me
+    </select>
+
+</mapper>

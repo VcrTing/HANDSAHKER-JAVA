@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.handshaker.moduie.product.mapper.ProductAndLabelMapper">
+
+    <resultMap id="one_by_label" type="com.qiong.handshaker.moduie.product.ProductAndLabel">
+        <id property="id" column="id" />
+        <result property="label_sql_id" column="label_sql_id"/>
+        <result property="product_sql_id" column="product_sql_id"/>
+
+        <association property="product" column="product_sql_id" select="com.qiong.handshaker.moduie.product.mapper.ProductMapper.selectById">
+            <id column="id" jdbcType="INTEGER" property="id" />
+            <result property="product_id" column="product_id" />
+            <result property="name" column="name" />
+        </association>
+        <association property="label" column="label_sql_id" select="com.qiong.handshaker.moduie.product.mapper.LabelMapper.selectById">
+            <id column="id" property="id" />
+            <result column="name" property="name" />
+            <result column="is_show" property="isShow" />
+        </association>
+    </resultMap>
+
+    <!-- 通过 一个 标签 查询 结果 -->
+    <select id="oneByLabel" resultMap="one_by_label" >
+        select * from prod_product_and_label as me
+            left join prod_product as one on me.product_sql_id = one.id
+            left join prod_label as two on me.label_sql_id = two.id
+            where me.label_sql_id = #{id}
+    </select>
+
+    <!-- 主要 查询 产品 -->
+    <select id="manyByProducts" resultMap="one_by_label">
+        select * from prod_product_and_label as me
+                  left join prod_product as one on me.product_sql_id = one.id
+                  left join prod_label as two on me.label_sql_id = two.id
+    </select>
+</mapper>

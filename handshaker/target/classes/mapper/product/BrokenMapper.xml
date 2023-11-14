@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.handshaker.moduie.product.mapper.BrokenMapper">
+
+    <!-- 多对一 -->
+    <resultMap id="many_with_deep" type="com.qiong.handshaker.moduie.product.Broken">
+        <id column="id" jdbcType="INTEGER" property="id" />
+
+        <result column="storehouse_sql_id" property="storehouse_sql_id"/>
+        <result column="product_sql_id" property="product_sql_id"/>
+
+        <result column="date" property="date"/>
+        <result column="remarks" property="remarks"/>
+        <result column="quantity" property="quantity"/>
+
+        <association property="storehouse" column="storehouse_sql_id" select="com.qiong.handshaker.moduie.base.mapper.StorehouseMapper.selectById">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="phone_no" column="phone_no"/>
+            <result property="contact_person" column="contact_person"/>
+        </association>
+        <association property="product" column="product_sql_id" select="com.qiong.handshaker.moduie.product.mapper.ProductMapper.selectById">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="product_id" column="product_id"/>
+        </association>
+    </resultMap>
+
+    <!-- IIST MP -->
+    <select id="pageDeep" resultMap="many_with_deep">
+        select *
+            from prod_broken as me
+                left join base_storehouse as one on me.storehouse_sql_id = one.id
+                left join prod_product as two on me.product_sql_id = two.id
+                ${ ew.customSqlSegment }
+        <!-- ${ ew.customSqlSegment } ORDER BY u.id DESC
+
+        -->
+    </select>
+    <select id="pageDeepCount" resultType="Long">
+        <!-- select count(*) from sys_user u left join base_storehouse s on u.storehouse_id = s.id ${ ew.customSqlSegment } -->
+        select count(*) from prod_broken as me ${ ew.customSqlSegment }
+    </select>
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="60 seconds" debug="false"> -->
+
+    <!-- 控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{时间:HH:mm:ss.SSS} [%logger{15}:%line]:%n   %msg%n%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 文件的
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>时间:%d{yyyy_MM_dd}.log</fileNamePattern>
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{时间:HH:mm:ss.SSS} [%logger{15}:%line]:%n   %msg%n%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <append>false</append>
+    </appender>
+    -->
+
+    <!-- 根 -->
+    <root level="error">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <!--
+    <logger name="com.qiong.handshaker.moduie" level="info">
+        <appender-ref ref="FILE_ONE"/>
+    </logger>
+    -->
+</configuration>

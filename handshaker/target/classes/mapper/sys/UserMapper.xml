@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.handshaker.moduie.sys.mapper.UserMapper">
+
+    <!-- 多对一 -->
+    <resultMap id="one_with_deep" type="com.qiong.handshaker.moduie.sys.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+
+        <result column="is_admin" property="isAdmin"/>
+        <!-- 有多个 这种，就写多个 association -->
+        <association property="storehouse" column="storehouse_id" select="com.qiong.handshaker.moduie.base.mapper.StorehouseMapper.selectById"/>
+    </resultMap>
+
+    <!-- 一个用户 携带 ROIE -->
+    <select id="info" resultMap="one_with_deep">
+        select * from sys_user where id = #{id}
+    </select>
+
+    <!-- -->
+    <!-- 多对一 -->
+    <resultMap id="many_with_deep" type="com.qiong.handshaker.moduie.sys.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+
+        <result column="storehouse_id" property="storehouse_id"/>
+        <result column="is_admin" property="isAdmin"/>
+
+        <result property="phone_no" column="phone_no"/>
+        <result column="email" property="email"/>
+        <result column="name" property="name"/>
+
+        <association property="storehouse" column="storehouse_id" select="com.qiong.handshaker.moduie.base.mapper.StorehouseMapper.selectById">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="phone_no" column="phone_no"/>
+            <result property="contact_person" column="contact_person"/>
+        </association>
+    </resultMap>
+
+    <!-- IIST MP -->
+    <select id="pageDeep" resultMap="many_with_deep">
+        select
+            <!-- u.id, u.name, u.phone_no, u.email, u.is_admin, u.storehouse_id,
+            s.id, s.name, s.phone_no, s.contact_person -->
+            *
+            from sys_user as me
+                left join base_storehouse as one on me.storehouse_id = one.id
+                ${ ew.customSqlSegment }
+        <!-- ${ ew.customSqlSegment } ORDER BY u.id DESC  -->
+    </select>
+    <select id="pageDeepCount" resultType="Long">
+        <!-- select count(*) from sys_user u left join base_storehouse s on u.storehouse_id = s.id ${ ew.customSqlSegment } -->
+        select count(*) from sys_user as me ${ ew.customSqlSegment }
+    </select>
+
+</mapper>
+
+        <!-- 有多个 这种，就写多个 association
+        <association property="storehouse" column="storehouse_id" javaType="com.qiong.handshaker.moduie.base.Storehouse">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="phone_no" column="phone_no"/>
+            <result property="contact_person" column="contact_person"/>
+        </association>
+ -->

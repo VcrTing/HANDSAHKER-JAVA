@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.handshaker.moduie.base.mapper.SupplierMapper">
+
+    <!-- 原来的 -->
+    <resultMap id="one_with_deep" type="com.qiong.handshaker.moduie.base.Supplier">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="supplier_id" property="supplier_id"/>
+        <result column="email" property="email"/>
+        <result column="name" property="name"/>
+        <result column="phone_no" property="phone_no"/>
+        <result column="remarks" property="remarks"/>
+        <result column="create_date" property="create_date"/>
+        <result column="contact_person" property="contact_person"/>
+        <result column="create_date" property="create_date"/>
+        <result column="office_address" property="office_address"/>
+        <result column="factory_address" property="factory_address"/>
+    </resultMap>
+
+    <!-- resultType="com.qiong.handshaker.moduie.base.Supplier" -->
+    <select id="one" resultMap="one_with_deep">
+        select * from base_supplier where id = #{id}
+    </select>
+
+</mapper>
