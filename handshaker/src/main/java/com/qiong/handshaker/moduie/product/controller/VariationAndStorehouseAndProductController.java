@@ -1,14 +1,8 @@
 package com.qiong.handshaker.moduie.product.controller;
 
 import com.qiong.handshaker.anno.result.QResponseAdvice;
-import com.qiong.handshaker.define.result.QResponse;
-import com.qiong.handshaker.moduie.product.Product;
-import com.qiong.handshaker.moduie.product.inner.LabelsJson;
-import com.qiong.handshaker.moduie.product.serive.ProductService;
-import com.qiong.handshaker.tool.result.QResponseTool;
+import com.qiong.handshaker.moduie.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

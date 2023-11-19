@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -14,18 +15,22 @@ import java.util.List;
 @AllArgsConstructor
 public class VoRestockPostForm {
 
-    private Integer quantity;
-    private Long product;
+    @NotNull(message = "产品数据 必须要有")
+    private String product;
+
     private Long supplier;
 
-    private List<VoInnerRestockDistribute>restock_distribute;
+    private List<VoInnerRestockDistribute> restock_distribute;
 
-    private Long product_sql_id;
-    private Long supplier_sql_id;
+    @NotNull(message = "入货日期 必须要有")
+    private String restock_date;
 
-    private Date restock_date;
-
+    @NotNull(message = "入货价格 必须要有")
     private BigDecimal restock_price;
     private BigDecimal lowest_price;
     private BigDecimal selling_price;
+
+    public boolean hasSupplier() {
+        return supplier != null;
+    }
 }

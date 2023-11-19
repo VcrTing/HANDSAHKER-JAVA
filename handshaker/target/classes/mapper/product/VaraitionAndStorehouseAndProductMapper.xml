@@ -5,10 +5,14 @@
 
 <mapper namespace="com.qiong.handshaker.moduie.product.mapper.VariationAndStorehouseAndProductMapper">
 
+
     <!-- 深度 -->
     <resultMap id="one_deep" type="com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct">
-        <id property="id" column="id" />
-        <result property="quantity" column="quantity" />
+        <id property="id" column="me_id" />
+        <result property="quantity" column="me_quantity" />
+        <result property="product_sql_id" column="me_product_sql_id" />
+        <result property="variation_sql_id" column="me_variation_sql_id" />
+        <result property="storehouse_sql_id" column="me_storehouse_sql_id" />
 
         <association property="variation" javaType="com.qiong.handshaker.moduie.product.Variation">
             <id property="id" column="v_id" />
@@ -18,13 +22,25 @@
         <association property="storehouse" javaType="com.qiong.handshaker.moduie.base.Storehouse">
             <id property="id" column="s_id" />
             <result property="name" column="s_name"/>
+            <result property="address" column="s_address"/>
+            <result property="phone_no" column="s_phone_no"/>
         </association>
     </resultMap>
 
+    <!-- 深度 列表 -->
+    <select id="listDeep" resultMap="one_deep">
+        SELECT me.id as me_id, me.quantity as me_quantity, me.product_sql_id as me_product_sql_id, me.variation_sql_id as me_variation_sql_id, me.storehouse_sql_id as me_storehouse_sql_id,
+               one.id as v_id,one.name as v_name,
+               two.id as s_id,two.name as s_name, two.address as s_address, two.phone_no as s_phone_no
+        from prod_variation_and_storehouse_and_product as me
+                 LEFT JOIN prod_variation as one on me.variation_sql_id=one.id
+                 LEFT JOIN base_storehouse as two on me.storehouse_sql_id=two.id
+    </select>
+    <!-- 根據 產品 過濾 -->
     <select id="productVariationDeep" resultMap="one_deep">
-        SELECT me.id, me.quantity,
+        SELECT me.id as me_id, me.quantity as me_quantity, me.product_sql_id as me_product_sql_id, me.variation_sql_id as me_variation_sql_id,
             one.id as v_id,one.name as v_name,
-            two.id as s_id,two.name as s_name
+            two.id as s_id,two.name as s_name, two.address as s_address, two.phone_no as s_phone_no
         from prod_variation_and_storehouse_and_product as me
                  LEFT JOIN prod_variation as one on me.variation_sql_id=one.id
                  LEFT JOIN base_storehouse as two on me.storehouse_sql_id=two.id

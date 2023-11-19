@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qiong.handshaker.moduie.order.mapper.OrderMapper">
+
+
+    <!-- many_with_storehouse -->
+    <resultMap id="many_with_storehouse" type="com.qiong.handshaker.moduie.order.Order">
+        <id property="id" column="me_id" />
+        <result property="order_id" column="me_order_id" />
+        <result property="order_date" column="me_order_date" />
+        <result property="total_price" column="me_total_price" />
+        <result property="order_status" column="me_order_status" />
+        <result property="storehouse_sql_id" column="me_storehouse_sql_id" />
+
+        <association property="storehouse" javaType="com.qiong.handshaker.moduie.base.Storehouse">
+            <id column="one_id" jdbcType="INTEGER" property="id" />
+            <result property="phone_no" column="one_phone_no" />
+            <result property="address" column="one_address" />
+            <result property="name" column="one_name" />
+        </association>
+
+        <association property="member" javaType="com.qiong.handshaker.moduie.custom.Customer">
+            <id column="two_id" jdbcType="INTEGER" property="id" />
+            <result property="name" column="two_name" />
+        </association>
+    </resultMap>
+
+    <select id="pageList" resultMap="many_with_storehouse">
+        select
+            me.id as me_id, me.order_id as me_order_id, me.order_date as me_order_date, me.total_price as me_total_price, me.order_status as me_order_status,
+            me.storehouse_sql_id as me_storehouse_sql_id,
+            one.id as one_id, one.name as one_name, one.address as one_address, one.phone_no as one_phone_no,
+            two.id as two_id, two.name as two_name
+            from order_order as me
+                left join base_storehouse as one on me.storehouse_sql_id=one.id
+                left join custom_customer as two on me.member_sql_id=two.id
+                ${ ew.customSqlSegment }
+    </select>
+</mapper>

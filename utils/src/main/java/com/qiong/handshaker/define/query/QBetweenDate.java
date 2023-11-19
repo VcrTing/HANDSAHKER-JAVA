@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -33,6 +34,9 @@ public class QBetweenDate {
     public boolean hasStar() { return (this.starDate != null); }
     public boolean hasEnd() { return (this.endDate != null); }
 
+    public Date starDate(boolean isExact) { return stringToDate(this.starDate, isExact); }
+    public Date endDate(boolean isExact) { return stringToDate(this.endDate, isExact); }
+
     /**
     * 當前時間 STRING
     * @params
@@ -57,6 +61,13 @@ public class QBetweenDate {
         }
         catch (ParseException ignored) { } return null;
     }
+    public static String dateToString(Date date, boolean isExactDate) {
+        return new SimpleDateFormat(isExactDate ? DEF_FMT_LONG : DEF_FMT).format(date);
+    }
+    public static Date stringToDate(String str, boolean isExactDate) {
+        try { return new SimpleDateFormat(isExactDate ? DEF_FMT_LONG : DEF_FMT).parse(str.trim()); }
+        catch (Exception ignored) { } return null;
+    }
 
     /**
     *
@@ -64,9 +75,13 @@ public class QBetweenDate {
     * @return
     */
     public static QBetweenDate ofMap(HashMap<String, Object> map, boolean isExactDate) {
-        String st = serDateString(map.get(KEY_STAR_DATE), isExactDate);
-        String ed = serDateString(map.get(KEY_END_DATE), isExactDate);
-        return new QBetweenDate(st, ed, isExactDate);
+        return init(map.get(KEY_STAR_DATE), map.get(KEY_END_DATE), isExactDate);
+    }
+    public static QBetweenDate init(Object star, Object end, boolean isExactDate) {
+        return new QBetweenDate(serDateString(star, isExactDate), serDateString(end, isExactDate), isExactDate);
+    }
+    public static QBetweenDate init(Object end, boolean isExactDate) {
+        return new QBetweenDate(serDateString(nowDateString(isExactDate), isExactDate), serDateString(end, isExactDate), isExactDate);
     }
 
     /**
@@ -83,5 +98,23 @@ public class QBetweenDate {
             map.put(KEY_END_DATE, this.endDate);
         }
         return map;
+    }
+
+    /**
+    * 过去几天
+    * @params
+    * @return
+    */
+    public static QBetweenDate ofWhenDay(Integer day, boolean isExact) {
+        QBetweenDate res = new QBetweenDate();
+        Date n = new Date();
+        // 开始
+        res.setStarDate(dateToString(n, isExact));
+        // 结束
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, day);
+        res.setEndDate(dateToString(calendar.getTime(), isExact));
+
+        return res;
     }
 }

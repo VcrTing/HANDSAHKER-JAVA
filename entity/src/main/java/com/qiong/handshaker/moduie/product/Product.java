@@ -46,6 +46,24 @@ public class Product extends BaseEntity {
     // 标签 JSON 数据
     private String labels;
 
+    /**
+    *
+    * @params
+    * @return
+    */
+    public Product simpleResult() {
+        Product res = new Product();
+        res.setId(this.getId());
+        res.setName(this.getName());
+        res.setProduct_id(this.getProduct_id());
+        return res;
+    }
+
+    /**
+    * 初始化
+    * @params
+    * @return
+    */
     public static Product initPost(VoProductPostForm postForm) {
         Product res = new Product();
 
@@ -62,10 +80,17 @@ public class Product extends BaseEntity {
         return autoGenerate( res );
     }
 
-    public static Product changePatch(VoProductPatchForm form, Product product) {
-        product.setProduct_id(form.getProduct_id());
-        product.setName(form.getName());
-        product.setCreate_date(form.getCreate_date());
+    public Product modifyNewStock(Product product, RestockRecord restockRecord, Supplier supplier) {
+        product.setNew_restock_date(restockRecord.getRestock_date());
+
+        product.setNew_selling_price(restockRecord.getSelling_price());
+        product.setNew_restock_price(restockRecord.getRestock_price());
+        product.setNew_lowest_price(restockRecord.getLowest_price());
+
+        if (supplier != null) {
+            product.setNew_supplier(supplier.getName());
+            product.setNew_supplier_sql_id(supplier.getId());
+        }
         return product;
     }
 }

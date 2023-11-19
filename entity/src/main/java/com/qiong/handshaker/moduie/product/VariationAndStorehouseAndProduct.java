@@ -9,6 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @TableName("prod_variation_and_storehouse_and_product")
 @Data
@@ -51,5 +54,25 @@ public class VariationAndStorehouseAndProduct extends BaseEntity {
         this.version = 1;
         this.quantity = 0;
         autoGenerate(this);
+    }
+
+    // 必须 获取 库存 数量
+    public Integer mustGetQuantity() {
+        return this.quantity == null ? 0 : Math.abs(this.quantity);
+    }
+    // 减货
+    public void removeQuantity(Integer num) { this.quantity = this.quantity - Math.abs(num); }
+    // 加货
+    public void insertQuantity(Integer num) { this.quantity = this.quantity + Math.abs(num); }
+
+    // 構建 屬於 自己的
+    public static List<VariationAndStorehouseAndProduct> filterByProduct(List<VariationAndStorehouseAndProduct> vsps, Long pid) {
+        List<VariationAndStorehouseAndProduct> res = new ArrayList<>();
+        for (VariationAndStorehouseAndProduct vsp: vsps) {
+            if (Objects.equals(vsp.getProduct_sql_id(), pid)) {
+                res.add(vsp);
+            }
+        }
+        return res;
     }
 }

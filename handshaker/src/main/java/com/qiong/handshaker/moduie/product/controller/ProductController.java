@@ -1,11 +1,6 @@
 package com.qiong.handshaker.moduie.product.controller;
 
-import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterProduct;
@@ -15,18 +10,12 @@ import com.qiong.handshaker.define.query.QPage;
 import com.qiong.handshaker.define.query.QSort;
 import com.qiong.handshaker.define.result.QPager;
 import com.qiong.handshaker.define.result.QResponse;
-import com.qiong.handshaker.moduie.base.Supplier;
-import com.qiong.handshaker.moduie.base.service.SupplierService;
-import com.qiong.handshaker.moduie.custom.Customer;
 import com.qiong.handshaker.moduie.product.Product;
-import com.qiong.handshaker.moduie.product.ProductAndLabel;
 import com.qiong.handshaker.moduie.product.Variation;
-import com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct;
-import com.qiong.handshaker.moduie.product.serive.ProductAndLabelService;
-import com.qiong.handshaker.moduie.product.serive.ProductService;
-import com.qiong.handshaker.moduie.product.serive.VariationAndStorehouseAndProductService;
+import com.qiong.handshaker.moduie.product.service.ProductAndLabelService;
+import com.qiong.handshaker.moduie.product.service.ProductService;
+import com.qiong.handshaker.moduie.product.service.VariationAndStorehouseAndProductService;
 import com.qiong.handshaker.tool.result.QResponseTool;
-import com.qiong.handshaker.utils.basic.QTypedUtil;
 import com.qiong.handshaker.view.product.ViewProductResultForm;
 import com.qiong.handshaker.vo.product.VoProductPatchForm;
 import com.qiong.handshaker.vo.product.VoProductPostForm;
@@ -36,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @QResponseAdvice

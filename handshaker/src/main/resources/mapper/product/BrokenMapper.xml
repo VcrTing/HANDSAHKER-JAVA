@@ -8,7 +8,7 @@
     <!-- 多对一 -->
     <resultMap id="many_with_deep" type="com.qiong.handshaker.moduie.product.Broken">
         <id column="id" jdbcType="INTEGER" property="id" />
-
+        
         <result column="storehouse_sql_id" property="storehouse_sql_id"/>
         <result column="product_sql_id" property="product_sql_id"/>
 
@@ -19,8 +19,9 @@
         <association property="storehouse" column="storehouse_sql_id" select="com.qiong.handshaker.moduie.base.mapper.StorehouseMapper.selectById">
             <id property="id" column="id"/>
             <result property="name" column="name"/>
+            <!--
             <result property="phone_no" column="phone_no"/>
-            <result property="contact_person" column="contact_person"/>
+            <result property="contact_person" column="contact_person"/> -->
         </association>
         <association property="product" column="product_sql_id" select="com.qiong.handshaker.moduie.product.mapper.ProductMapper.selectById">
             <id property="id" column="id"/>
@@ -32,6 +33,10 @@
     <!-- IIST MP -->
     <select id="pageDeep" resultMap="many_with_deep">
         select *
+            <!-- me.id as me_id, me.date, me.remarks, me.quantity,
+            one.id as b_id, one.name as b_name,
+            two.id as p_id, two.name as p_name, two.product_id as p_product_id
+            -->
             from prod_broken as me
                 left join base_storehouse as one on me.storehouse_sql_id = one.id
                 left join prod_product as two on me.product_sql_id = two.id
@@ -40,8 +45,8 @@
 
         -->
     </select>
+
     <select id="pageDeepCount" resultType="Long">
-        <!-- select count(*) from sys_user u left join base_storehouse s on u.storehouse_id = s.id ${ ew.customSqlSegment } -->
         select count(*) from prod_broken as me ${ ew.customSqlSegment }
     </select>
 

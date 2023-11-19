@@ -41,6 +41,15 @@ public class User extends BaseEntity {
     private Storehouse storehouse;
 
     /**
+    * 只获取 脱敏信息
+    * @params
+    * @return
+    */
+    public void doProtected() {
+        this.setPassword("");
+    }
+
+    /**
     * 来自于 VoUserOptionForm
     * @params
     * @return

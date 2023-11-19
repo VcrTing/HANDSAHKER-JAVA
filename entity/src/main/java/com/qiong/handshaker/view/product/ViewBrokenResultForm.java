@@ -13,6 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ViewBrokenResultForm {
+    private Long id;
 
     private Date date;
     private String remarks;
@@ -25,7 +26,8 @@ public class ViewBrokenResultForm {
     private Product product;
     private Storehouse storehouse;
 
-    public static ViewBrokenResultForm fromBean(Broken broken) {
+    public static ViewBrokenResultForm init(Broken broken) {
+
         Product p = broken.getProduct();
         Storehouse s = broken.getStorehouse();
 
@@ -35,6 +37,7 @@ public class ViewBrokenResultForm {
         res.setQuantity(broken.getQuantity());
         res.setStorehouse(s);
         res.setProduct(p);
+        res.setId(broken.getId());
 
         if (p != null) {
             res.setProduct_id(p.getProduct_id());
