@@ -10,7 +10,4 @@ import org.springframework.stereotype.Service;
 @Service
 public class VariationService extends ServiceImpl<VariationMapper, Variation> {
 
-    @Autowired
-    BrokenMapper mapper;
-
 }

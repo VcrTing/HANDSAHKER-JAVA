@@ -30,10 +30,15 @@ public class WebResponseBodyAdvice implements ResponseBodyAdvice<Object> {
         return anno != null;
     }
 
+    /**
+    * 拦截 最终返回
+    * @params
+    * @return
+    */
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
 
-        // 拦截 QRESPONSE 类型
+        // 拦截 Q RESPONSE 类型
         // 只返回 DATA
         // 因为 手办前端需要 明文 数据 类型
         if (body instanceof QResponse) {
@@ -44,7 +49,7 @@ public class WebResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             return res.getData();
         }
 
-        System.out.println("最终返回值 = " + body);
+        System.out.println("最终返回值(无 Q RES) = " + body);
         return body;
     }
 }

@@ -34,52 +34,66 @@ public class CustomerController {
     @Autowired
     CustomerService service;
 
-    @GetMapping("/aii")
-    public QResponse<List<Customer>> aii() {
-        return QResponseTool.genSuccess("查询成功", service.list());
-    }
-
+    /**
+     * 深层 分页 列表
+     * @params
+     * @return
+     */
     @GetMapping
     public QResponse<IPage<Customer>> page(@RequestParam HashMap<String, Object> qry) {
-        System.out.println("查询 = " + qry);
 
         QueryWrapper<Customer> qw = new QueryWrapper<>();
-        QSort qs = QSort.ofMap(qry);
-        qw.orderBy(QSort.hasSort(qry), qs.isAsc(), "me.id");
+        qw.orderBy(QSort.hasSort(qry), QSort.isAsc(qry), "me.id");
 
         QLikes likes = QLikes.ofMap(qry, new String[] { "search" });
         String search = likes.one("search");
         if (!search.isEmpty()) {
             qw
-                    .like("me.member_id", search).or()
-                    .like("me.phone_no", search).or()
-                    .like("me.name", search).or()
-                    .like("me.email", search).or();
+                .like("me.member_id", search).or()
+                .like("me.phone_no", search).or()
+                .like("me.name", search).or()
+                .like("me.email", search).or();
         }
 
-        QPage qp = QPage.ofMap(qry);
-        IPage<Customer> ipage = new Page<>(qp.getPage(), qp.getSize());
-
-        return QResponseTool.restfull(true, service.pageDeep(ipage, qw));
+        return QResponseTool.restfull(true, service.pageDeep(new Page<Customer>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
     }
 
+    /**
+     * 深层 查詢 单个
+     * @params
+     * @return
+     */
     @GetMapping("/{id}")
     public QResponse<Customer> one(@PathVariable Long id) {
         return QResponseTool.restfull(id != null, service.oneDeep(id));
     }
 
+    /**
+     * 常规 新增
+     * @params
+     * @return
+     */
     @PostMapping
     public QResponse<Object> pos(@RequestBody @Validated VoCustomOptionForm form) {
-        return service.posCustom(Customer.init(form));
+        return service.posCustom(Customer.init(form, null));
     }
 
+    /**
+     * 常规 修改
+     * @params
+     * @return
+     */
     @PatchMapping("/{id}")
     public QResponse<Customer> upd(@PathVariable Long id, @RequestBody @Validated VoCustomOptionForm form) {
-        Customer entity = Customer.init(form);
-        entity.setId(id);
+        Customer entity = Customer.init(form, id);
         return QResponseTool.restfull(service.updateById(entity), entity);
     }
 
+    /**
+     * 常规 删除
+     * @params
+     * @return
+     */
     @DeleteMapping("/{id}")
     public QResponse<Customer> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));

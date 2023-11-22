@@ -32,47 +32,58 @@ public class LabelController {
     @Autowired
     ProductAndLabelService pnlService;
 
+    /**
+    * 浅层 分页 列表
+    * @params
+    * @return
+    */
     @GetMapping
     public QResponse<IPage<Label>> page(@RequestParam HashMap<String, Object> qry) {
-
         LambdaQueryWrapper<Label> qw = new LambdaQueryWrapper<>();
-        QSort qs = QSort.ofMap(qry);
-        qw.orderBy(QSort.hasSort(qry), qs.isAsc(), Label::getId);
-        QPage qp = QPage.ofMap(qry);
-        IPage<Label> ipage = new Page<>(qp.getPage(), qp.getSize());
-
-        return QResponseTool.restfull(true, service.page(ipage, qw));
+        qw.orderBy(QSort.hasSort(qry), QSort.isAsc(qry), Label::getId);
+        return QResponseTool.restfull(true, service.page(new Page<Label>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
     }
 
-    // GET ONE 获取 一个 标签
+    /**
+    * 查询一个标签，附带他的产品信息
+    * @params
+    * @return
+    */
     @GetMapping("/{id}")
     public QResponse<ViewLabelResultForm> one(@PathVariable Long id) {
         return QResponseTool.restfull(id != null, pnlService.oneByLabel(id));
     }
 
-    @GetMapping("/aii")
-    public QResponse<List<Label>> aii() {
-        return QResponseTool.genSuccess("查询成功", service.list());
-    }
-
-    // POST
+    /**
+    * 新增 标签
+    * @params
+    * @return
+    */
     @PostMapping
     public QResponse<Label> pos(@RequestBody @Validated VoLabelForm form) {
         Label entity = Label.init(form);
-        System.out.println("新增 ENTITY = " + entity);
         return QResponseTool.restfull(service.save(entity), entity);
     }
 
+    /**
+    * 修改 标签 名称
+    * @params
+    * @return
+    */
     @PatchMapping("/{id}")
     public QResponse<Label> upd(@PathVariable Long id, @RequestBody @Validated VoLabelForm form) {
         Label entity = Label.init(form);
         entity.setId(id);
-        System.out.println(id + "  " + entity);
         return QResponseTool.restfull(service.updateById(entity), entity);
     }
 
     // 删除 标签，不需要 遍历 产品 ，不需要修改 他的 labels json string
     // 只需要 product 查询 label 时，过滤掉 status = 0 的 label
+    /**
+    * 删除某标签
+    * @params
+    * @return
+    */
     @DeleteMapping("/{id}")
     public QResponse<Label> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));

@@ -13,6 +13,7 @@ import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.view.product.ViewBrokenResultForm;
 import com.qiong.handshaker.vo.product.VoBrokenOperaForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,12 +27,16 @@ public class BrokenController {
     @Autowired
     private BrokenService service;
 
+    /**
+    * 產品壞貨 深度 分頁
+    * @params
+    * @return
+    */
     @GetMapping
     public QResponse<QPager<ViewBrokenResultForm>> page(@RequestParam HashMap<String, Object> qry) {
 
         QueryWrapper<Broken> qw = new QueryWrapper<>();
-        QSort qs = QSort.ofMap(qry);
-        qw.orderBy(QSort.hasSort(qry), qs.isAsc(), "me.id");
+        qw.orderBy(QSort.hasSort(qry), QSort.isAsc(qry), "me.id");
         qw.eq("me.status", "1");
 
         QDate qd = QDate.ofMap(qry, "date");
@@ -45,26 +50,30 @@ public class BrokenController {
         return QResponseTool.restfull(true, service.pageDeep(new Page<>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
     }
 
-    @GetMapping("/{id}")
-    public QResponse<Broken> one(@PathVariable Long id) {
-        return QResponseTool.restfull(true, service.getById(id));
-    }
+    // @GetMapping("/{id}")
+    // public QResponse<Broken> one(@PathVariable Long id) { return QResponseTool.restfull(true, service.getById(id)); }
 
-    // POST
+    /**
+    * 新增 壞貨
+    * @params
+    * @return
+    */
     @PostMapping
+    @Transactional
     public QResponse<Broken> pos(@RequestBody @Validated VoBrokenOperaForm form) {
         Broken entity = Broken.init(form);
         return QResponseTool.restfull(service.broken(entity), entity);
     }
 
-    // DELETE
+    /**
+    * 取消 壞貨
+    * @params
+    * @return
+    */
     @DeleteMapping("/{id}")
+    @Transactional
     public QResponse<Broken> dei(@PathVariable Long id) {
-        System.out.println(
-                "ID = " + id
-        );
         Broken entity = service.getById(id);
-        System.out.println(entity);
         if (entity == null) throw new QLogicException("壞貨數據未找到，請重試");
         return QResponseTool.restfull(service.revocation(entity), entity);
     }

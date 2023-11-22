@@ -8,13 +8,26 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class AppTest {
 
     @Test
+    public void nullTest() {
+        Object a = null;
+
+        if (a instanceof String) {
+            System.out.println("非空");
+        }
+        if (a == null) {
+            System.out.println("空");
+        }
+
+    }
+
+    @Test
     public void code() {
         HttpStatus code = HttpStatus.resolve(400);
-
         System.out.println(code);
         System.out.println(code == null);
     }

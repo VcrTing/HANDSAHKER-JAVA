@@ -1,5 +1,6 @@
 package com.qiong.handshaker.view.order;
 
+import com.qiong.handshaker.define.enums.EnumOrderStatus;
 import com.qiong.handshaker.moduie.custom.Customer;
 import com.qiong.handshaker.moduie.order.OrderProfit;
 import com.qiong.handshaker.moduie.sys.User;
@@ -17,8 +18,11 @@ public class ViewProfitResultForm {
 
     private Long id;
 
+    private Long order_sql_id;
+
     private String order_id;
     private Date order_date;
+    private EnumOrderStatus order_status;
 
     private Customer member;
     private User cashier;
@@ -36,6 +40,7 @@ public class ViewProfitResultForm {
         res.setMember(customer);
 
         res.setId(profit.getId());
+        res.setOrder_sql_id(profit.getOrder_sql_id());
 
         res.setTotal_profit(profit.getNew_total_profit());
         res.setTotal_price(profit.getOrigin_total_price());

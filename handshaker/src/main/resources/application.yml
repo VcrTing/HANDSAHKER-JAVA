@@ -19,6 +19,17 @@ spring:
   main:
     banner-mode: off
 
+  mvc:
+    static-path-pattern: /uploads/**
+
+  web:
+    resources:
+      static-locations: classpath:/document/
+
+my:
+  interview-header: uploads
+  document-folder: document
+
 # MYBATIS
 mybatis-plus:
   global-config:
@@ -34,3 +45,5 @@ mybatis-plus:
 
 server:
   port: 80
+
+

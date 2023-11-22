@@ -1,5 +1,6 @@
 package com.qiong.handshaker.moduie.product.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -22,12 +23,17 @@ public class BrokenService extends ServiceImpl<BrokenMapper, Broken> {
     @Autowired
     VariationAndStorehouseAndProductService variationAndStorehouseAndProductService;
 
-    public List<ViewBrokenResultForm> serListBroken(List<Broken> list) {
-        if (list == null) list = new ArrayList<>();
-        List<ViewBrokenResultForm> res = new ArrayList<>();
-        list.forEach(s -> res.add(ViewBrokenResultForm.init(s)));
-        return res;
+    /**
+    * 通过 产品 查 坏货，深度查詢
+    * @params
+    * @return
+    */
+    public List<Broken> byProduct(Long pid) {
+        LambdaQueryWrapper<Broken> qw = new LambdaQueryWrapper<>();
+        qw.eq(Broken::getProduct_sql_id, pid);
+        return mapper.listDeep(qw);
     }
+
 
     /**
      * 自定義 深度 分頁
@@ -36,11 +42,11 @@ public class BrokenService extends ServiceImpl<BrokenMapper, Broken> {
      */
     public QPager<ViewBrokenResultForm> pageDeep(IPage<Broken> ip, QueryWrapper<Broken> iqw) {
         ip.setRecords(mapper.pageDeep(ip, iqw));
-        return QPager.ofPage( ip, serListBroken(ip.getRecords()) );
+        return QPager.ofPage( ip, ViewBrokenResultForm.initList(ip.getRecords()) );
     }
 
     /**
-    * 新增 壞貨
+    * 新增 壞貨，倉庫 庫存 減去
     * @params
     * @return
     */
@@ -48,13 +54,13 @@ public class BrokenService extends ServiceImpl<BrokenMapper, Broken> {
         // 產品 庫存 減去 數量
         boolean isOk = variationAndStorehouseAndProductService.removeQuantity(
                 broken.getProduct_sql_id(), broken.getVariation_sql_id(), broken.getStorehouse_sql_id(),
-                broken.getQuantity());
+                broken.mustGetQuantity());
         // 新增 壞貨 紀錄
         return isOk && this.save(broken);
     }
 
     /**
-    * 移除 壞貨
+    * 移除 壞貨，倉庫 庫存 加回
     * @params
     * @return
     */

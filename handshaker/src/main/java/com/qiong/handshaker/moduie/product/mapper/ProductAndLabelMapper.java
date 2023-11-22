@@ -11,7 +11,4 @@ import java.util.List;
 @Mapper
 public interface ProductAndLabelMapper extends BaseMapper<ProductAndLabel> {
 
-    List<ProductAndLabel> oneByLabel(@Param("id") Long id);
-
-    List<ProductAndLabel> manyByProducts();
 }

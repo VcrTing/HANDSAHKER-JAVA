@@ -1,5 +1,6 @@
 package com.qiong.handshaker.moduie.product.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qiong.handshaker.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.moduie.base.Supplier;
@@ -17,32 +18,36 @@ import java.util.List;
 public class RestockService extends ServiceImpl<RestockMapper, RestockRecord> {
 
     @Autowired
-    RestockMapper mapper;
-
-    @Autowired
     VariationAndStorehouseAndProductService variationAndStorehouseAndProductService;
 
-    public Integer insertQuantity(List<VoInnerRestockDistribute> rds, Long pid) {
-        Integer res = 0;
-        for (VoInnerRestockDistribute rd: rds) {
-            // 正式 入货
-            if (variationAndStorehouseAndProductService.insertQuantity(
-                    pid, rd.getVariation(), rd.getStorehouse(), rd.mustGetQuantity()
-            )) res += rd.mustGetQuantity();
-        }
-        return res;
+    /**
+    * 一個產品 的 入貨紀錄
+    * @params
+    * @return
+    */
+    public List<RestockRecord> manyRecordByProduct(Long pid) {
+        LambdaQueryWrapper<RestockRecord> qw = new LambdaQueryWrapper<>();
+        qw.eq(RestockRecord::getProduct_sql_id, pid);
+        return this.list(qw);
     }
 
+    /**
+    * 正常 入货
+    * @params
+    * @return
+    */
     public RestockRecord restockNormal(VoRestockPostForm form, Supplier supplier, Product product) {
-        if (product == null) throw new QLogicException("产品查询 异常，请检查产品 ID");
+        if (product == null || product.getId() == null) throw new QLogicException("产品查询 异常，请检查产品 ID");
 
         // 构建 入货 记录
         RestockRecord res = RestockRecord.init(form, supplier, product); // supplier 可以为 空
 
-        // 新增 库存 数量
-        Integer resQuantity = insertQuantity(form.getRestock_distribute(), product.getId());
+        // 循環 入货
+        for (VoInnerRestockDistribute rd: form.getRestock_distribute()) {
+            variationAndStorehouseAndProductService.insertQuantity(product.getId(), rd.getVariation(), rd.getStorehouse(), rd.mustGetQuantity());
+        }
 
         // 新增 入货 记录
-        return mapper.insert(res) > 0 ? res : null;
+        return this.save(res) ? res : null;
     }
 }

@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,6 +27,12 @@ public class ViewBrokenResultForm {
 
     private Product product;
     private Storehouse storehouse;
+
+    public static List<ViewBrokenResultForm> initList(List<Broken> src) {
+        List<ViewBrokenResultForm> res = new ArrayList<>();
+        src.forEach(s -> res.add(init(s)));
+        return res;
+    }
 
     public static ViewBrokenResultForm init(Broken broken) {
 

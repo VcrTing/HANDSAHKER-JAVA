@@ -25,6 +25,11 @@ public class CashierProductService  extends ServiceImpl<CashierProductMapper, Pr
     @Autowired
     VariationAndStorehouseAndProductService variationAndStorehouseAndProductService;
 
+    /**
+    * 深度 查询 收银员页面 的 产品 列表
+    * @params
+    * @return
+    */
     public QPager<ViewCashierProductResultForm> pageCashier(IPage<Product> ip, QueryWrapper<Product> qw) {
 
         // INIT

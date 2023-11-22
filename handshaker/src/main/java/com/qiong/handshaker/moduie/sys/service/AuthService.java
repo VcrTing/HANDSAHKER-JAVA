@@ -23,17 +23,10 @@ public class AuthService {
     @Autowired
     AuthenticationManager manager;
 
-    // @Autowired
-    // QSecurityDatasetTool securityDatasetTool;
-
     @Autowired
     QSecurityOfMysqlUtil mysqlUtil;
 
-    private AuthUser killPassword(AuthUser authUser) {
-        authUser.getUser().setPassword(""); return authUser;
-    }
-
-    // 储存 用户
+    // 储存 用户 到 缓存 内
     protected AuthUser storeUser(AuthUser user) {
         // REDIS
         // securityDatasetTool.setUserToRedis(user.getId(), user);
@@ -42,14 +35,19 @@ public class AuthService {
         return mysqlUtil.setAuthUserToMysql(user);
     }
 
+    // 组装 JWT 和 删除密码 和 缓存 用户
     public AuthUser groupLoginUser(AuthUser user) {
         user.setJwt(QJwtUtil.genJwt(user.getId(), user.getUsername()));
-        killPassword(user);
+        user.getUser().setPassword("");
         return storeUser(user);
     }
 
+    /**
+    * 用户 登录
+    * @params
+    * @return
+    */
     public Object login(String name, String pass) {
-        // if (!StringUtils.hasText(name) || !StringUtils.hasText(pass)) return "用户名或密码为空";
         System.out.println(name + " " + pass);
         UsernamePasswordAuthenticationToken authenticationToken = QSecurityTool.genNamePassToken(name, pass);
         System.out.println("驗證 = " + authenticationToken);

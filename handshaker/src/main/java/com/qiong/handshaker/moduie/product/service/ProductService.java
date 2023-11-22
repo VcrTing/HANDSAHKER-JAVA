@@ -6,12 +6,17 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qiong.handshaker.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.define.result.QPager;
-import com.qiong.handshaker.moduie.product.Label;
-import com.qiong.handshaker.moduie.product.Product;
-import com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct;
+import com.qiong.handshaker.moduie.base.Storehouse;
+import com.qiong.handshaker.moduie.base.Supplier;
+import com.qiong.handshaker.moduie.base.service.StorehouseService;
+import com.qiong.handshaker.moduie.base.service.SupplierService;
+import com.qiong.handshaker.moduie.product.*;
 import com.qiong.handshaker.moduie.product.mapper.ProductMapper;
 import com.qiong.handshaker.utils.basic.QTypedUtil;
 import com.qiong.handshaker.view.product.ViewProductResultForm;
+import com.qiong.handshaker.view.product.inner.ViewInnerBrokenProduct;
+import com.qiong.handshaker.view.product.inner.ViewInnerRestock;
+import com.qiong.handshaker.view.product.inner.ViewInnerStorehouseInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,34 +33,20 @@ public class ProductService extends ServiceImpl<ProductMapper, Product> {
     LabelService labelService;
 
     @Autowired
+    SupplierService supplierService;
+
+    @Autowired
+    BrokenService brokenService;
+
+    @Autowired
+    RestockService restockService;
+
+    @Autowired
+    StorehouseService storehouseService;
+
+    @Autowired
     VariationAndStorehouseAndProductService variationAndStorehouseAndProductService;
 
-    public List<ViewProductResultForm> serProducts(List<Product> src) {
-        List<ViewProductResultForm> res = new ArrayList<>();
-        /**
-        * 这里 已经 过滤 掉了 status = 0 的 label 了
-        * @params
-        * @return
-        */
-        List<Label> allLabels = labelService.list();
-        /**
-        * 搜索 全部 样式 与 库存 数据 很多条，但是是 浅层的 数据
-        * @params
-        * @return
-        */
-        List<VariationAndStorehouseAndProduct> vsps = variationAndStorehouseAndProductService.listDeep();
-
-
-        // 循环 组装 产品
-        for (Product p: src) {
-            // 组装 标签 和 基础 数据
-            ViewProductResultForm one = ViewProductResultForm.initList(p, allLabels);
-            // 组装 样式 与 库存
-            one.groupVariations(vsps);
-            res.add(one);
-        }
-        return res;
-    }
 
     /**
      * 自定義 深度 分頁，更换 IPage 为 QPager
@@ -63,8 +54,24 @@ public class ProductService extends ServiceImpl<ProductMapper, Product> {
      * @return
      */
     public QPager<ViewProductResultForm> pageDeep( IPage<Product> ip, QueryWrapper<Product> qw) {
-        ip = mapper.selectPage(ip, qw); // 查询
-        return QPager.ofPage(ip, serProducts(ip.getRecords())); // 換 PAGER
+        ip = mapper.selectPage(ip, qw); // 率先 查询
+        return QPager.ofPage(ip, serProductList(ip.getRecords())); // 更換 PAGER
+    }
+    // 组装 产品列表 结果
+    public List<ViewProductResultForm> serProductList(List<Product> src) {
+        List<ViewProductResultForm> res = new ArrayList<>();
+        // 全部的 可用的 标签
+        List<Label> allLabels = labelService.list();
+        // 全部的 库存数据，浅层连表
+        List<VariationAndStorehouseAndProduct> vsps = variationAndStorehouseAndProductService.listDeep();
+
+        for (Product p: src) {
+            // 组装 标签 和 基础 数据
+            ViewProductResultForm one = ViewProductResultForm.init(p, allLabels);
+            // 组装 样式 与 库存，且加入列表
+            res.add(one.groupVariations(vsps));
+        }
+        return res;
     }
 
     /**
@@ -72,29 +79,47 @@ public class ProductService extends ServiceImpl<ProductMapper, Product> {
     * @params
     * @return
     */
+    public ViewProductResultForm oneDeep(Object pid) {
+
+        // 基础 查询
+        Product entity = oneByProductID( pid.toString() );
+        Long prodID = entity.getId();
+
+        // 构建 ResultForm 结果
+        ViewProductResultForm res = ViewProductResultForm.init(entity, labelService.list());
+
+        // 加入 多对多 样式 信息
+        res.setVariations( variationAndStorehouseAndProductService.productVariations(prodID) );
+
+        // 查询 入货列表，根据 产品 ID
+        List<RestockRecord> rrs = restockService.manyRecordByProduct( prodID );
+        if (rrs != null) {
+            res.setRestocks( ViewInnerRestock.fromRestockRecord(rrs, res.getVariations(), storehouseService.list(), supplierService.list()) );
+            res.asyncNewRestock(); // 提取 最新 入货 记录
+        }
+
+        // 查询 坏货，组装 坏货列表结果
+        res.setBroken_products(ViewInnerBrokenProduct.ofBroken( brokenService.byProduct( prodID ) ));
+
+        // 查询 库存，组装 库存信息结果
+        res.setStorehouse_info(ViewInnerStorehouseInfo.ofVsps( variationAndStorehouseAndProductService.byProduct( prodID ) ));
+
+        return res;
+    }
+
+    /**
+    * 查询 产品，通过产品的 Long ID 或 String ID
+    * @params
+    * @return
+    */
     public Product oneByProductID(String pID) {
         if (pID == null) throw new QLogicException("产品 ID 异常: " + pID);
         LambdaQueryWrapper<Product> qw = new LambdaQueryWrapper<>();
-        // 是 ID 还是 Product_id
+        // 是 ID 还是 Product_id，通过 isLong 判断
         qw.eq(QTypedUtil.isLong(pID) ? Product::getId : Product::getProduct_id, pID);
         Product product = mapper.selectOne(qw);
         if (product == null) throw new QLogicException("未找到该 产品 ID: " + pID);
         return product;
-    }
-
-    public ViewProductResultForm oneDeep(Object pid) {
-
-        // 基础 查询
-        Product entity = oneByProductID( pid.toString());
-        List<Label> allLabels = labelService.list();
-
-        // 构建 结果
-        ViewProductResultForm res = ViewProductResultForm.initList(entity, allLabels);
-
-        // 加入 多对多 样式 信息
-        res.setVariations( variationAndStorehouseAndProductService.productVariations(entity.getId()) );
-
-        return res;
     }
 
     /**
@@ -102,7 +127,7 @@ public class ProductService extends ServiceImpl<ProductMapper, Product> {
     * @params
     * @return
     */
-    public boolean modifyProduct(Product product) {
+    public boolean updateProduct(Product product) {
         if (product.getId() == null) throw new QLogicException("产品 ID 必须存在");
         return this.updateById(product);
     }

@@ -48,7 +48,7 @@ public class ViewOrderDetailForm {
     private List<ViewInnerPaymentMethod> payment_method;
 
 
-    public static ViewOrderDetailForm init(Order order, User cashier, Customer member, MemberLevel memberLevel) {
+    public static ViewOrderDetailForm init(Order order, Storehouse storehouse, User cashier, Customer member, MemberLevel memberLevel) {
         ViewOrderDetailForm res = new ViewOrderDetailForm();
 
         res.setId(order.getId());
@@ -59,7 +59,8 @@ public class ViewOrderDetailForm {
 
         cashier.doProtected();
 
-        res.setOrder_shop(order.getStorehouse());
+        res.setOrder_shop( storehouse );
+
         res.setMember_level(memberLevel);
         res.setCashier(cashier);
         res.setMember(member);

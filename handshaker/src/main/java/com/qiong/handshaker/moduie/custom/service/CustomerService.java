@@ -21,15 +21,13 @@ public class CustomerService extends ServiceImpl<CustomerMapper, Customer> {
     @Autowired
     CustomerMapper mapper;
 
-    public Customer oneDeep(Long id) { return mapper.oneDeep(id); }
-
     /**
-    * 新增客户
+    * 新增客户，新增前，需要自定义增长的 customer id
     * @params
     * @return
     */
     public QResponse<Object> posCustom(Customer entity) {
-        Long memberID = DataConfigHandshaker.initMemberID;
+        long memberID = DataConfigHandshaker.initMemberID;
 
         // 查询最后一个 用户
         Customer last = mapper.lastEntity();
@@ -39,10 +37,10 @@ public class CustomerService extends ServiceImpl<CustomerMapper, Customer> {
             Long mid = QTypedUtil.serLong(last.getMember_id());
             if (mid != null) memberID = mid + 1;
         }
-        entity.setMember_id(memberID.toString());
+        entity.setMember_id(Long.toString(memberID));
 
-        int isOk = mapper.insert(entity);
-        return QResponseTool.restfull(isOk > 0, entity);
+        // 返回
+        return QResponseTool.restfull(mapper.insert(entity) > 0, entity);
     }
 
 
@@ -51,13 +49,18 @@ public class CustomerService extends ServiceImpl<CustomerMapper, Customer> {
      * @params
      * @return
      */
-    public IPage<Customer> pageDeep(
-            IPage<Customer> ip,
-            QueryWrapper<Customer> iqw) {
+    public IPage<Customer> pageDeep( IPage<Customer> ip, QueryWrapper<Customer> iqw) {
         // 查詢 紀錄
         ip.setRecords(mapper.pageDeep(ip, iqw));
         // 查詢 數量
-        ip.setTotal(QTypedUtil.serLong(mapper.pageDeepCount(ip, iqw), 0L));
+        // ip.setTotal(QTypedUtil.serLong(mapper.pageDeepCount(ip, iqw), 0L));
         return ip;
     }
+
+    /**
+    * 自定义 深度 查询 单个
+    * @params
+    * @return
+    */
+    public Customer oneDeep(Long id) { return mapper.oneDeep(id); }
 }

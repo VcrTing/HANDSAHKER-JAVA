@@ -28,7 +28,20 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     QSecurityMvcTool securityMvcTool;
 
     /**
-    * 新增，修改 用户 的功能
+     * 自定義 深度 分頁
+     * @params
+     * @return
+     */
+    public IPage<User> pageDeep(IPage<User> ip, QueryWrapper<User> iqw) {
+        // 查詢 紀錄
+        ip.setRecords(mapper.pageDeep(ip, iqw));
+        // 查詢 數量
+        // ip.setTotal(QTypedUtil.serLong(mapper.pageDeepCount(ip, iqw), 0L));
+        return ip;
+    }
+
+    /**
+    * 新增 用户
     * @params
     * @return
     */
@@ -40,6 +53,12 @@ public class UserService extends ServiceImpl<UserMapper, User> {
                 QResponseTool.restfull(this.save(entity), entity) :
                 QResponseTool.genBad("相同用户", "已存在相同的用户了");
     }
+
+    /**
+    * 修改 用户
+    * @params
+    * @return
+    */
     public QResponse<Object> pacUser(User entity, Long uid) {
         if (QTypedUtil.serLong(uid) == null) throw new QLogicException("用户 ID 非法");
         User old = this.getById(uid);
@@ -73,7 +92,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     }
 
     /**
-    * 拿 用戶 信息
+    * 查询 用戶 信息
     * @params
     * @return
     */
@@ -82,20 +101,5 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         if (user == null) throw new QLogicException("找不到用户");
         user.setPassword("");
         return user;
-    }
-
-    /**
-    * 自定義 深度 分頁
-    * @params
-    * @return
-    */
-    public IPage<User> pageDeep(
-            IPage<User> ip,
-            QueryWrapper<User> iqw) {
-        // 查詢 紀錄
-        ip.setRecords(mapper.pageDeep(ip, iqw));
-        // 查詢 數量
-        ip.setTotal(QTypedUtil.serLong(mapper.pageDeepCount(ip, iqw), 0L));
-        return ip;
     }
 }

@@ -13,6 +13,10 @@ public class ViewInnerRestockDistribute {
 
     private Integer quantity;
 
-    private Variation variation;
+    private ViewInnerVariation variation;
     private Storehouse storehouse;
+
+    public Integer mustGetQuantity() {
+        return Math.abs(quantity != null ? quantity : 0);
+    }
 }

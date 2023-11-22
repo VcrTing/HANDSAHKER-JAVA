@@ -32,53 +32,69 @@ public class UserController {
     @Autowired
     QSecurityMvcTool securityMvcTool;
 
+    /**
+    * 深层 用户 分页 列表
+    * @params
+    * @return
+    */
     @GetMapping(DataRouterSys.USER)
     @QResponseAdvice
     public QResponse<IPage<User>> page(@RequestParam HashMap<String, Object> qry) {
 
         QueryWrapper<User> qw = new QueryWrapper<>();
-        QSort qs = QSort.ofMap(qry);
-        qw.orderBy(QSort.hasSort(qry), qs.isAsc(), "me.id");
+        qw.orderBy(QSort.hasSort(qry), QSort.isAsc(qry), "me.id");
 
         QLikes likes = QLikes.ofMap(qry, new String[] { "search" });
+
+        // 根据 search 模糊 搜索
         String search = likes.one("search");
         if (!search.isEmpty()) {
             qw
-                    .like("me.phone_no", search).or()
-                    .like("me.name", search).or()
-                    .like("me.email", search).or();
+                .like("me.phone_no", search).or()
+                .like("me.name", search).or()
+                .like("me.email", search).or();
         }
 
-        QPage qp = QPage.ofMap(qry);
-        IPage<User> ipage = new Page<>(qp.getPage(), qp.getSize());
-
-        return QResponseTool.restfull(true, service.pageDeep(ipage, qw));
+        return QResponseTool.restfull(true, service.pageDeep(new Page<User>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
     }
 
+    /**
+    * 常规 获取 单个
+    * @params
+    * @return
+    */
     @GetMapping(DataRouterSys.USER + "/{id}")
     public QResponse<User> one(@PathVariable Long id) {
-        return QResponseTool.restfull(QTypedUtil.serLong(id) != null, service.getById(id));
+        return QResponseTool.restfull(QTypedUtil.hasLong(id), service.getById(id));
     }
 
-    @GetMapping(DataRouterSys.USER + "/aii")
-    public QResponse<List<User>> aii() {
-        return QResponseTool.genSuccess("查询成功", service.list());
-    }
-
-    // POST
+    /**
+     * 新增 用户
+     * @params
+     * @return
+     */
     @PostMapping(DataRouterSys.USER)
     @QResponseAdvice
     public QResponse<Object> pos(@RequestBody @Validated VoUserOptionForm form) {
         return service.posUser(User.init(form));
     }
 
-    // PATCH
+    /**
+     * 修改 用户
+     * @params
+     * @return
+     */
     @PatchMapping(DataRouterSys.USER_PATCH + "/{id}")
     @QResponseAdvice
     public QResponse<Object> upd(@PathVariable Long id, @RequestBody @Validated VoUserOptionForm form) {
         return service.pacUser(User.init(form), id);
     }
 
+    /**
+    * 常规 删除 用户
+    * @params
+    * @return
+    */
     @DeleteMapping(DataRouterSys.USER + "/{id}")
     public QResponse<User> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));

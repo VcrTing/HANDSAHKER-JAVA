@@ -8,6 +8,7 @@ import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterBase;
 import com.qiong.handshaker.data.router.DataRouterOrder;
 import com.qiong.handshaker.define.dataset.EntityDefineDataset;
+import com.qiong.handshaker.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.define.query.QBetweenDate;
 import com.qiong.handshaker.define.query.QLikes;
 import com.qiong.handshaker.define.query.QPage;
@@ -40,7 +41,11 @@ public class OrderController {
     @Autowired
     OrderService service;
 
-    // ADMIN 订单 列表
+    /**
+    * 深层 查询 ADMIN 订单 列表
+    * @params
+    * @return
+    */
     @GetMapping
     public QResponse<QPager<ViewOrderResultForm>> page(@RequestParam HashMap<String, Object> qry) {
 
@@ -48,13 +53,16 @@ public class OrderController {
         qw.orderBy(QSort.hasSort(qry), QSort.ofMap(qry).isAsc(), "me.id");
 
         QLikes likes = QLikes.ofMap(qry, new String[] { "search", "member", "status", "order_id", "time_period", "startDate", "endDate" });
+
+        // search 模糊 查询
         if (likes.has("search")) { qw.like("me.order_id", likes.one("search")).or(); }
 
+        // 模糊 查询
         if (likes.has("order_id")) { qw.like("me.order_id", likes.one("order_id")).or(); }
         if (likes.has("status")) { qw.like("me.order_status", likes.one("status")).or(); }
         if (likes.has("member")) { qw.like("me.member_sql_id", likes.one("member")).or(); }
 
-        // 计算 日期
+        // 日期 区间 过滤
         QBetweenDate qbd = null;
         if (likes.has("time_period")) {
             qbd = QBetweenDate.ofWhenDay( - QTypedUtil.serInt(likes.one("time_period"), 0), false);
@@ -69,14 +77,17 @@ public class OrderController {
             qw.gt("me.order_date", qbd.endDate(false));
         }
 
-        return QResponseTool.restfull(true, service.pageList(new Page<Order>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
+        return QResponseTool.restfull(true, service.pageDeep(new Page<Order>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
     }
 
-    // 查询 一个
+    /**
+    * 深度 查询一个 订单 详情
+    * @params
+    * @return
+    */
     @GetMapping("/{id}")
-    public QResponse<ViewOrderDetailForm> detail(@PathVariable Long id) {
-        return QResponseTool.restfull(id != null, service.detail(id));
+    public QResponse<ViewOrderDetailForm> detail(@PathVariable Object id) {
+        if (id == null) throw new QLogicException("未找到 订单 ID");
+        return QResponseTool.restfull(true, service.detail(id));
     }
-
-    // 新增订单 移步 到 Checkout controller
 }

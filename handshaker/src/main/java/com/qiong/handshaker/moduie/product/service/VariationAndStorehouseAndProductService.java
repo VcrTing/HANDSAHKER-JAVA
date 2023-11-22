@@ -10,6 +10,7 @@ import com.qiong.handshaker.moduie.product.Variation;
 import com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct;
 import com.qiong.handshaker.moduie.product.mapper.VariationAndStorehouseAndProductMapper;
 import com.qiong.handshaker.moduie.product.mapper.VariationMapper;
+import com.qiong.handshaker.view.product.inner.ViewInnerStorehouseInfo;
 import com.qiong.handshaker.view.product.inner.ViewInnerVariation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,33 +40,18 @@ public class VariationAndStorehouseAndProductService extends ServiceImpl<Variati
 
 
     /**
-    * 新增
+    * 新增 產品 和 各個倉庫的 各個樣式的 庫存信息
     * @params
     * @return
     */
-    // 给 产品，新增一个 样式，以及执行 新增后的 后续
-    public List<VariationAndStorehouseAndProduct> connectionVariationForProduct(Long pid, Variation entity) {
-        // 查询 所有 storehouse;
-        List<Storehouse> storehouses = storehouseMapper.selectList(null);
-        // 执行 新增 样式，以及 后续
-        return (variationMapper.insert(entity) > 0) ? afterVariationPost(pid, entity.getId(), storehouses) : null;
-    }
-
-    // 给一个产品 和 样式，绑定 很多仓库的 库存
-    public List<VariationAndStorehouseAndProduct> afterVariationPost(Long productId, Long variationId, List<Storehouse> storehouses) {
-        // INIT
-        List<VariationAndStorehouseAndProduct> res = new ArrayList<>();
-
-        // 每个 Storehouse 都要有 一个 VariationAndStorehouseAndProduct 数据
-        for (Storehouse s: storehouses) {
-            res.add( new VariationAndStorehouseAndProduct(productId, variationId, s.getId()) );
+    public void connectionVariationForProduct(Long pid, Variation entity) {
+        if (variationMapper.insert(entity) > 0) {
+            List<Storehouse> storehouses = storehouseMapper.selectList(null);
+            for (Storehouse s: storehouses) {
+                // 每一个仓库，均新增一个 库存 数据
+                mapper.insert(new VariationAndStorehouseAndProduct(pid, entity.getId(), s.getId()));
+            }
         }
-
-        // 执行 新增
-        for (VariationAndStorehouseAndProduct vp: res) { mapper.insert(vp); }
-
-        // 返回
-        return res;
     }
 
     /**
@@ -76,10 +62,10 @@ public class VariationAndStorehouseAndProductService extends ServiceImpl<Variati
     // 某 产品的 浅样式 数据
     public List<ViewInnerVariation> productVariations(Long pid) {
         List<ViewInnerVariation> res = new ArrayList<>();
-        List<Variation> cen = new ArrayList<>();
         List<VariationAndStorehouseAndProduct> src = mapper.productVariations(pid);
         if (src != null) {
-            // VariationAndStorehouseAndProduct 提取 Variation
+            List<Variation> cen = new ArrayList<>();
+            // 从 VariationAndStorehouseAndProduct 中 提取 Variation
             for (VariationAndStorehouseAndProduct vp: src) {
                 cen.add(vp.getVariation());
             }
@@ -93,18 +79,17 @@ public class VariationAndStorehouseAndProductService extends ServiceImpl<Variati
         return res;
     }
 
-    // 某 产品的 深度 样式 数据 包括 数量
-    public List<ViewInnerVariation> productVariationDeep(Long pid) {
-        List<ViewInnerVariation> res = new ArrayList<>();
-        List<VariationAndStorehouseAndProduct> src = mapper.productVariationDeep(pid);
-        for (VariationAndStorehouseAndProduct vp: src) {
-            res.add(ViewInnerVariation.init(vp.getVariation(), vp.getStorehouse(), vp.getQuantity()));
-        }
-        return res;
+    /**
+    * 根据产品 ID，深度查询 库存仓库样式 数据
+    * @params
+    * @return
+    */
+    public List<VariationAndStorehouseAndProduct> byProduct(Long pid) {
+        return mapper.productVariationDeep(pid);
     }
 
     /**
-    * 入货，这里是 入货了
+    * 根據 产品/样式/仓库 ID 獲取 庫存 數據
     * @params
     * @return
     */
@@ -118,27 +103,39 @@ public class VariationAndStorehouseAndProductService extends ServiceImpl<Variati
         return res;
     }
 
-    public Boolean modifyNum(VariationAndStorehouseAndProduct vsp, Integer quantity) {
+    /**
+     * 庫存 修改
+     * @params
+     * @return
+     */
+    public Boolean updateQuantity(VariationAndStorehouseAndProduct vsp, Integer quantity) {
         LambdaUpdateWrapper<VariationAndStorehouseAndProduct> uw = new LambdaUpdateWrapper<>();
         uw.set(VariationAndStorehouseAndProduct::getQuantity, quantity);
         uw.eq(VariationAndStorehouseAndProduct::getId, vsp.getId());
-        try {
-            return (mapper.update(vsp, uw) > 0);
-        } catch (Exception err) { throw new QLogicException("更改仓库库存信息失败！！！"); }
+        try { return (mapper.update(vsp, uw) > 0); } catch (Exception err) { throw new QLogicException("更改仓库库存信息失败！！！"); }
     }
 
-    // 加货
+    /**
+    * 加货
+    * @params
+    * @return
+    */
     public Boolean insertQuantity(Long productID, Long variationID, Long storehouseID, Integer quantity) {
         VariationAndStorehouseAndProduct vsp = one(productID, variationID, storehouseID);
-        Integer origin = (vsp.getQuantity() == null) ? 0 : vsp.getQuantity();
-        return modifyNum(vsp, origin + quantity);
+        // int err = 1 / 0; 測試 回滾，能
+        // throw new QLogicException("測試 調貨 數據回滾"); 測試 回滾，能
+        return updateQuantity(vsp, vsp.mustGetQuantity() + quantity);
     }
-    // 减货
+
+    /**
+    * 减货
+    * @params
+    * @return
+    */
     public Boolean removeQuantity(Long productID, Long variationID, Long storehouseID, Integer quantity) {
         VariationAndStorehouseAndProduct vsp = one(productID, variationID, storehouseID);
-        Integer origin = (vsp.getQuantity() == null) ? 0 : vsp.getQuantity();
-        int res = origin - quantity;
-        if (res < 0) throw new QLogicException("仓库 库存 数量，少于 要减去的 数量，刚才仓库的剩余数量 = " + origin);
-        return modifyNum(vsp, res);
+        int res = vsp.mustGetQuantity() - quantity;
+        if (res < 0) throw new QLogicException("仓库的库存数量，少于 要减去的数量，此仓库的剩余庫存 = " + vsp.mustGetQuantity());
+        return updateQuantity(vsp, res);
     }
 }

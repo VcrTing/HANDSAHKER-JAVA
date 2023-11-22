@@ -30,13 +30,16 @@ public class CashierProductController {
     @Autowired
     CashierProductService service;
 
+    /**
+    * 收银员页面的 产品
+    * @params
+    * @return
+    */
     @GetMapping
     public QResponse<QPager<ViewCashierProductResultForm>> page(@RequestParam HashMap<String, Object> qry) {
 
-        System.out.println("查询 = " + qry);
-
         QueryWrapper<Product> qw = new QueryWrapper<>();
-        qw.lambda().orderBy(QSort.hasSort(qry), QSort.ofMap(qry).isAsc(), Product::getId);
+        qw.lambda().orderBy(QSort.hasSort(qry), QSort.isAsc(qry), Product::getId);
 
         QLikes likes = QLikes.ofMap(qry, new String[] { "search", "label", "supplier", "new_restock_date" });
         String search = likes.one("search");

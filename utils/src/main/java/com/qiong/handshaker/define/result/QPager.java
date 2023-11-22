@@ -13,14 +13,17 @@ public class QPager<T> {
     private Long total;
     private Long pages;
 
+    private Object extra;
+
     private List<T> records;
 
-    public static <R> QPager<R> ofPage(IPage src, List<R> records) {
+    public static <R, T> QPager<R> ofPage(IPage<T> src, List<R> records) {
         QPager<R> res = new QPager<>();
         res.setSize(src.getSize());
         res.setPages(src.getPages());
         res.setTotal(src.getTotal());
         res.setRecords(records);
+        res.setCurrent(src.getCurrent());
         return res;
     }
 }

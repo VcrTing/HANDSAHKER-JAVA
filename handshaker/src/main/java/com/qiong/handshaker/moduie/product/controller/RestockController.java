@@ -2,24 +2,28 @@ package com.qiong.handshaker.moduie.product.controller;
 
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterProduct;
+import com.qiong.handshaker.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.define.result.QResponse;
 import com.qiong.handshaker.moduie.base.Supplier;
 import com.qiong.handshaker.moduie.base.service.SupplierService;
 import com.qiong.handshaker.moduie.product.Product;
 import com.qiong.handshaker.moduie.product.RestockRecord;
+import com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct;
 import com.qiong.handshaker.moduie.product.service.ProductService;
 import com.qiong.handshaker.moduie.product.service.RestockService;
+import com.qiong.handshaker.moduie.product.service.VariationAndStorehouseAndProductService;
 import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.vo.product.VoRestockPostForm;
+import com.qiong.handshaker.vo.product.VoTransferStockForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 @QResponseAdvice
-@RequestMapping(DataRouterProduct.RESTOCK)
 public class RestockController {
 
     @Autowired
@@ -31,9 +35,16 @@ public class RestockController {
     @Autowired
     ProductService productService;
 
-    // 注意加事物回滚
-    // 新增 入货
-    @PostMapping
+    @Autowired
+    VariationAndStorehouseAndProductService variationAndStorehouseAndProductService;
+
+    /**
+     * 產品 入貨
+     * @params
+     * @return
+     */
+    @PostMapping(DataRouterProduct.RESTOCK)
+    @Transactional
     public QResponse<Object> pos(@RequestBody VoRestockPostForm form) {
         // 获取 supplier
         Supplier supplier = form.hasSupplier() ? supplierService.getById(form.getSupplier()) : null;
@@ -44,6 +55,30 @@ public class RestockController {
         // 加货成功，更新 产品的 最新价格
         product.modifyNewStock(product, rr, supplier);
         // 储存 产品 数据
-        return QResponseTool.restfull(productService.modifyProduct(product), rr);
+        return QResponseTool.restfull(productService.updateProduct(product), rr);
+    }
+
+    /**
+    * 調貨
+    * @params
+    * @return
+    */
+    @PatchMapping(DataRouterProduct.TRANSFER + "/{id}")
+    @Transactional
+    public QResponse<Object> transfer(@PathVariable Long id, @RequestBody VoTransferStockForm form) {
+
+        VariationAndStorehouseAndProduct vspFrom = variationAndStorehouseAndProductService.one(id, form.getVariation(), form.getStorehouse_from());
+        if (vspFrom == null) throw new QLogicException("減貨倉庫 库存数据 为空");
+        VariationAndStorehouseAndProduct vspTo = variationAndStorehouseAndProductService.one(id, form.getVariation(), form.getStorehouse_to());
+        if (vspTo == null) throw new QLogicException("加貨倉庫 库存数据 为空");
+
+        // 减货
+        variationAndStorehouseAndProductService.removeQuantity(
+                vspFrom.getProduct_sql_id(), vspFrom.getVariation_sql_id(), vspFrom.getStorehouse_sql_id(), form.getQuantity());
+        // 加货
+        variationAndStorehouseAndProductService.insertQuantity(
+                vspTo.getProduct_sql_id(), vspTo.getVariation_sql_id(), vspTo.getStorehouse_sql_id(), form.getQuantity());
+
+        return QResponseTool.restfull(true, form);
     }
 }

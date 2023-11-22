@@ -24,19 +24,11 @@ import java.util.List;
 public class GlobalExceptionHandier {
     Logger logger = LoggerFactory.getLogger(GlobalExceptionHandier.class);
 
-    // 运行时 异常
-    /*
-    @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ResponseBody
-    @QResponseAdvice
-    public QResponse<RuntimeException> handierRunTime(RuntimeException re) {
-        logger.info("RUNTIME 我在调试的 错误 = " + re.getLocalizedMessage());
-        return QResponseTool.genBad(re.getLocalizedMessage(), re);
-    }
-     */
-
-    // 自定义 运行时 异常
+    /**
+    * 自定义 运行时 异常
+    * @params
+    * @return
+    */
     @ExceptionHandler(QLogicException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -46,7 +38,11 @@ public class GlobalExceptionHandier {
         return QResponseTool.genBad(re.getLocalizedMessage(), re);
     }
 
-    // Request 相关
+    /**
+    * Servlet 相关异常
+    * @params
+    * @return
+    */
     @ExceptionHandler(ServletException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -55,7 +51,11 @@ public class GlobalExceptionHandier {
         return QResponseTool.genBad(srb.getLocalizedMessage(), srb);
     }
 
-    // 验证字段 异常
+    /**
+    * spring 验证字段 异常
+    * @params
+    * @return
+    */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody

@@ -20,6 +20,7 @@ import com.qiong.handshaker.view.product.ViewProductResultForm;
 import com.qiong.handshaker.vo.product.VoProductPatchForm;
 import com.qiong.handshaker.vo.product.VoProductPostForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,62 +42,75 @@ public class ProductController {
     @Autowired
     VariationAndStorehouseAndProductService variationAndStorehouseAndProductService;
 
+    /**
+    * 深层 分页 列表，查询 深层产品 数据
+    * @params
+    * @return
+    */
     @GetMapping
     public QResponse<QPager<ViewProductResultForm>> page(@RequestParam HashMap<String, Object> qry) {
-
-        System.out.println("查询 = " + qry);
 
         QueryWrapper<Product> qw = new QueryWrapper<>();
         qw.lambda().orderBy(QSort.hasSort(qry), QSort.ofMap(qry).isAsc(), Product::getId);
 
         QLikes likes = QLikes.ofMap(qry, new String[] { "search", "label", "supplier", "new_restock_date" });
+        // 根据 search
         String search = likes.one("search");
         if (!search.isEmpty()) {
             qw.lambda().like(Product::getProduct_id, search).or().like(Product::getName, search).or();
         }
 
-        // 标签，记得 拼接 ID数据 前缀
+        // 根据 某标签，记得 拼接 ID数据 前缀
         if (likes.has("label")) qw.lambda().like(Product::getLabels, EntityDefineDataset.ID_JSON_PREFIX + likes.one("label")).or();
+        // 根据 某 供应商
         if (likes.has("supplier")) qw.lambda().like(Product::getNew_supplier_sql_id, likes.one("supplier")).or();
-        // 入货 时间
+        // 根据 入货 时间 区间
         if (likes.has("new_restock_date")) qw.lambda().gt(Product::getNew_restock_date, likes.one("new_restock_date")).or();
 
         return QResponseTool.restfull(true, service.pageDeep(new Page<Product>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
     }
 
+    /**
+    * 深度 查询 一个 产品
+    * @params
+    * @return
+    */
     @GetMapping("/{id}")
     public QResponse<ViewProductResultForm> one(@PathVariable Object id) {
         return id != null ? QResponseTool.restfull(true, service.oneDeep( id )) : QResponseTool.genBad("", null);
     }
 
-    @GetMapping("/aii")
-    public QResponse<List<Product>> aii() {
-        return QResponseTool.genSuccess("查询成功", service.list());
-    }
-
-    // 注意加事物回滚
+    /**
+    * 新增产品，新增完，需要给 产品 加一个 默认样式，名字固定
+    * @params
+    * @return
+    */
     @PostMapping
+    @Transactional
     public QResponse<Product> pos(@RequestBody @Validated VoProductPostForm form) {
         Product entity = Product.initPost(form);
         if (service.save(entity)) {
-            /**
-            * 我们改用 JSON List<String> 处理 多对多
-            * @params
-            * @return
-            */
-            // 为 产品 连接 Labels
-            // productAndLabelService.afterPostProduct(entity.getId(), form.getLabels());
-            // 为 产品 添加 默认的 样式，名字叫 origin
+            // 为 产品 添加 默认的 样式，名字在 EntityDefineDataset.VARIATION_NAME_DEF 里
             variationAndStorehouseAndProductService.connectionVariationForProduct(entity.getId(), new Variation(EntityDefineDataset.VARIATION_NAME_DEF));
         }
         return QResponseTool.restfull(entity.getId() != null, entity);
     }
 
+    /**
+    * 修改 产品，修改的 字段 在 VoProductPatchForm.genUpdateWrapper 里决定
+    * @params
+    * @return
+    */
     @PatchMapping("/{id}")
     public QResponse<Product> upd(@PathVariable Long id, @RequestBody @Validated VoProductPatchForm form) {
         return QResponseTool.restfull(service.update(form.genUpdateWrapper(id)), service.getById(id));
     }
 
+    /**
+    * 删除 产品
+    * @params
+    * @return
+    */
     @DeleteMapping("/{id}")
     public QResponse<Product> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));

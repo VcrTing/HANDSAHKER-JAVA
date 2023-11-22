@@ -19,13 +19,11 @@ public class MemberLevel extends BaseEntity {
     private String name;
     private BigDecimal discount;
 
-    public static MemberLevel init(VoMemberLevelForm levelForm) {
-        MemberLevel level = new MemberLevel();
-        if (levelForm.getId() != null) level.setId(level.getId());
-        level.setName(levelForm.getName());
-        level.setDiscount(levelForm.getDiscount());
-        //
-        autoGenerate(level);
-        return level;
+    public static MemberLevel init(VoMemberLevelForm levelForm, Long id) {
+        MemberLevel res = new MemberLevel();
+        res.setDiscount(levelForm.getDiscount());
+        res.setName(levelForm.getName());
+        if (id != null) res.setId(id);
+        return autoGenerate(res);
     }
 }

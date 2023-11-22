@@ -21,6 +21,7 @@ import com.qiong.handshaker.vo.order.VoOrderPostForm;
 import com.qiong.handshaker.vo.order.inner.VoInnerOrderProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,13 +46,17 @@ public class CheckoutService {
     * @params
     * @return
     */
+    @Transactional
     public Order checkout(VoOrderPostForm form, User user, Customer customer, MemberLevel memberLevel, Storehouse storehouse) {
 
+        // 购买的 产品
         List<VoInnerOrderProduct> viops = form.getOrdered_product();
 
+        // 库存
         List<VariationAndStorehouseAndProduct> vsps = new ArrayList<>();
 
-        // 查询 库存 是否 足够，放行 则 库存 足够
+        // 1. 查询 库存 是否 足够
+        // 放行 则 库存 足够，不放行，抛出错误
         for (VoInnerOrderProduct op: viops) {
 
             // 检查 库存 是否 足够
@@ -66,28 +71,29 @@ public class CheckoutService {
             op.setProductEntity(productService.getById(op.getProduct()));
         }
 
-        List<OrderProduct> order_products = new ArrayList<>();
+        // 2. 更新 库存 数据
+        for (VariationAndStorehouseAndProduct vsp: vsps) { variationAndStorehouseAndProductService.updateQuantity(vsp, vsp.getQuantity()); }
+
+
+        // 正式开单
+        Order order = Order.init(form, user, customer, memberLevel, storehouse);
+
         // 生成 OrderProduct
+        List<OrderProduct> order_products = new ArrayList<>();
         for (VoInnerOrderProduct op: viops) { order_products.add( OrderProduct.init(op, op.getProductEntity()) ); }
 
-        // 更新 库存 数据
-        for (VariationAndStorehouseAndProduct vsp: vsps) { variationAndStorehouseAndProductService.modifyNum(vsp, vsp.getQuantity()); }
-
-        // 储存 订单，正式开单
-        Order order = Order.init(form, user, customer, memberLevel, storehouse);
+        // 插入 OrderProduct 列表数据
         order.jsonSetOrdered_product(order_products);
 
-        System.out.println();
-
-        // 构建 利率表 记录
+        // 3. 储存 利率表 记录
         OrderProfit profit = OrderProfit.init(order, order_products, OrderDiscount.init(form.getDiscount()));
         boolean isOk = profitService.save(profit);
-        if (!isOk) throw new QLogicException("利率储存 失败");
+        if (!isOk) throw new QLogicException("利率数据 储存 失败");
 
-        // 反馈 回 订单，订单连表
+        // 4. 订单连表，储存 订单，
         order.setProfit_sql_id(profit.getId());
         isOk = orderService.save(order);
-        if (!isOk) throw new QLogicException("订单储存 失败");
+        if (!isOk) throw new QLogicException("订单数据 储存 失败");
 
         return order;
     }

@@ -12,5 +12,5 @@ import java.util.List;
 
 @Mapper
 public interface CashierProductMapper extends BaseMapper<Product> {
-    <T, P extends IPage<T>> List<T> pageCashier(P page, @Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
+    // <T, P extends IPage<T>> List<T> pageCashier(P page, @Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 }

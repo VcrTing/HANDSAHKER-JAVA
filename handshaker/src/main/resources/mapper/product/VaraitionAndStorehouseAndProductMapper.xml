@@ -38,7 +38,7 @@
     </select>
     <!-- 根據 產品 過濾 -->
     <select id="productVariationDeep" resultMap="one_deep">
-        SELECT me.id as me_id, me.quantity as me_quantity, me.product_sql_id as me_product_sql_id, me.variation_sql_id as me_variation_sql_id,
+        SELECT me.id as me_id, me.quantity as me_quantity, me.product_sql_id as me_product_sql_id, me.variation_sql_id as me_variation_sql_id, me.storehouse_sql_id as me_storehouse_sql_id,
             one.id as v_id,one.name as v_name,
             two.id as s_id,two.name as s_name, two.address as s_address, two.phone_no as s_phone_no
         from prod_variation_and_storehouse_and_product as me

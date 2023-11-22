@@ -38,6 +38,9 @@ public class Broken extends BaseEntity {
     private Storehouse storehouse;
 
     @TableField(exist = false)
+    private Variation variation;
+
+    @TableField(exist = false)
     private Product product;
 
     public static Broken init(VoBrokenOperaForm form) {
@@ -50,4 +53,6 @@ public class Broken extends BaseEntity {
 
         return res;
     }
+
+    public Integer mustGetQuantity() { return (quantity == null) ? 0 : Math.abs(quantity); }
 }

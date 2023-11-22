@@ -6,21 +6,22 @@
 <mapper namespace="com.qiong.handshaker.moduie.order.mapper.ProfitMapper">
 
     <!-- many_with_custom_and_user -->
-    <resultMap id="many_with_custom_and_user" type="com.qiong.handshaker.moduie.order.Order">
+    <resultMap id="many_with_custom_and_user" type="com.qiong.handshaker.moduie.order.OrderProfit">
         <id property="id" column="me_id" />
         <result property="order_id" column="me_order_id" />
         <result property="order_date" column="me_order_date" />
+        <result property="order_sql_id" column="me_order_sql_id"/>
         <result property="origin_total_profit" column="me_origin_total_profit" />
         <result property="origin_total_price" column="me_origin_total_price" />
         <result property="new_total_profit" column="me_new_total_profit" />
 
-        <association property="user" javaType="com.qiong.handshaker.moduie.sys.User">
+        <association property="cashier" javaType="com.qiong.handshaker.moduie.sys.User">
             <id column="one_id" jdbcType="INTEGER" property="id" />
             <result property="email" column="one_email" />
             <result property="name" column="one_name" />
         </association>
 
-        <association property="customer" javaType="com.qiong.handshaker.moduie.custom.Customer">
+        <association property="member" javaType="com.qiong.handshaker.moduie.custom.Customer">
             <id column="two_id" jdbcType="INTEGER" property="id" />
             <result property="name" column="two_name" />
         </association>
@@ -30,9 +31,9 @@
         select
             me.id as me_id, me.order_id as me_order_id, me.order_date as me_order_date,
             me.origin_total_profit as me_origin_total_profit, me.origin_total_price as me_origin_total_price,
-            me.new_total_profit as me_new_total_profit,
+            me.new_total_profit as me_new_total_profit, me.order_sql_id as me_order_sql_id,
 
-            one.id as one_id, one.name as one_name, one.email as one_email
+            one.id as one_id, one.name as one_name, one.email as one_email,
             two.id as two_id, two.name as two_name
             from order_profit as me
                 left join sys_user as one on me.cashier_sql_id=one.id

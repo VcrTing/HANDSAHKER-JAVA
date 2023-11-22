@@ -41,7 +41,11 @@ public class RefundController {
     @Autowired
     ProfitService profitService;
 
-
+    /**
+    * 退款退货
+    * @params
+    * @return
+    */
     @PatchMapping("/{id}")
     public QResponse<Object> refund(@PathVariable Long id, @RequestBody VoRefundOperaForm form) {
 
@@ -60,6 +64,7 @@ public class RefundController {
         // 调用 退款 功能
         Refunded refunded = service.refunded(form, order, profit);
 
+        // 返回
         return QResponseTool.restfull(true, refunded);
     }
 }

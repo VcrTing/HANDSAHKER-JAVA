@@ -28,6 +28,10 @@
             <result property="name" column="name"/>
             <result property="product_id" column="product_id"/>
         </association>
+        <association property="variation" column="variation_sql_id" select="com.qiong.handshaker.moduie.product.mapper.VariationMapper.selectById">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
     </resultMap>
 
     <!-- IIST MP -->
@@ -50,4 +54,13 @@
         select count(*) from prod_broken as me ${ ew.customSqlSegment }
     </select>
 
+
+    <!-- -->
+    <select id="listDeep" resultMap="many_with_deep">
+        select *
+            from prod_broken as me
+            left join base_storehouse as one on me.storehouse_sql_id = one.id
+            left join prod_variation as two on me.variation_sql_id = two.id
+        ${ ew.customSqlSegment }
+    </select>
 </mapper>

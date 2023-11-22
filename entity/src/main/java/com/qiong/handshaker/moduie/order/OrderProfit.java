@@ -2,6 +2,7 @@ package com.qiong.handshaker.moduie.order;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.qiong.handshaker.define.enums.EnumOrderStatus;
 import com.qiong.handshaker.moduie.BaseEntity;
 import com.qiong.handshaker.moduie.custom.Customer;
 import com.qiong.handshaker.moduie.order.inner.OrderDiscount;
@@ -39,6 +40,7 @@ public class OrderProfit extends BaseEntity {
 
     private String order_id;
     private Date order_date;
+    private EnumOrderStatus order_status;
 
     // 订单产品 的 总 金额
     private BigDecimal products_all_price;
@@ -90,6 +92,7 @@ public class OrderProfit extends BaseEntity {
 
         res.setOrder_id(order.getOrder_id());
         res.setOrder_date(order.getOrder_date());
+        res.setOrder_status(order.getOrder_status());
 
         res.setOrder_sql_id(order.getId());
         res.setCashier_sql_id(order.getCashier_sql_id());

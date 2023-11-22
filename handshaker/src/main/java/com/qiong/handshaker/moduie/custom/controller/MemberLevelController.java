@@ -9,6 +9,7 @@ import com.qiong.handshaker.data.router.DataRouterCustom;
 import com.qiong.handshaker.define.query.QPage;
 import com.qiong.handshaker.define.query.QSort;
 import com.qiong.handshaker.define.result.QResponse;
+import com.qiong.handshaker.moduie.base.Supplier;
 import com.qiong.handshaker.moduie.custom.MemberLevel;
 import com.qiong.handshaker.moduie.custom.service.MemberLevelService;
 import com.qiong.handshaker.tool.result.QResponseTool;
@@ -28,56 +29,57 @@ public class MemberLevelController {
     @Autowired
     MemberLevelService service;
 
-    @GetMapping("/aii")
-    public QResponse<List<MemberLevel>> aii() {
-        return QResponseTool.genSuccess("查询成功", service.list());
-    }
-
+    /**
+    * 常规 分页 列表
+    * @params
+    * @return
+    */
     @GetMapping
     public QResponse<IPage<MemberLevel>> page(@RequestParam HashMap<String, Object> qry) {
-        System.out.println("查询 = " + qry);
-
         LambdaQueryWrapper<MemberLevel> qw = new LambdaQueryWrapper<>();
-        QSort qs = QSort.ofMap(qry);
-        qw.orderBy(QSort.hasSort(qry), qs.isAsc(), MemberLevel::getId);
-        QPage qp = QPage.ofMap(qry);
-        IPage<MemberLevel> ipage = new Page<>(qp.getPage(), qp.getSize());
-
-        return QResponseTool.restfull(true, service.page(ipage, qw));
+        qw.orderBy(QSort.hasSort(qry), QSort.isAsc(qry), MemberLevel::getId);
+        return QResponseTool.restfull(true, service.page(new Page<MemberLevel>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
     }
 
-
+    /**
+     * 常规 查詢 单个
+     * @params
+     * @return
+     */
     @GetMapping("/{id}")
     public QResponse<MemberLevel> one(@PathVariable Long id) {
         return QResponseTool.restfull(id != null, service.getById(id));
     }
 
-
+    /**
+     * 常规 新增
+     * @params
+     * @return
+     */
     @PostMapping
     public QResponse<MemberLevel> pos(@RequestBody @Validated VoMemberLevelForm memberLevelForm) {
-        MemberLevel src = MemberLevel.init(memberLevelForm);
+        MemberLevel src = MemberLevel.init(memberLevelForm, null);
         return QResponseTool.restfull(service.save(src), src);
     }
 
+    /**
+     * 常规 修改
+     * @params
+     * @return
+     */
     @PatchMapping("/{id}")
     public QResponse<MemberLevel> upd(@PathVariable Long id, @RequestBody @Validated VoMemberLevelForm memberLevelForm) {
-        System.out.println(id + "  " + memberLevelForm);
-        MemberLevel src = MemberLevel.init(memberLevelForm);
-        src.setId(id);
+        MemberLevel src = MemberLevel.init(memberLevelForm, id);
         return QResponseTool.restfull(service.updateById(src), src);
     }
 
+    /**
+     * 常规 删除
+     * @params
+     * @return
+     */
     @DeleteMapping("/{id}")
     public QResponse<MemberLevel> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));
     }
 }
-
-// 如果 有 時間 區間 過濾
-// QBetweenDate qbd = QBetweenDate.ofMap(qry, false);
-// qw.ge(qbd.hasStar(), MemberLevel::getCreatedAt, qbd.getStarDate());
-// qw.le(qbd.hasEnd(), MemberLevel::getCreatedAt, qbd.getEndDate());
-
-// 多個 Like
-// qw.like(qry.get("username") != null, MemberLevel::getUsername, qry.get("username")).or();
-// qw.like(qry.get("email") != null, MemberLevel::getEmail, qry.get("email")).or();

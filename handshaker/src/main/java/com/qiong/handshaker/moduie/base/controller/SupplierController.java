@@ -9,6 +9,7 @@ import com.qiong.handshaker.define.query.QLikes;
 import com.qiong.handshaker.define.query.QPage;
 import com.qiong.handshaker.define.query.QSort;
 import com.qiong.handshaker.define.result.QResponse;
+import com.qiong.handshaker.moduie.base.Storehouse;
 import com.qiong.handshaker.moduie.base.Supplier;
 import com.qiong.handshaker.moduie.base.service.SupplierService;
 import com.qiong.handshaker.tool.result.QResponseTool;
@@ -29,7 +30,7 @@ public class SupplierController {
     SupplierService service;
 
     /**
-    * 無需聯表的 查詢
+    * 常规 查詢
     * @params
     * @return
     */
@@ -37,10 +38,9 @@ public class SupplierController {
     public QResponse<IPage<Supplier>> page(@RequestParam HashMap<String, Object> qry) {
 
         LambdaQueryWrapper<Supplier> qw = new LambdaQueryWrapper<>();
-        QSort qs = QSort.ofMap(qry);
-        qw.orderBy(QSort.hasSort(qry), qs.isAsc(), Supplier::getId);
+        qw.orderBy(QSort.hasSort(qry), QSort.isAsc(qry), Supplier::getId);
 
-        // 模糊 搜寻
+        // 根据 search 进行 模糊 搜寻
         QLikes likes = QLikes.ofMap(qry, new String[] { "search" });
         if (likes.has("search")) {
             qw.like(Supplier::getEmail, likes.one("search")).or();
@@ -49,35 +49,45 @@ public class SupplierController {
             qw.like(Supplier::getContact_person, likes.one("search")).or();
         }
 
-        QPage qp = QPage.ofMap(qry);
-        IPage<Supplier> ipage = new Page<>(qp.getPage(), qp.getSize());
-
-        return QResponseTool.restfull(true, service.page(ipage, qw));
+        return QResponseTool.restfull(true, service.page(new Page<Supplier>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
     }
 
+    /**
+     * 常规 查詢 单个，使用了 mapper.xml
+     * @params
+     * @return
+     */
     @GetMapping("/{id}")
     public QResponse<Supplier> one(@PathVariable Long id) {
         return QResponseTool.restfull(QTypedUtil.serLong(id) != null, service.one(id));
     }
 
-    @GetMapping("/aii")
-    public QResponse<List<Supplier>> aii() {
-        return QResponseTool.genSuccess("查询成功", service.list());
-    }
-
+    /**
+     * 常规 新增
+     * @params
+     * @return
+     */
     @PostMapping
     public QResponse<Supplier> pos(@RequestBody @Validated Supplier entity) {
-        System.out.println("新增 ENTITY = " + entity);
         return QResponseTool.restfull(service.save(entity), entity);
     }
 
+    /**
+     * 常规 修改
+     * @params
+     * @return
+     */
     @PatchMapping("/{id}")
     public QResponse<Supplier> upd(@PathVariable Long id, @RequestBody @Validated Supplier entity) {
-        System.out.println(id + "  " + entity);
         entity.setId(id);
         return QResponseTool.restfull(service.updateById(entity), entity);
     }
 
+    /**
+     * 常规 删除
+     * @params
+     * @return
+     */
     @DeleteMapping("/{id}")
     public QResponse<Supplier> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));

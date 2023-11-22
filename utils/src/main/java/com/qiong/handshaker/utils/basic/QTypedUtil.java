@@ -1,5 +1,6 @@
 package com.qiong.handshaker.utils.basic;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,6 +15,9 @@ public abstract class QTypedUtil {
     public static boolean isNoNull(Object obj) {
         return (obj == null);
     }
+
+    public static String serStr(Object obj, Object def) { return (obj == null) ? def.toString() : obj.toString(); }
+    public static String serStr(BigDecimal src) { return serStr(src, "0.00"); }
 
     /**
     * 数字类
@@ -71,9 +75,14 @@ public abstract class QTypedUtil {
     static String DEF_FMT = "yyyy-MM-dd";
     static String DEF_FMT_LONG = DEF_FMT + " HH:mm:ss";
     public static Date serDate(Object dateString, boolean isExactDate) {
-        if (dateString == null) return null; String src = dateString.toString().trim();
-        if (src.isEmpty()) return null;
-        try { return new SimpleDateFormat(isExactDate ? DEF_FMT_LONG : DEF_FMT).parse(src); }
-        catch (ParseException ignored) { } return null;
+        try {
+            String src = dateString.toString().trim();
+            return new SimpleDateFormat(isExactDate ? DEF_FMT_LONG : DEF_FMT).parse(src); }
+        catch (Exception ignored) { } return null;
+    }
+    public static String serStr(Date date, boolean isExactDate) {
+        try {
+            return new SimpleDateFormat(isExactDate ? DEF_FMT_LONG : DEF_FMT).format(date); }
+        catch (Exception ignored) { } return null;
     }
 }

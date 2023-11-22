@@ -19,6 +19,7 @@ import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.tool.security.QSecurityMvcTool;
 import com.qiong.handshaker.vo.order.VoOrderPostForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,6 +49,11 @@ public class CheckoutController {
     @Autowired
     QSecurityMvcTool securityMvcTool;
 
+    /**
+    * 结算 金额
+    * @params
+    * @return
+    */
     @PostMapping
     public QResponse<Object> checkout(@RequestBody @Validated VoOrderPostForm form) {
 
@@ -56,7 +62,7 @@ public class CheckoutController {
         User user = authUser.getUser();
         System.out.println("AUTH USER = " + authUser);
         System.out.println("STORE ID = " + user.getStorehouse_id());
-        if (user == null || user.getStorehouse_id() == null) throw new QLogicException("未找到收银员以及仓库的信息，请重试 结算！！！");
+        if (user.getStorehouse_id() == null) throw new QLogicException("未找到收银员以及仓库的信息，请重试 结算！！！");
 
         // 是否有  收银员 所属 仓库
         Storehouse storehouse = storehouseService.getById(user.getStorehouse_id());

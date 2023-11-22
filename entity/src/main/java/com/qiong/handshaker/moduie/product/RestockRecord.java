@@ -1,6 +1,7 @@
 package com.qiong.handshaker.moduie.product;
 
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.qiong.handshaker.define.query.QDate;
 import com.qiong.handshaker.moduie.BaseEntity;
@@ -30,6 +31,9 @@ public class RestockRecord extends BaseEntity {
     private BigDecimal selling_price;
 
     private String restock_distribute;
+
+    @TableField(exist = false)
+    private Supplier supplier;
 
     public static RestockRecord init(VoRestockPostForm form, Supplier supplier, Product product) {
         RestockRecord res = new RestockRecord();

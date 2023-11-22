@@ -11,6 +11,7 @@ import com.qiong.handshaker.define.result.QResponse;
 import com.qiong.handshaker.moduie.base.Storehouse;
 import com.qiong.handshaker.moduie.base.Supplier;
 import com.qiong.handshaker.moduie.base.service.StorehouseService;
+import com.qiong.handshaker.moduie.product.Label;
 import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.utils.basic.QTypedUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,43 +29,55 @@ public class StorehouseController {
     @Autowired
     StorehouseService service;
 
+    /**
+    * 仓库 分页 列表
+    * @params
+    * @return
+    */
     @GetMapping
     @QResponseAdvice
     public QResponse<IPage<Storehouse>> page(@RequestParam HashMap<String, Object> qry) {
-
         LambdaQueryWrapper<Storehouse> qw = new LambdaQueryWrapper<>();
-        QSort qs = QSort.ofMap(qry);
-        qw.orderBy(QSort.hasSort(qry), qs.isAsc(), Storehouse::getId);
-        QPage qp = QPage.ofMap(qry);
-        IPage<Storehouse> ipage = new Page<>(qp.getPage(), qp.getSize());
-
-        return QResponseTool.restfull(true, service.page(ipage, qw));
+        qw.orderBy(QSort.hasSort(qry), QSort.isAsc(qry), Storehouse::getId);
+        return QResponseTool.restfull(true, service.page(new Page<Storehouse>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
     }
 
-
+    /**
+    * 查询一个 仓库
+    * @params
+    * @return
+    */
     @GetMapping("/{id}")
     public QResponse<Storehouse> one(@PathVariable Long id) {
-        return QResponseTool.restfull(QTypedUtil.serLong(id) != null, service.getById(id));
+        return QResponseTool.restfull(QTypedUtil.hasLong(id), service.getById(id));
     }
 
-    @GetMapping("/aii")
-    public QResponse<List<Storehouse>> aii() {
-        return QResponseTool.genSuccess("查询成功", service.list());
-    }
-
+    /**
+    * 常规 新增
+    * @params
+    * @return
+    */
     @PostMapping
     public QResponse<Storehouse> pos(@RequestBody @Validated Storehouse entity) {
-        System.out.println("新增 ENTITY = " + entity);
         return QResponseTool.restfull(service.save(entity), entity);
     }
 
+    /**
+     * 常规 修改
+     * @params
+     * @return
+     */
     @PatchMapping("/{id}")
     public QResponse<Storehouse> upd(@PathVariable Long id, @RequestBody @Validated Storehouse entity) {
-        System.out.println(id + "  " + entity);
         entity.setId(id);
         return QResponseTool.restfull(service.updateById(entity), entity);
     }
 
+    /**
+     * 常规 删除
+     * @params
+     * @return
+     */
     @DeleteMapping("/{id}")
     public QResponse<Storehouse> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));

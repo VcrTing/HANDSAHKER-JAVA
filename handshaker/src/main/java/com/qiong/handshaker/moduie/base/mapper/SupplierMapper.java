@@ -8,6 +8,5 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SupplierMapper extends BaseMapper<Supplier> {
-
     Supplier one(@Param("id") Long id);
 }

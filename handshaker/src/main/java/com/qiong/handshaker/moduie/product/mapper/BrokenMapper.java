@@ -16,4 +16,5 @@ public interface BrokenMapper extends BaseMapper<Broken> {
     <T, P extends IPage<T>> List<T> pageDeep(P page, @Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
     // <T, P extends IPage<T>> Long pageDeepCount(P page, @Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 
+    <T> List<T> listDeep(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 }

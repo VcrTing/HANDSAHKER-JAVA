@@ -40,7 +40,6 @@ public class AuthController {
     @QResponseAdvice
     @PostMapping(DataRouterAuth.LOGIN)
     public QResponse<Object> login(@RequestBody VoUserLoginForm loginForm) {
-
         Object res = authService.login(loginForm.getIdentifier(), loginForm.getPassword());
         if (QTypedUtil.isString(res)) return QResponseTool.genBad("登录错误", res);
         return QResponseTool.genSuccess("登录成功", res);
@@ -54,7 +53,7 @@ public class AuthController {
     @GetMapping(DataRouterAuth.USER_INFO)
     public QResponse<User> userinfo() {
         AuthUser authUser = securityMvcTool.nowUser();
-        if (authUser == null) new QLogicException("登录上下文错误");
+        if (authUser == null || authUser.getUser() == null) throw new QLogicException("登录上下文错误");
         User user = userService.userInfo(authUser.getId());
         // System.out.println("用户信息 = " + user);
         return QResponseTool.genSuccess("获取数据成功", user);

@@ -24,15 +24,16 @@ public class VariationController {
     @Autowired
     VariationAndStorehouseAndProductService variationAndStorehouseAndProductService;
 
-    // 新建 和 产品 有关 的 样式
+    /**
+    * 新建样式，
+    * @params
+    * @return
+    */
     @PostMapping
     public QResponse<Variation> pos(@RequestBody @Validated VoVariationOperaForm form) {
-        System.out.println("进来了 提交 产品 样式 新增");
         Variation entity = Variation.init(form);
-        // boolean isOk = service.save(entity);
-        // if (isOk) variationAndStorehouseAndProductService.afterVariationPost(form.getProduct(), entity.getId());
         variationAndStorehouseAndProductService.connectionVariationForProduct(form.getProduct(), entity);
-        return QResponseTool.restfull(QTypedUtil.serLong(form.getProduct()) == null, entity);
+        return QResponseTool.restfull(QTypedUtil.hasLong(form.getProduct()), entity);
     }
 
     // 修改 样式名称

@@ -33,21 +33,28 @@ public class ProfitController {
     @Autowired
     ProfitService service;
 
-    // ADMIN 订单 列表
+    /**
+    * 深度 利率 列表
+    * @params
+    * @return
+    */
     @GetMapping
     public QResponse<QPager<ViewProfitResultForm>> page(@RequestParam HashMap<String, Object> qry) {
 
         QueryWrapper<OrderProfit> qw = new QueryWrapper<>();
-        qw.orderBy(QSort.hasSort(qry), QSort.ofMap(qry).isAsc(), "me.id");
-        /*
-        QLikes likes = QLikes.ofMap(qry, new String[] { "search", "member", "status", "order_id", "time_period", "startDate", "endDate" });
+        qw.orderBy(QSort.hasSort(qry), QSort.isAsc(qry), "me.id");
+
+        QLikes likes = QLikes.ofMap(qry, new String[] { "search", "cashier", "status", "order_id", "time_period", "startDate", "endDate" });
+
+        // search 模糊 搜索
         if (likes.has("search")) { qw.like("me.order_id", likes.one("search")).or(); }
 
+        // 模糊 搜索
         if (likes.has("order_id")) { qw.like("me.order_id", likes.one("order_id")).or(); }
         if (likes.has("status")) { qw.like("me.order_status", likes.one("status")).or(); }
-        if (likes.has("member")) { qw.like("me.member_sql_id", likes.one("member")).or(); }
+        if (likes.has("cashier")) { qw.like("me.cashier_sql_id", likes.one("cashier")).or(); }
 
-        // 计算 日期
+        // 日期 区间
         QBetweenDate qbd = null;
         if (likes.has("time_period")) {
             qbd = QBetweenDate.ofWhenDay( - QTypedUtil.serInt(likes.one("time_period"), 0), false);
@@ -61,7 +68,6 @@ public class ProfitController {
             qw.lt("me.order_date", qbd.starDate(false));
             qw.gt("me.order_date", qbd.endDate(false));
         }
-        */
-        return QResponseTool.restfull(true, service.pageList(new Page<OrderProfit>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
+        return QResponseTool.restfull(true, service.pageDeep(new Page<OrderProfit>(QPage.easyCurrent(qry), QPage.easySize(qry)), qw));
     }
 }

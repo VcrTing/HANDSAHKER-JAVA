@@ -5,6 +5,7 @@ import com.qiong.handshaker.worker.security.fiiter.SecurityAuthRequestFilter;
 import com.qiong.handshaker.worker.security.handie.SecurityAuthFailureHandier;
 import com.qiong.handshaker.worker.security.handie.SecurityForbiddenHandier;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,12 +37,18 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
     @Autowired
     SecurityAuthFailureHandier authFailureHandier;
 
+
+    @Value("${spring.mvc.static-path-pattern}")
+    private String staticLinks;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
         // http.headers().frameOptions().sameOrigin();
 
         http.authorizeRequests().antMatchers(DataSecurityRouterConf.WHITE_LIST).permitAll();
+        http.authorizeRequests().antMatchers(staticLinks).permitAll();
+
         http.authorizeRequests().anyRequest().authenticated();
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

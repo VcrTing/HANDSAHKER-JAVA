@@ -4,12 +4,14 @@ package com.qiong.handshaker.view.product;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
 import com.qiong.handshaker.define.dataset.EntityDefineDataset;
+import com.qiong.handshaker.moduie.base.Supplier;
 import com.qiong.handshaker.moduie.product.Label;
 import com.qiong.handshaker.moduie.product.Product;
 import com.qiong.handshaker.moduie.product.Variation;
 import com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct;
 import com.qiong.handshaker.moduie.product.inner.LabelsJson;
 import com.qiong.handshaker.moduie.product.inner.ProductRemark;
+import com.qiong.handshaker.utils.basic.QTypedUtil;
 import com.qiong.handshaker.view.product.inner.ViewInnerBrokenProduct;
 import com.qiong.handshaker.view.product.inner.ViewInnerRestock;
 import com.qiong.handshaker.view.product.inner.ViewInnerStorehouseInfo;
@@ -18,6 +20,8 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
@@ -65,6 +69,19 @@ public class ViewProductResultForm implements Serializable {
 
     // 入貨紀錄
     private List<ViewInnerRestock> restock;
+    private List<ViewInnerRestock> restocks;
+
+    // 更新 最新 入货 记录
+    public void asyncNewRestock() {
+        List<ViewInnerRestock> irs = restocks;
+        if (irs != null) {
+            irs.sort((s1, s2) -> (int)(s1.getId() - s2.getId()));
+            if (!irs.isEmpty()) {
+                restock = new ArrayList<>();
+                restock.add(irs.get(0));
+            }
+        }
+    }
 
     /**
     * 组装 ViewInnerVariation ，以及计算 总 库存
@@ -101,7 +118,7 @@ public class ViewProductResultForm implements Serializable {
     * @params
     * @return
     */
-    public static ViewProductResultForm initList(Product product, List<Label> allLabels) {
+    public static ViewProductResultForm init(Product product, List<Label> allLabels) {
 
         ViewProductResultForm res = new ViewProductResultForm();
         if (product == null) return res;
@@ -124,9 +141,47 @@ public class ViewProductResultForm implements Serializable {
         // 序列化 标签
         res.setLabels(LabelsJson.init(product).idsToEntity(allLabels));
 
-
         // 序列化 库存 数据
 
         return res;
+    }
+
+    /**
+    * 生成 EXCEL
+    * @params
+    * @return
+    */
+    public static void genExcel(Sheet sheet, List<ViewProductResultForm> src) {
+
+        for (int i = 0; i < src.size(); i++) {
+            Row row = sheet.createRow(i);
+            ViewProductResultForm one = src.get(i);
+            // 基础 信息
+            row.createCell(0).setCellValue( one.getProduct_id() );
+            row.createCell(1).setCellValue( one.getName() );
+            row.createCell(2).setCellValue(QTypedUtil.serStr(one.getCreate_date(), false));
+
+            // 标签
+            StringBuilder sbLabel = new StringBuilder();
+            one.getLabels().forEach(s -> sbLabel.append( s.getName() ).append( "，") );
+            row.createCell(3).setCellValue( sbLabel.toString() );
+
+            // 入货
+            row.createCell(4).setCellValue( QTypedUtil.serStr(one.getTotal_stock(), 0) );
+            row.createCell(5).setCellValue( QTypedUtil.serStr(one.getNew_restock_date(), false) );
+            row.createCell(6).setCellValue( one.getNew_supplier() );
+
+            // 价格
+            row.createCell(7).setCellValue( QTypedUtil.serStr(one.getNew_lowest_price()) );
+            row.createCell(8).setCellValue( QTypedUtil.serStr(one.getNew_restock_price()) );
+            row.createCell(9).setCellValue( QTypedUtil.serStr(one.getNew_selling_price()) );
+            row.createCell(10).setCellValue( QTypedUtil.serStr(one.getAverage_restock_price()) );
+
+            // 备注
+            StringBuilder sbRmk = new StringBuilder();
+            one.getRemarks().forEach(s -> sbRmk.append( s.getContent() ).append( "，") );
+            row.createCell(11).setCellValue( sbRmk.toString() );
+
+        }
     }
 }

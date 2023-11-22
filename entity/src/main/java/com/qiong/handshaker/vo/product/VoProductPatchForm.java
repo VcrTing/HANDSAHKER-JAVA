@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VoProductPatchForm {
+
+    private BigDecimal new_lowest_price;
+    private BigDecimal new_selling_price;
+
     private Long id;
 
     @NotNull(message = "产品 ID 不为空")
@@ -41,6 +46,10 @@ public class VoProductPatchForm {
         uw.set(StringUtils.hasText(product_id), Product::getProduct_id, product_id);
         uw.set(create_date != null, Product::getCreate_date, create_date);
         uw.set(remarks != null, Product::getRemarks, JSONUtil.toJsonStr(remarks));
+
+        uw.set(new_lowest_price != null, Product::getNew_lowest_price, new_lowest_price);
+        uw.set(new_selling_price != null, Product::getNew_selling_price, new_selling_price);
+
         return uw;
     }
 }

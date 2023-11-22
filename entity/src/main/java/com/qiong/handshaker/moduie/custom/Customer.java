@@ -51,15 +51,13 @@ public class Customer extends BaseEntity {
     @TableField(exist = false)
     private MemberLevel member_level;
 
-    public static Customer init(VoCustomOptionForm form) {
+    public static Customer init(VoCustomOptionForm form, Long id) {
         // 比较高级的 借助 JSON 转换
-
         Long agentId = form.getMember_level();
         form.setMember_level(null);
-
-        Customer customer = JSONUtil.toBean(JSONUtil.toJsonStr(form), Customer.class);
-        customer.setMember_level_id(agentId);
-
-        return autoGenerate(customer);
+        Customer res = JSONUtil.toBean(JSONUtil.toJsonStr(form), Customer.class);
+        res.setMember_level_id(agentId);
+        if (id != null) res.setId(id);
+        return autoGenerate(res);
     }
 }

@@ -48,18 +48,13 @@ public class QLikes {
     public static QLikes ofMap(Map<String, Object> map, String[] pks) {
         HashMap<String, String> res = new HashMap<>();
 
-        if (map != null) {
+        if (map != null && pks != null) {
+            // 只有 PKS 裡面的 才能進入 LIKE MAP
+            for (String k: pks) {
 
-            if (pks != null) {
-                // 只有 PKS 裡面的 才能進入 LIKE MAP
-                for (String k: pks) {
-
-                    Object v = map.get(k);
-                    // 有數據 才能進入 LIKE MAP
-                    if (v != null) {
-                        res.put(k, v.toString().trim());
-                    }
-                }
+                Object v = map.get(k);
+                // 有數據 才能進入 LIKE MAP
+                if (v != null) res.put(k, v.toString().trim());
             }
         }
 
@@ -71,12 +66,8 @@ public class QLikes {
     * @params
     * @return
     */
-    public static String oneOfMap(Map<String, Object> map, String k) {
-        if (map != null) {
-            Object res = map.get(k);
-            if (res != null ) return res.toString();
-        }
-        return "";
+    public static String mustOne(Map<String, Object> map, String k) {
+        return (map != null && map.get(k) != null) ? map.get(k).toString().trim() : "";
     }
 
     /**

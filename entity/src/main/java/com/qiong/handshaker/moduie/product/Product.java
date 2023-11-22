@@ -51,6 +51,15 @@ public class Product extends BaseEntity {
     * @params
     * @return
     */
+    public void asyncLabels(List<Label> labels) {
+
+    }
+
+    /**
+    *
+    * @params
+    * @return
+    */
     public Product simpleResult() {
         Product res = new Product();
         res.setId(this.getId());

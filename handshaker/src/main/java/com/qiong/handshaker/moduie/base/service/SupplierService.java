@@ -16,7 +16,6 @@ public class SupplierService extends ServiceImpl<SupplierMapper, Supplier> {
     SupplierMapper mapper;
 
     public Supplier one(Long id) {
-
         return mapper.one(id);
     }
 

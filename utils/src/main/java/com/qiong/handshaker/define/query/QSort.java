@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -26,15 +27,19 @@ public class QSort {
     */
     public boolean isAsc() { return this.value.equalsIgnoreCase(ASC); }
 
+    public static boolean isAsc(Map<String, Object> map) {
+        if (map.get(SORT_KEY) == null) return false;
+        return serValue(map.get(SORT_KEY)).equalsIgnoreCase(ASC);
+    }
+
     /**
     * MAP 中 是否 含有 排序 字符
     * @params
     * @return
     */
     public static boolean hasSort(Map<String, Object> map) {
-        Object k = map.get(SORT_KEY);
-        if (k == null) return false;
-        return !k.toString().trim().isEmpty();
+        if (map.get(SORT_KEY) == null) return false;
+        return !map.get(SORT_KEY).toString().trim().isEmpty();
     }
 
     /**
@@ -48,6 +53,7 @@ public class QSort {
         map.put("value", this.value);
         return map;
     }
+
     /**
     * 取出 MAP 內的 值
     * @params MAP
@@ -58,24 +64,31 @@ public class QSort {
         String v = DESC;
 
         Object sort = map.get(SORT_KEY);
-        if (sort != null) {
-            if (sort instanceof String) {
+        if (sort instanceof String) {
 
-                String _sort = sort.toString().trim();
-                if (!_sort.isEmpty()) {
+            String _sort = sort.toString().trim();
+            if (!_sort.isEmpty()) {
 
-                    String[] ks = _sort.split(":");
-                    if (ks.length == 1) {
-                        k = ks[0];
-                    }
-                    else if (ks.length == 2) {
-                        k = ks[0];
-                        v = (ks[1].equalsIgnoreCase(ASC)) ? ASC : DESC;
-                    }
+                String[] ks = _sort.split(":");
+                if (ks.length == 1) { k = ks[0]; }
+                else if (ks.length == 2) {
+                    k = ks[0];
+                    v = (ks[1].equalsIgnoreCase(ASC)) ? ASC : DESC;
                 }
             }
         }
         return new QSort(k, v);
     }
 
+    public static String serValue(Object src) {
+        String v = DESC;
+        if (src instanceof String) {
+            String _sort = src.toString().trim();
+            if (!_sort.isEmpty()) {
+                String[] ks = _sort.split(":");
+                if (ks.length == 2) { v = (ks[1].equalsIgnoreCase(ASC)) ? ASC : DESC; }
+            }
+        }
+        return v;
+    }
 }
