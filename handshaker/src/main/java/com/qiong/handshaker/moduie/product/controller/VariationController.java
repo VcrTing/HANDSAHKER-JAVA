@@ -2,6 +2,7 @@ package com.qiong.handshaker.moduie.product.controller;
 
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterProduct;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.result.QResponse;
 import com.qiong.handshaker.moduie.product.Variation;
 import com.qiong.handshaker.moduie.product.service.VariationAndStorehouseAndProductService;
@@ -10,6 +11,7 @@ import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.utils.basic.QTypedUtil;
 import com.qiong.handshaker.vo.product.VoVariationOperaForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,7 @@ public class VariationController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PostMapping
     public QResponse<Variation> pos(@RequestBody @Validated VoVariationOperaForm form) {
         Variation entity = Variation.init(form);
@@ -36,14 +39,16 @@ public class VariationController {
         return QResponseTool.restfull(QTypedUtil.hasLong(form.getProduct()), entity);
     }
 
-    // 修改 样式名称
+    /**
+    * 修改 样式名称
+    * @params
+    * @return
+    */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PatchMapping("/{id}")
     public QResponse<Variation> put(@PathVariable Long id, @RequestBody @Validated VoVariationOperaForm form) {
         Variation entity = Variation.init(form);
         entity.setId(id);
         return QResponseTool.restfull(service.updateById(entity), entity);
     }
-
-    // 删除 和 产品 有关 的 样式
-    // 暂时 不需要
 }

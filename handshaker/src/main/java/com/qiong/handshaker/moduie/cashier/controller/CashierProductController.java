@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterCashier;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.dataset.EntityDefineDataset;
 import com.qiong.handshaker.define.query.QLikes;
 import com.qiong.handshaker.define.query.QPage;
@@ -18,6 +19,7 @@ import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.view.cashier.ViewCashierProductResultForm;
 import com.qiong.handshaker.view.product.ViewProductResultForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -35,6 +37,7 @@ public class CashierProductController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_CASHIER)
     @GetMapping
     public QResponse<QPager<ViewCashierProductResultForm>> page(@RequestParam HashMap<String, Object> qry) {
 

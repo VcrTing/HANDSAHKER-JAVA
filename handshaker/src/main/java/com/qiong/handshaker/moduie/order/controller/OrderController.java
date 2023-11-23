@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterBase;
 import com.qiong.handshaker.data.router.DataRouterOrder;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.dataset.EntityDefineDataset;
 import com.qiong.handshaker.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.define.query.QBetweenDate;
@@ -26,6 +27,7 @@ import com.qiong.handshaker.view.product.ViewProductResultForm;
 import com.qiong.handshaker.vo.order.VoOrderPostForm;
 import com.qiong.handshaker.vo.product.VoProductPostForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +48,7 @@ public class OrderController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping
     public QResponse<QPager<ViewOrderResultForm>> page(@RequestParam HashMap<String, Object> qry) {
 
@@ -85,6 +88,7 @@ public class OrderController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping("/{id}")
     public QResponse<ViewOrderDetailForm> detail(@PathVariable Object id) {
         if (id == null) throw new QLogicException("未找到 订单 ID");

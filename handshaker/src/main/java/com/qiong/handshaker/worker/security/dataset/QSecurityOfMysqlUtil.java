@@ -60,7 +60,7 @@ public class QSecurityOfMysqlUtil {
             User u = QJsonUtil.serToObject(qToken.getAuthUserString(), User.class);
             // System.out.println(">--- MYSQL 里面的 用户 = " + u);
             // 查询 USER 后去 构建 AuthUser，因为 AuthUser 很难
-            return new AuthUser(qToken.getToken(), u);
+            return new AuthUser(qToken.getToken(), u, AuthUser.genAuthorities(u.getIsAdmin()));
         } catch (Exception e) { return null; }
     }
 

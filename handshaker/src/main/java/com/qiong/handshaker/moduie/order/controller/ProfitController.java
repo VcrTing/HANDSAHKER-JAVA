@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterOrder;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.query.QBetweenDate;
 import com.qiong.handshaker.define.query.QLikes;
 import com.qiong.handshaker.define.query.QPage;
@@ -18,6 +19,7 @@ import com.qiong.handshaker.utils.basic.QTypedUtil;
 import com.qiong.handshaker.view.order.ViewOrderResultForm;
 import com.qiong.handshaker.view.order.ViewProfitResultForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +40,7 @@ public class ProfitController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping
     public QResponse<QPager<ViewProfitResultForm>> page(@RequestParam HashMap<String, Object> qry) {
 

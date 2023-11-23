@@ -5,6 +5,7 @@ import com.qiong.handshaker.moduie.sys.mapper.UserMapper;
 import com.qiong.handshaker.tool.security.QSecurityDatasetTool;
 import com.qiong.handshaker.tool.security.QSecurityTool;
 import com.qiong.handshaker.worker.security.dataset.QSecurityOfMysqlUtil;
+import com.qiong.handshaker.worker.security.dataset.QSecurityOfRedisUtil;
 import com.qiong.handshaker.worker.security.dataset.entity.QToken;
 import com.qiong.handshaker.utils.security.QJwtUtil;
 import com.qiong.handshaker.utils.usefull.QJsonUtil;
@@ -26,19 +27,23 @@ public class AuthService {
     @Autowired
     QSecurityOfMysqlUtil mysqlUtil;
 
+    @Autowired
+    QSecurityOfRedisUtil redisUtil;
+
     // 储存 用户 到 缓存 内
     protected AuthUser storeUser(AuthUser user) {
         // REDIS
-        // securityDatasetTool.setUserToRedis(user.getId(), user);
-
+        return redisUtil.setAuthUserToRedis(user);
         // MYSQL
-        return mysqlUtil.setAuthUserToMysql(user);
+        // return mysqlUtil.setAuthUserToMysql(user);
     }
 
-    // 组装 JWT 和 删除密码 和 缓存 用户
     public AuthUser groupLoginUser(AuthUser user) {
+        // 组装 JWT
         user.setJwt(QJwtUtil.genJwt(user.getId(), user.getUsername()));
+        // 删除密码
         user.getUser().setPassword("");
+        // 缓存 用户
         return storeUser(user);
     }
 
@@ -48,11 +53,9 @@ public class AuthService {
     * @return
     */
     public Object login(String name, String pass) {
-        System.out.println(name + " " + pass);
         UsernamePasswordAuthenticationToken authenticationToken = QSecurityTool.genNamePassToken(name, pass);
-        System.out.println("驗證 = " + authenticationToken);
         Authentication authentication = manager.authenticate(authenticationToken);
-        System.out.println("驗證登錄通過");
+        System.out.println("驗證通过 = " + authenticationToken);
         if (authentication == null) return "NAME OR PASS 错误，认证失败";
         Object authUser = authentication.getPrincipal();
         return (authUser == null) ? "NAME OR PASS 错误，认证失败" : groupLoginUser((AuthUser) authUser);

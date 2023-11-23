@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterProduct;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.query.QPage;
 import com.qiong.handshaker.define.query.QSort;
 import com.qiong.handshaker.define.result.QResponse;
@@ -15,6 +16,7 @@ import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.view.product.ViewLabelResultForm;
 import com.qiong.handshaker.vo.product.VoLabelForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +39,7 @@ public class LabelController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_CASHIER)
     @GetMapping
     public QResponse<IPage<Label>> page(@RequestParam HashMap<String, Object> qry) {
         LambdaQueryWrapper<Label> qw = new LambdaQueryWrapper<>();
@@ -49,6 +52,7 @@ public class LabelController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping("/{id}")
     public QResponse<ViewLabelResultForm> one(@PathVariable Long id) {
         return QResponseTool.restfull(id != null, pnlService.oneByLabel(id));
@@ -59,6 +63,7 @@ public class LabelController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PostMapping
     public QResponse<Label> pos(@RequestBody @Validated VoLabelForm form) {
         Label entity = Label.init(form);
@@ -70,6 +75,7 @@ public class LabelController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PatchMapping("/{id}")
     public QResponse<Label> upd(@PathVariable Long id, @RequestBody @Validated VoLabelForm form) {
         Label entity = Label.init(form);
@@ -84,6 +90,7 @@ public class LabelController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @DeleteMapping("/{id}")
     public QResponse<Label> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));

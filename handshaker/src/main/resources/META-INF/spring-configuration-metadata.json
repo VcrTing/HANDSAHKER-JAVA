@@ -1,0 +1,18 @@
+{
+  "groups": [ ],
+  "hints": [ ],
+  "properties": [
+    {
+      "name": "my.interview-header",
+      "type": "java.lang.String",
+      "defaultValue": "uploads",
+      "description": "上传的资源 的访问头"
+    },
+    {
+      "name": "my.document-folder",
+      "type": "java.lang.String",
+      "defaultValue": "document",
+      "description": "上传的资源 的存储文件夹 名称"
+    }
+  ]
+}

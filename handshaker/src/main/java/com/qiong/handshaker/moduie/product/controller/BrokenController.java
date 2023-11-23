@@ -3,6 +3,7 @@ package com.qiong.handshaker.moduie.product.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.define.query.*;
 import com.qiong.handshaker.define.result.QPager;
@@ -13,6 +14,7 @@ import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.view.product.ViewBrokenResultForm;
 import com.qiong.handshaker.vo.product.VoBrokenOperaForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +34,7 @@ public class BrokenController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping
     public QResponse<QPager<ViewBrokenResultForm>> page(@RequestParam HashMap<String, Object> qry) {
 
@@ -58,6 +61,7 @@ public class BrokenController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PostMapping
     @Transactional
     public QResponse<Broken> pos(@RequestBody @Validated VoBrokenOperaForm form) {
@@ -70,6 +74,7 @@ public class BrokenController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @DeleteMapping("/{id}")
     @Transactional
     public QResponse<Broken> dei(@PathVariable Long id) {

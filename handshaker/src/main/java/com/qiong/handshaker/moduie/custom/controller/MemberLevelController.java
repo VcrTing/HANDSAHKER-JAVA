@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterCustom;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.query.QPage;
 import com.qiong.handshaker.define.query.QSort;
 import com.qiong.handshaker.define.result.QResponse;
@@ -15,6 +16,7 @@ import com.qiong.handshaker.moduie.custom.service.MemberLevelService;
 import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.vo.custom.VoMemberLevelForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +36,7 @@ public class MemberLevelController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping
     public QResponse<IPage<MemberLevel>> page(@RequestParam HashMap<String, Object> qry) {
         LambdaQueryWrapper<MemberLevel> qw = new LambdaQueryWrapper<>();
@@ -46,6 +49,7 @@ public class MemberLevelController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping("/{id}")
     public QResponse<MemberLevel> one(@PathVariable Long id) {
         return QResponseTool.restfull(id != null, service.getById(id));
@@ -56,6 +60,7 @@ public class MemberLevelController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PostMapping
     public QResponse<MemberLevel> pos(@RequestBody @Validated VoMemberLevelForm memberLevelForm) {
         MemberLevel src = MemberLevel.init(memberLevelForm, null);
@@ -67,6 +72,7 @@ public class MemberLevelController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PatchMapping("/{id}")
     public QResponse<MemberLevel> upd(@PathVariable Long id, @RequestBody @Validated VoMemberLevelForm memberLevelForm) {
         MemberLevel src = MemberLevel.init(memberLevelForm, id);
@@ -78,6 +84,7 @@ public class MemberLevelController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @DeleteMapping("/{id}")
     public QResponse<MemberLevel> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));

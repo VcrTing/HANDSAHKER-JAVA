@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterProduct;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.dataset.EntityDefineDataset;
 import com.qiong.handshaker.define.query.QLikes;
 import com.qiong.handshaker.define.query.QPage;
@@ -15,11 +16,15 @@ import com.qiong.handshaker.moduie.product.Variation;
 import com.qiong.handshaker.moduie.product.service.ProductAndLabelService;
 import com.qiong.handshaker.moduie.product.service.ProductService;
 import com.qiong.handshaker.moduie.product.service.VariationAndStorehouseAndProductService;
+import com.qiong.handshaker.moduie.sys.auth.AuthUser;
 import com.qiong.handshaker.tool.result.QResponseTool;
+import com.qiong.handshaker.tool.security.QSecurityMvcTool;
+import com.qiong.handshaker.tool.security.QSecurityTool;
 import com.qiong.handshaker.view.product.ViewProductResultForm;
 import com.qiong.handshaker.vo.product.VoProductPatchForm;
 import com.qiong.handshaker.vo.product.VoProductPostForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -42,11 +47,15 @@ public class ProductController {
     @Autowired
     VariationAndStorehouseAndProductService variationAndStorehouseAndProductService;
 
+    @Autowired
+    QSecurityMvcTool securityMvcTool;
+
     /**
     * 深层 分页 列表，查询 深层产品 数据
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping
     public QResponse<QPager<ViewProductResultForm>> page(@RequestParam HashMap<String, Object> qry) {
 
@@ -75,6 +84,7 @@ public class ProductController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_CASHIER)
     @GetMapping("/{id}")
     public QResponse<ViewProductResultForm> one(@PathVariable Object id) {
         return id != null ? QResponseTool.restfull(true, service.oneDeep( id )) : QResponseTool.genBad("", null);
@@ -85,6 +95,7 @@ public class ProductController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PostMapping
     @Transactional
     public QResponse<Product> pos(@RequestBody @Validated VoProductPostForm form) {
@@ -101,7 +112,9 @@ public class ProductController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PatchMapping("/{id}")
+    @Transactional
     public QResponse<Product> upd(@PathVariable Long id, @RequestBody @Validated VoProductPatchForm form) {
         return QResponseTool.restfull(service.update(form.genUpdateWrapper(id)), service.getById(id));
     }
@@ -111,7 +124,9 @@ public class ProductController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @DeleteMapping("/{id}")
+    @Transactional
     public QResponse<Product> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));
     }

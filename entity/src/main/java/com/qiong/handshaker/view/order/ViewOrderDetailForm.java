@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 import org.apache.ibatis.javassist.compiler.ast.Member;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -25,6 +26,8 @@ public class ViewOrderDetailForm {
 
     private Long id;
     private String order_id;
+
+    private Date order_date;
 
     // 收银员
     private User cashier;
@@ -53,6 +56,7 @@ public class ViewOrderDetailForm {
 
         res.setId(order.getId());
         res.setOrder_id(order.getOrder_id());
+        res.setOrder_date(order.getOrder_date());
         res.setStatus(order.getOrder_status().getValue());
 
         res.setTotal_price(order.getTotal_price());

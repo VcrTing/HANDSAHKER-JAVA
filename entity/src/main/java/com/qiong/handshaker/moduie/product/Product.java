@@ -65,6 +65,7 @@ public class Product extends BaseEntity {
         res.setId(this.getId());
         res.setName(this.getName());
         res.setProduct_id(this.getProduct_id());
+
         return res;
     }
 

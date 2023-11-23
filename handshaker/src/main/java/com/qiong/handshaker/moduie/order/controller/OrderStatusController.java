@@ -3,6 +3,7 @@ package com.qiong.handshaker.moduie.order.controller;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterOrder;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.enums.EnumOrderStatus;
 import com.qiong.handshaker.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.define.result.QResponse;
@@ -12,6 +13,7 @@ import com.qiong.handshaker.moduie.order.service.OrderService;
 import com.qiong.handshaker.moduie.order.service.ProfitService;
 import com.qiong.handshaker.tool.result.QResponseTool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +43,7 @@ public class OrderStatusController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_CASHIER)
     @PatchMapping("/{id}")
     @Transactional
     public QResponse<Object> updStatus(@RequestBody HashMap<String, String> statusMap, @PathVariable Long id) {

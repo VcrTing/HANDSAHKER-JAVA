@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterCustom;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.query.QLikes;
 import com.qiong.handshaker.define.query.QPage;
 import com.qiong.handshaker.define.query.QSort;
@@ -20,6 +21,7 @@ import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.vo.custom.VoCustomOptionForm;
 import com.qiong.handshaker.vo.custom.VoMemberLevelForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +41,7 @@ public class CustomerController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_CASHIER)
     @GetMapping
     public QResponse<IPage<Customer>> page(@RequestParam HashMap<String, Object> qry) {
 
@@ -63,6 +66,7 @@ public class CustomerController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping("/{id}")
     public QResponse<Customer> one(@PathVariable Long id) {
         return QResponseTool.restfull(id != null, service.oneDeep(id));
@@ -73,6 +77,7 @@ public class CustomerController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PostMapping
     public QResponse<Object> pos(@RequestBody @Validated VoCustomOptionForm form) {
         return service.posCustom(Customer.init(form, null));
@@ -83,6 +88,7 @@ public class CustomerController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PatchMapping("/{id}")
     public QResponse<Customer> upd(@PathVariable Long id, @RequestBody @Validated VoCustomOptionForm form) {
         Customer entity = Customer.init(form, id);
@@ -94,6 +100,7 @@ public class CustomerController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @DeleteMapping("/{id}")
     public QResponse<Customer> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));

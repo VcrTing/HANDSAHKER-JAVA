@@ -71,17 +71,8 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
     * @return
     */
     public QPager<ViewOrderResultForm> pageDeep(IPage<Order> ip, QueryWrapper<Order> qw) {
-
-        List<ViewOrderResultForm> res = new ArrayList<>();
         ip.setRecords(mapper.pageList(ip, qw));
-
-        if (ip.getRecords() != null) {
-            for(Order o: ip.getRecords()) {
-                res.add(ViewOrderResultForm.init(o, o.getStorehouse()));
-            }
-        }
-
-        return QPager.ofPage(ip, res);
+        return QPager.ofPage(ip, ViewOrderResultForm.initList(ip.getRecords()));
     }
 
 
@@ -125,7 +116,9 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
         List<OrderProduct> ops = res.getOrdered_product();
         for (OrderProduct op: ops) {
             Product product = productMapper.selectById(op.getProduct_sql_id());
-            op.setProduct(product.simpleResult());
+            op.setProduct(
+                    ViewProductResultForm.init(product, null)
+            );
             Variation variation = variationMapper.selectById(op.getVariation_sql_id());
             op.setVariation(variation);
         }

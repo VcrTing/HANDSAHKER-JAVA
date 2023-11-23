@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 import org.apache.ibatis.javassist.compiler.ast.Member;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,6 +29,15 @@ public class ViewOrderResultForm {
     private BigDecimal total_price;
 
     private Storehouse order_shop;
+
+    public static List<ViewOrderResultForm> initList(List<Order> src) {
+        List<ViewOrderResultForm> res = new ArrayList<>();
+        if (src == null) return res;
+        for(Order o: src) {
+            res.add(ViewOrderResultForm.init(o, o.getStorehouse()));
+        }
+        return res;
+    }
 
     public static ViewOrderResultForm init(Order order, Storehouse storehouse) {
         ViewOrderResultForm res = new ViewOrderResultForm();

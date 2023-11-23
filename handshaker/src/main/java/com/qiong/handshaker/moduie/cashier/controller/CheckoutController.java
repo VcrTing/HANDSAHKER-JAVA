@@ -2,6 +2,7 @@ package com.qiong.handshaker.moduie.cashier.controller;
 
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterOrder;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.define.result.QResponse;
 import com.qiong.handshaker.moduie.base.Storehouse;
@@ -19,6 +20,7 @@ import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.tool.security.QSecurityMvcTool;
 import com.qiong.handshaker.vo.order.VoOrderPostForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,6 +56,7 @@ public class CheckoutController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_CASHIER)
     @PostMapping
     public QResponse<Object> checkout(@RequestBody @Validated VoOrderPostForm form) {
 

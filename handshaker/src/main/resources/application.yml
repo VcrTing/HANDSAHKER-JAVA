@@ -26,9 +26,15 @@ spring:
     resources:
       static-locations: classpath:/document/
 
+# 自己的 配置
 my:
   interview-header: uploads
   document-folder: document
+  author:
+    nickname: 沙荔枝
+    default-email: vcrting@163.com
+  security:
+    token-survival-time: 72 # 3 天
 
 # MYBATIS
 mybatis-plus:
@@ -41,8 +47,7 @@ mybatis-plus:
     map-underscore-to-camel-case: false # 关闭 驼峰
   mapper-locations: classpath:mapper/*Mapper.xml,classpath:mapper/**/*Mapper.xml
 
-# LOG
-
+# 启动 端口
 server:
   port: 80
 

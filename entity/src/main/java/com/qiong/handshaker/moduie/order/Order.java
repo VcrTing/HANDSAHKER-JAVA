@@ -113,8 +113,8 @@ public class Order extends BaseEntity {
     // 生成 订单 ID
     public static String genOrderID() {
         int num = (int) (Math.random() * 100 + 1);
-        String tim = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        int num2 = (int) (Math.random() * 100 + 1);
-        return "ORDER_" + num + tim + num2;
+        String tim = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+        // int num2 = (int) (Math.random() * 100 + 1);
+        return "ORDER_" + tim + num;
     }
 }

@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "my",
+      "type": "com.qiong.handshaker.data.properties.PropertiesMy",
+      "sourceType": "com.qiong.handshaker.data.properties.PropertiesMy"
+    }
+  ],
+  "properties": [
+    {
+      "name": "my.author",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "com.qiong.handshaker.data.properties.PropertiesMy"
+    },
+    {
+      "name": "my.document-folder",
+      "type": "java.lang.String",
+      "sourceType": "com.qiong.handshaker.data.properties.PropertiesMy"
+    },
+    {
+      "name": "my.interview-header",
+      "type": "java.lang.String",
+      "sourceType": "com.qiong.handshaker.data.properties.PropertiesMy"
+    },
+    {
+      "name": "my.security",
+      "type": "com.qiong.handshaker.data.properties.innerMy.PropertiesMyInnerSecurity",
+      "sourceType": "com.qiong.handshaker.data.properties.PropertiesMy"
+    }
+  ],
+  "hints": []
+}

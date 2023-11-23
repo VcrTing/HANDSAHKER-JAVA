@@ -139,7 +139,7 @@ public class ViewProductResultForm implements Serializable {
         if (product.getRemarks() != null) res.setRemarks(JSONUtil.toList(product.getRemarks(), ProductRemark.class));
 
         // 序列化 标签
-        res.setLabels(LabelsJson.init(product).idsToEntity(allLabels));
+        if (allLabels != null) res.setLabels(LabelsJson.init(product).idsToEntity(allLabels));
 
         // 序列化 库存 数据
 

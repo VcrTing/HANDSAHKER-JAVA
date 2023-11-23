@@ -2,6 +2,7 @@ package com.qiong.handshaker.moduie.product.controller;
 
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterProduct;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.define.result.QResponse;
 import com.qiong.handshaker.moduie.base.Supplier;
@@ -16,6 +17,7 @@ import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.vo.product.VoRestockPostForm;
 import com.qiong.handshaker.vo.product.VoTransferStockForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +45,7 @@ public class RestockController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PostMapping(DataRouterProduct.RESTOCK)
     @Transactional
     public QResponse<Object> pos(@RequestBody VoRestockPostForm form) {
@@ -63,6 +66,7 @@ public class RestockController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PatchMapping(DataRouterProduct.TRANSFER + "/{id}")
     @Transactional
     public QResponse<Object> transfer(@PathVariable Long id, @RequestBody VoTransferStockForm form) {
@@ -72,10 +76,10 @@ public class RestockController {
         VariationAndStorehouseAndProduct vspTo = variationAndStorehouseAndProductService.one(id, form.getVariation(), form.getStorehouse_to());
         if (vspTo == null) throw new QLogicException("加貨倉庫 库存数据 为空");
 
-        // 减货
+        // 减货 FROM
         variationAndStorehouseAndProductService.removeQuantity(
                 vspFrom.getProduct_sql_id(), vspFrom.getVariation_sql_id(), vspFrom.getStorehouse_sql_id(), form.getQuantity());
-        // 加货
+        // 加货 TO
         variationAndStorehouseAndProductService.insertQuantity(
                 vspTo.getProduct_sql_id(), vspTo.getVariation_sql_id(), vspTo.getStorehouse_sql_id(), form.getQuantity());
 

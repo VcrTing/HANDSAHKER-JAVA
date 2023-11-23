@@ -2,6 +2,7 @@ package com.qiong.handshaker.moduie.order.inner;
 
 import com.qiong.handshaker.moduie.product.Product;
 import com.qiong.handshaker.moduie.product.Variation;
+import com.qiong.handshaker.view.product.ViewProductResultForm;
 import com.qiong.handshaker.vo.order.inner.VoInnerOrderProduct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class OrderProduct {
     private Long product_sql_id;
-    private Product product;
+    private ViewProductResultForm product;
 
     private Long variation_sql_id;
     private Variation variation;

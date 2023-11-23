@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterBase;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.query.QLikes;
 import com.qiong.handshaker.define.query.QPage;
 import com.qiong.handshaker.define.query.QSort;
@@ -15,6 +16,7 @@ import com.qiong.handshaker.moduie.base.service.SupplierService;
 import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.utils.basic.QTypedUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +36,7 @@ public class SupplierController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_CASHIER)
     @GetMapping
     public QResponse<IPage<Supplier>> page(@RequestParam HashMap<String, Object> qry) {
 
@@ -57,6 +60,7 @@ public class SupplierController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping("/{id}")
     public QResponse<Supplier> one(@PathVariable Long id) {
         return QResponseTool.restfull(QTypedUtil.serLong(id) != null, service.one(id));
@@ -67,6 +71,7 @@ public class SupplierController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PostMapping
     public QResponse<Supplier> pos(@RequestBody @Validated Supplier entity) {
         return QResponseTool.restfull(service.save(entity), entity);
@@ -77,6 +82,7 @@ public class SupplierController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PatchMapping("/{id}")
     public QResponse<Supplier> upd(@PathVariable Long id, @RequestBody @Validated Supplier entity) {
         entity.setId(id);
@@ -88,6 +94,7 @@ public class SupplierController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @DeleteMapping("/{id}")
     public QResponse<Supplier> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));

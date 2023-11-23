@@ -3,6 +3,7 @@ package com.qiong.handshaker.moduie.order.controller;
 
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterOrder;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.define.result.QResponse;
 import com.qiong.handshaker.moduie.base.Storehouse;
@@ -19,6 +20,7 @@ import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.vo.order.VoRefundOperaForm;
 import com.qiong.handshaker.vo.order.refund.VoInnerRefundedInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -46,6 +48,7 @@ public class RefundController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_CASHIER)
     @PatchMapping("/{id}")
     public QResponse<Object> refund(@PathVariable Long id, @RequestBody VoRefundOperaForm form) {
 

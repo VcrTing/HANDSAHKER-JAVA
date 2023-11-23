@@ -15,6 +15,6 @@ public class SecurityAuthFailureHandier implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         System.out.println("authException = " + authException.getLocalizedMessage());
-        QHttpResponseResultUtil.authFailure(response, "认证失败");
+        QHttpResponseResultUtil.authFailure(response, "认证 TOKEN 失败，请登录。");
     }
 }

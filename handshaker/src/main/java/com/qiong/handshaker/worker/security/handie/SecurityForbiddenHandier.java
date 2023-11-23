@@ -14,6 +14,6 @@ import java.io.IOException;
 public class SecurityForbiddenHandier implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        QHttpResponseResultUtil.forbidden(response, "没有权限");
+        QHttpResponseResultUtil.forbidden(response, "您没有权限访问该链接。");
     }
 }

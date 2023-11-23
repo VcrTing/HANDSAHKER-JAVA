@@ -1,7 +1,9 @@
 package com.qiong.handshaker.moduie.product.controller;
 
 import com.qiong.handshaker.anno.result.QResponseAdvice;
+import com.qiong.handshaker.data.properties.PropertiesMy;
 import com.qiong.handshaker.data.router.DataRouterProduct;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.result.QResponse;
 import com.qiong.handshaker.moduie.base.service.SupplierService;
 import com.qiong.handshaker.moduie.product.Label;
@@ -18,6 +20,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,17 +81,27 @@ public class ProductAndLabelController {
     * @params
     * @return
     */
-
+    /*
     // @Value("${spring.web.resources.static-locations}")
     @Value("${my.document-folder}")
     private String documentFolder;
 
     @Value("${my.interview-header}")
     private String interviewHeader;
-
+    */
     @Autowired
     QStaticTool staticTool;
 
+    // 自定义 数据
+    @Autowired
+    PropertiesMy propertiesMy;
+
+    /**
+    * 导出 产品 EXCAEL
+    * @params
+    * @return
+    */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping(DataRouterProduct.EXPORT)
     public QResponse<String> exportExcel() {
 
@@ -110,12 +123,12 @@ public class ProductAndLabelController {
         // 写入 文件
         try {
             name = QFileUtil.genName("產品統計表", "xlsx");
-            OutputStream out = staticTool.genResourceOutputStream(documentFolder, name);
+            OutputStream out = staticTool.genResourceOutputStream(propertiesMy.getDocumentFolder(), name);
             workbook.write(out);
             out.flush();
             out.close();
         } catch (Exception ignored) { }
 
-        return QResponseTool.restfull(!name.isEmpty(), name); // interviewHeader + "/" + name
+        return QResponseTool.restfull(!name.isEmpty(), name); // propertiesMy.getInterviewHeader() + "/" + name
     }
 }

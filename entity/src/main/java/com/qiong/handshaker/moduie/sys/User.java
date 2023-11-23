@@ -1,5 +1,6 @@
 package com.qiong.handshaker.moduie.sys;
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.qiong.handshaker.moduie.BaseEntity;
@@ -56,18 +57,15 @@ public class User extends BaseEntity {
     */
     public static User init(VoUserOptionForm form) {
 
-        // 比较原始的 手写 转换
+        // 率先提取
+        boolean is_admin = form.getIsAdmin();
+        form.setIsAdmin(null);
 
-        User u = new User();
+        User u = JSONUtil.toBean( JSONUtil.toJsonStr(form), User.class);
 
-        u.setName(form.getName());
-        u.setEmail(form.getEmail());
-        u.setUsername(form.getEmail());
-        u.setPassword(form.getPassword());
-        u.setPhone_no(form.getPhone_no());
-        u.setStorehouse_id(form.getStorehouse());
+        u.setUsername(u.getEmail());
+        u.setIsAdmin(is_admin ? 1 : 0);
 
-        u.setIsAdmin(form.getIsAdmin() ? 1 : 0);
         return autoGenerate(u);
     }
 

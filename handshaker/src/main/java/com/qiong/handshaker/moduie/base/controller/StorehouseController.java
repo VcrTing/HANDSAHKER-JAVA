@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qiong.handshaker.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterBase;
+import com.qiong.handshaker.data.security.DataSecurityRoleConf;
 import com.qiong.handshaker.define.query.QPage;
 import com.qiong.handshaker.define.query.QSort;
 import com.qiong.handshaker.define.result.QResponse;
@@ -15,6 +16,7 @@ import com.qiong.handshaker.moduie.product.Label;
 import com.qiong.handshaker.tool.result.QResponseTool;
 import com.qiong.handshaker.utils.basic.QTypedUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +36,7 @@ public class StorehouseController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_CASHIER)
     @GetMapping
     @QResponseAdvice
     public QResponse<IPage<Storehouse>> page(@RequestParam HashMap<String, Object> qry) {
@@ -47,6 +50,7 @@ public class StorehouseController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @GetMapping("/{id}")
     public QResponse<Storehouse> one(@PathVariable Long id) {
         return QResponseTool.restfull(QTypedUtil.hasLong(id), service.getById(id));
@@ -57,6 +61,7 @@ public class StorehouseController {
     * @params
     * @return
     */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PostMapping
     public QResponse<Storehouse> pos(@RequestBody @Validated Storehouse entity) {
         return QResponseTool.restfull(service.save(entity), entity);
@@ -67,6 +72,7 @@ public class StorehouseController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @PatchMapping("/{id}")
     public QResponse<Storehouse> upd(@PathVariable Long id, @RequestBody @Validated Storehouse entity) {
         entity.setId(id);
@@ -78,6 +84,7 @@ public class StorehouseController {
      * @params
      * @return
      */
+    @PreAuthorize(DataSecurityRoleConf.AUTH_ADMIN_ONLY)
     @DeleteMapping("/{id}")
     public QResponse<Storehouse> dei(@PathVariable Long id) {
         return QResponseTool.restfull(service.removeById(id), service.getById(id));
