@@ -7,6 +7,7 @@ import com.qiong.handshaker.vo.order.inner.VoInnerPaymentMethod;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class VoOrderPostForm {
     private Long member;
+
     private EnumOrderStatus status;
 
     private List<VoInnerOrderProduct> ordered_product;

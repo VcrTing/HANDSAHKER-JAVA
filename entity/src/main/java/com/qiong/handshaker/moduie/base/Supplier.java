@@ -28,6 +28,7 @@ public class Supplier extends BaseEntity {
     @Email
     private String email;
 
+    @Length(min = 2, max = 90, message = "名字长度介于 {min} - {max} 之间")
     private String name;
 
     @NotNull(message = "电话号码不为空")
@@ -46,6 +47,7 @@ public class Supplier extends BaseEntity {
     @Length(min = 0, max = 250, message = "公司地址长度介于 {min} - {max} 之间")
     @TableField("office_address")
     private String office_address;
+
     @Length(min = 0, max = 250, message = "工厂地址长度介于 {min} - {max} 之间")
     @TableField("factory_address")
     private String factory_address;

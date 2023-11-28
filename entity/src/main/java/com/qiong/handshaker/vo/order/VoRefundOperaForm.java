@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -17,5 +18,6 @@ public class VoRefundOperaForm {
 
     private String refunded_remarks;
 
+    @NotNull
     private Long storehouse;
 }

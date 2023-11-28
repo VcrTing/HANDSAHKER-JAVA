@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.util.StringUtils;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,7 +22,9 @@ import java.util.List;
 @AllArgsConstructor
 public class VoProductPatchForm {
 
+    @Digits(integer = 999999999, fraction = 2, message = "最低價錢数字异常")
     private BigDecimal new_lowest_price;
+    @Digits(integer = 999999999, fraction = 2, message = "售價錢数字异常")
     private BigDecimal new_selling_price;
 
     private Long id;

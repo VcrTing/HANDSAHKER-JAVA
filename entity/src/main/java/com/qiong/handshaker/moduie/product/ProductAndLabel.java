@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @TableName("prod_product_and_label")
@@ -25,17 +26,14 @@ public class ProductAndLabel extends BaseEntity {
     @TableField(exist = false)
     private Label label;
 
+    /*
     public ProductAndLabel(Long pid, Long lid) {
         this.setProduct_sql_id(pid);
         this.setLabel_sql_id(lid);
         autoGenerate(this);
     }
-
     public static List<ProductAndLabel> initMany(Long pid, List<Long> lids) {
-        List<ProductAndLabel> res = new ArrayList<>();
-        for (Long lid: lids) {
-            res.add(new ProductAndLabel(pid, lid));
-        }
-        return res;
+        return lids.stream().map(lid -> new ProductAndLabel(pid, lid)).collect(Collectors.toList());
     }
+    */
 }

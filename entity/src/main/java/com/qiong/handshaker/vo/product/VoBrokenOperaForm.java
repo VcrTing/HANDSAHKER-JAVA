@@ -28,6 +28,4 @@ public class VoBrokenOperaForm {
 
     @NotNull(message = "壞貨倉庫不为空")
     private Long storehouse_id;
-
-
 }

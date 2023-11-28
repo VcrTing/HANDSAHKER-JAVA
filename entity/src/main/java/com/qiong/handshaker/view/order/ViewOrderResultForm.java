@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -31,12 +32,8 @@ public class ViewOrderResultForm {
     private Storehouse order_shop;
 
     public static List<ViewOrderResultForm> initList(List<Order> src) {
-        List<ViewOrderResultForm> res = new ArrayList<>();
-        if (src == null) return res;
-        for(Order o: src) {
-            res.add(ViewOrderResultForm.init(o, o.getStorehouse()));
-        }
-        return res;
+        if (src == null) return new ArrayList<>();
+        return src.stream().map(o -> ViewOrderResultForm.init(o, o.getStorehouse())).collect(Collectors.toList());
     }
 
     public static ViewOrderResultForm init(Order order, Storehouse storehouse) {

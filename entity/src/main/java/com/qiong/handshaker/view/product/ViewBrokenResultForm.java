@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -29,9 +30,7 @@ public class ViewBrokenResultForm {
     private Storehouse storehouse;
 
     public static List<ViewBrokenResultForm> initList(List<Broken> src) {
-        List<ViewBrokenResultForm> res = new ArrayList<>();
-        src.forEach(s -> res.add(init(s)));
-        return res;
+        return src.stream().map(ViewBrokenResultForm::init).collect(Collectors.toList());
     }
 
     public static ViewBrokenResultForm init(Broken broken) {

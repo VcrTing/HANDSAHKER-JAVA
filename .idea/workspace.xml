@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f4aafe6c-0312-4d12-8be6-fa2f313047b1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/front" beforeDir="false" afterPath="$PROJECT_DIR$/front" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handshaker/src/main/java/com/qiong/handshaker/data/security/DataSecurityRoleConf.java" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/src/main/java/com/qiong/handshaker/data/security/DataSecurityRoleConf.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +18,8 @@
         <option value="package-info" />
         <option value="AnnotationType" />
         <option value="Kotlin Class" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -81,23 +80,7 @@
       <recent name="com.qiong.handshaker.moduie.product.serive" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.App">
-    <configuration name="AppTest.code" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="handshaker" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.qiong.handshaker.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.qiong.handshaker" />
-      <option name="MAIN_CLASS_NAME" value="com.qiong.handshaker.AppTest" />
-      <option name="METHOD_NAME" value="code" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.UtilTest.beanUtilTest">
     <configuration name="AppTest.jackson" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="handshaker" />
       <extension name="coverage">
@@ -162,6 +145,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UtilTest.beanUtilTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="handshaker" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.qiong.handshaker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.qiong.handshaker" />
+      <option name="MAIN_CLASS_NAME" value="com.qiong.handshaker.UtilTest" />
+      <option name="METHOD_NAME" value="beanUtilTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="handshaker" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.qiong.handshaker.App" />
@@ -179,11 +178,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UtilTest.beanUtilTest" />
         <item itemvalue="JUnit.AppTest.nullTest" />
         <item itemvalue="JUnit.SecurityTool.pass" />
         <item itemvalue="JUnit.AppTest.jackson" />
         <item itemvalue="JUnit.AppTest.json" />
-        <item itemvalue="JUnit.AppTest.code" />
       </list>
     </recent_temporary>
   </component>
@@ -216,6 +215,7 @@
       <workItem from="1700742207648" duration="111000" />
       <workItem from="1700996369251" duration="227000" />
       <workItem from="1700996625126" duration="635000" />
+      <workItem from="1701156837445" duration="7809000" />
     </task>
     <servers />
   </component>

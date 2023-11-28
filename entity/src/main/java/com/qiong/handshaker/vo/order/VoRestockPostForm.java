@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 public class VoRestockPostForm {
 
-
+    @NotNull(message = "入貨數量不為空")
+    @Min(value = 0, message = "入貨數量 异常")
     private Integer quantity;
 
     private Date restock_date;
@@ -31,7 +34,9 @@ public class VoRestockPostForm {
     private BigDecimal selling_price;
 
     // 都是 ID
+    @NotNull(message = "入貨產品未選擇")
     private Long product;
+
     private Long supplier;
 
     // 仓库 数量 分配
