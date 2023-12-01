@@ -1,0 +1,34 @@
+
+# 启动 端口
+server:
+  port: 80
+
+# SPRING
+spring:
+  # DATA SOURCE
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://42.192.15.218:3306/handshaker?serverTimezone=UTC
+    username: qiong
+    password: qiong
+    type: com.alibaba.druid.pool.DruidDataSource
+  # REDIS
+  redis:
+    host: 42.192.15.218 #localhost #
+    port: 6379
+    client-type: lettuce
+    lettuce:
+      pool:
+        max-active: 8
+
+# MYBATIS
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+    banner: false
+  configuration:
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: false # 关闭 驼峰
+
+

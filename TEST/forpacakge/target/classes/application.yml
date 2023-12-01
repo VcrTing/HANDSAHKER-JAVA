@@ -1,0 +1,12 @@
+
+# SPRING
+spring:
+  profiles:
+    active: dev
+
+  main:
+    banner-mode: off
+
+# MYBATIS
+# mybatis-plus:
+  # mapper-locations: classpath:mapper/*Mapper.xml,classpath:mapper/**/*Mapper.xml

@@ -1,0 +1,27 @@
+
+# SPRING
+spring:
+  profiles:
+    active: dev
+
+  main:
+    banner-mode: off
+  mvc:
+    static-path-pattern: /uploads/**
+  web:
+    resources:
+      static-locations: classpath:/document/
+
+# MYBATIS
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml,classpath:mapper/**/*Mapper.xml
+
+# 自己的 配置
+my:
+  interview-header: uploads
+  document-folder: document
+  author:
+    nickname: 沙荔枝
+    default-email: vcrting@163.com
+  security:
+    token-survival-time: 72 # 3 天

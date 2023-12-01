@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c2ee6156-2e34-4ed4-a40a-d78e5c32263b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/order/OrderProfit.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/order/OrderProfit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/product/Broken.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/product/Broken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/product/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/product/RestockRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/product/RestockRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/sys/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/moduie/sys/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/vo/sys/VoUserLoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/src/main/java/com/qiong/handshaker/vo/sys/VoUserLoginForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/BaseEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/BaseEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/order/OrderProfit.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/order/OrderProfit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/product/Broken.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/product/Broken.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/product/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/product/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/product/RestockRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/product/RestockRecord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/sys/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/moduie/sys/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/order/VoOrderPostForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/order/VoOrderPostForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/order/VoRefundOperaForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/order/VoRefundOperaForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/order/VoRestockPostForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/order/VoRestockPostForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/product/VoBrokenOperaForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/product/VoBrokenOperaForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/product/VoRestockPostForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/product/VoRestockPostForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/product/VoTransferStockForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/product/VoTransferStockForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/sys/VoUserLoginForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../entity/target/classes/com/qiong/handshaker/vo/sys/VoUserLoginForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../front" beforeDir="false" afterPath="$PROJECT_DIR$/../../front" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/data/router/DataRouterAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/data/router/DataRouterAuth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/base/controller/StorehouseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/base/controller/StorehouseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/base/controller/SupplierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/base/controller/SupplierController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/product/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/product/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/product/service/RestockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/product/service/RestockService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/sys/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/sys/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/sys/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/sys/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/sys/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/sys/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/sys/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/moduie/sys/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/worker/security/fiiter/SecurityAuthRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/java/com/qiong/handshaker/worker/security/fiiter/SecurityAuthRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/data/router/DataRouterAuth.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/data/router/DataRouterAuth.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/base/controller/StorehouseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/base/controller/StorehouseController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/base/controller/SupplierController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/base/controller/SupplierController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/product/controller/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/product/controller/ProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/product/service/RestockService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/product/service/RestockService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/sys/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/sys/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/sys/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/sys/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/sys/service/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/sys/service/AuthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/sys/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/moduie/sys/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/worker/security/fiiter/SecurityAuthRequestFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/classes/com/qiong/handshaker/worker/security/fiiter/SecurityAuthRequestFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../handshaker/target/test-classes/com/qiong/handshaker/AppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../handshaker/target/test-classes/com/qiong/handshaker/AppTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/src/main/java/com/qiong/handshaker/utils/basic/QTypedUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/src/main/java/com/qiong/handshaker/utils/basic/QTypedUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/anno/result/QResponseAdvice.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/anno/result/QResponseAdvice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/anno/vaiid/QPhone$List.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/anno/vaiid/QPhone$List.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/anno/vaiid/QPhone.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/anno/vaiid/QPhone.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/anno/vaiid/impi/QPhoneAnnoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/anno/vaiid/impi/QPhoneAnnoImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/exception/vaiid/QLogicException.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/exception/vaiid/QLogicException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/exception/vaiid/QValidError.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/exception/vaiid/QValidError.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/query/QBetweenDate.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/query/QBetweenDate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/query/QDate.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/query/QDate.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/query/QLikes.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/query/QLikes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/query/QPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/query/QPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/query/QSort.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/query/QSort.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/result/QPager.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/result/QPager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/result/QResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/define/result/QResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/dataset/QRedisTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/dataset/QRedisTool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/result/QResponseTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/result/QResponseTool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/security/QSecurityDatasetTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/security/QSecurityDatasetTool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/security/QSecurityMvcTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/security/QSecurityMvcTool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/security/QSecurityTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/security/QSecurityTool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/staticset/QStaticTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/tool/staticset/QStaticTool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/basic/QFileUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/basic/QFileUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/basic/QTypedUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/basic/QTypedUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/bean/QBeanUntil.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/bean/QBeanUntil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/result/QHttpResponseResultUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/result/QHttpResponseResultUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/security/QJwtUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/security/QJwtUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/usefull/QJsonUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/usefull/QJsonUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/usefull/QVoToEntityUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/classes/com/qiong/handshaker/utils/usefull/QVoToEntityUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../utils/target/test-classes/com/qiong/handshaker/AppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../utils/target/test-classes/com/qiong/handshaker/AppTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../其他储存/产品数据结构.png" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2YvR6GKUHKOXTQF4BoxkEeUrRCd" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/zengyingqiong/JAVAS/SpringBoot/MY_PROJECT/HANDSHAKER/SAVE/forpacakge",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c2ee6156-2e34-4ed4-a40a-d78e5c32263b" name="Changes" comment="" />
+      <created>1701403889895</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701403889895</updated>
+      <workItem from="1701403890992" duration="6000" />
+    </task>
+    <servers />
+  </component>
+</project>
