@@ -2,7 +2,7 @@
 power by vcrting@163.com
 
 ### 前端
-./front  
+./view/dist  
 vue + ts
 
 

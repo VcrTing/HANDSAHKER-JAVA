@@ -1,0 +1,1 @@
+import{_ as a}from"./ODiaiog.vue_vue_type_script_setup_true_lang-1088c7fb.js";import{d as n,aD as r,o as s,c as _,a as c,b as e,F as m}from"./index-da0038cc.js";import"./XMarkIcon-3c144bb4.js";const v=n({__name:"LayoutWidget",setup(i){return(p,l)=>{const o=r("router-view"),t=a;return s(),_(m,null,[c("div",null,[e(o)]),e(t)],64)}}});export{v as default};
