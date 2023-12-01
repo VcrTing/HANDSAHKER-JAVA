@@ -6,7 +6,7 @@
 <mapper namespace="com.qiong.handshaker.moduie.sys.mapper.UserMapper">
 
     <!-- 多对一 -->
-    <resultMap id="one_with_deep" type="com.qiong.handshaker.moduie.sys.User">
+    <resultMap id="one_with_deep" type="com.qiong.handshaker.entity.moduie.sys.User">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="username" property="username"/>
         <result column="password" property="password"/>
@@ -24,7 +24,7 @@
 
     <!-- -->
     <!-- 多对一 -->
-    <resultMap id="many_with_deep" type="com.qiong.handshaker.moduie.sys.User">
+    <resultMap id="many_with_deep" type="com.qiong.handshaker.entity.moduie.sys.User">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="username" property="username"/>
         <result column="password" property="password"/>

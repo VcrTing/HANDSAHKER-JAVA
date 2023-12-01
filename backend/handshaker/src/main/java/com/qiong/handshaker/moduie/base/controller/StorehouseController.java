@@ -3,25 +3,22 @@ package com.qiong.handshaker.moduie.base.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.qiong.handshaker.anno.result.QResponseAdvice;
+import com.qiong.handshaker.utils.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterBase;
 import com.qiong.handshaker.data.security.DataSecurityRoleConf;
-import com.qiong.handshaker.define.query.QPage;
-import com.qiong.handshaker.define.query.QSort;
-import com.qiong.handshaker.define.result.QResponse;
-import com.qiong.handshaker.moduie.base.Storehouse;
-import com.qiong.handshaker.moduie.base.Supplier;
+import com.qiong.handshaker.utils.define.query.QPage;
+import com.qiong.handshaker.utils.define.query.QSort;
+import com.qiong.handshaker.utils.define.result.QResponse;
+import com.qiong.handshaker.entity.moduie.base.Storehouse;
 import com.qiong.handshaker.moduie.base.service.StorehouseService;
-import com.qiong.handshaker.moduie.product.Label;
-import com.qiong.handshaker.tool.result.QResponseTool;
-import com.qiong.handshaker.utils.basic.QTypedUtil;
+import com.qiong.handshaker.utils.tool.result.QResponseTool;
+import com.qiong.handshaker.utils.utils.basic.QTypedUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 
 @RestController
 @QResponseAdvice

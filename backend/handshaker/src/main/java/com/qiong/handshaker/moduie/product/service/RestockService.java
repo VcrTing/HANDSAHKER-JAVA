@@ -2,14 +2,13 @@ package com.qiong.handshaker.moduie.product.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.qiong.handshaker.define.exception.vaiid.QLogicException;
-import com.qiong.handshaker.moduie.base.Supplier;
-import com.qiong.handshaker.moduie.product.Product;
-import com.qiong.handshaker.moduie.product.RestockRecord;
+import com.qiong.handshaker.utils.define.exception.vaiid.QLogicException;
+import com.qiong.handshaker.entity.moduie.base.Supplier;
+import com.qiong.handshaker.entity.moduie.product.Product;
+import com.qiong.handshaker.entity.moduie.product.RestockRecord;
 import com.qiong.handshaker.moduie.product.mapper.RestockMapper;
-import com.qiong.handshaker.utils.basic.QTypedUtil;
-import com.qiong.handshaker.vo.product.VoRestockPostForm;
-import com.qiong.handshaker.vo.product.inner.VoInnerRestockDistribute;
+import com.qiong.handshaker.entity.vo.product.VoRestockPostForm;
+import com.qiong.handshaker.entity.vo.product.inner.VoInnerRestockDistribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

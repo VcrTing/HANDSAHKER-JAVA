@@ -60,30 +60,4 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
         // 请求的 TOKEN
         http.addFilterAt(authRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
-    /*
-    @Bean
-    protected AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
-
-    @Bean
-    protected UserDetailsService detailsService() {
-        return new AuthUserDetailService();
-    }
-
-    @Bean
-    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        http.cors().and().csrf().disable();
-        http.headers().frameOptions().sameOrigin();
-
-        http.authorizeRequests().antMatchers(DataSecurityRouter.WHITE_LIST).permitAll();
-        http.authorizeRequests().anyRequest().authenticated();
-
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        return http.build();
-    }
-     */
 }

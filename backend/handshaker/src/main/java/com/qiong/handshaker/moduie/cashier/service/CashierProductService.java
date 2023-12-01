@@ -3,13 +3,13 @@ package com.qiong.handshaker.moduie.cashier.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.qiong.handshaker.define.result.QPager;
+import com.qiong.handshaker.utils.define.result.QPager;
 import com.qiong.handshaker.moduie.cashier.mapper.CashierProductMapper;
-import com.qiong.handshaker.moduie.product.Product;
-import com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct;
+import com.qiong.handshaker.entity.moduie.product.Product;
+import com.qiong.handshaker.entity.moduie.product.VariationAndStorehouseAndProduct;
 import com.qiong.handshaker.moduie.product.mapper.ProductMapper;
 import com.qiong.handshaker.moduie.product.service.VariationAndStorehouseAndProductService;
-import com.qiong.handshaker.view.cashier.ViewCashierProductResultForm;
+import com.qiong.handshaker.entity.view.cashier.ViewCashierProductResultForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

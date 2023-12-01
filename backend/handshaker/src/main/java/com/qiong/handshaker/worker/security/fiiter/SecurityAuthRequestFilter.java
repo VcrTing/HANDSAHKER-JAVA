@@ -1,17 +1,13 @@
 package com.qiong.handshaker.worker.security.fiiter;
 
 import com.qiong.handshaker.data.properties.PropertiesMy;
-import com.qiong.handshaker.define.exception.vaiid.QLogicException;
-import com.qiong.handshaker.moduie.sys.User;
+import com.qiong.handshaker.utils.define.exception.vaiid.QLogicException;
 import com.qiong.handshaker.moduie.sys.auth.AuthUser;
-import com.qiong.handshaker.tool.security.QSecurityDatasetTool;
-import com.qiong.handshaker.tool.security.QSecurityTool;
+import com.qiong.handshaker.utils.tool.security.QSecurityTool;
 import com.qiong.handshaker.worker.security.dataset.QSecurityOfMysqlUtil;
 import com.qiong.handshaker.worker.security.dataset.QSecurityOfRedisUtil;
-import com.qiong.handshaker.worker.security.dataset.entity.QToken;
-import com.qiong.handshaker.utils.security.QJwtUtil;
+import com.qiong.handshaker.utils.utils.security.QJwtUtil;
 
-import com.qiong.handshaker.utils.usefull.QJsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -71,7 +67,7 @@ public class SecurityAuthRequestFilter extends OncePerRequestFilter {
     */
     protected void setUserToContext(Long uid) throws QLogicException {
         Object obj = getUserFromStore(uid);
-        System.out.println("----------- 請求的用戶 = " + uid + " DATA = " + obj);
+        // System.out.println("----------- 請求的用戶 = " + uid + " DATA = " + obj);
         if (obj == null) throw new QLogicException("用户的登录信息未找到或已過期，认证失败，请重新登录");
         if (obj instanceof AuthUser) {
             AuthUser loginUser = (AuthUser) obj;

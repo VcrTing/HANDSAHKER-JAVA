@@ -1,10 +1,9 @@
 package com.qiong.handshaker.moduie.product.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.qiong.handshaker.moduie.product.Product;
-import com.qiong.handshaker.moduie.product.inner.LabelsJson;
-import com.qiong.handshaker.moduie.product.mapper.ProductAndLabelMapper;
-import com.qiong.handshaker.view.product.ViewLabelResultForm;
+import com.qiong.handshaker.entity.moduie.product.Product;
+import com.qiong.handshaker.entity.moduie.product.inner.LabelsJson;
+import com.qiong.handshaker.entity.view.product.ViewLabelResultForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

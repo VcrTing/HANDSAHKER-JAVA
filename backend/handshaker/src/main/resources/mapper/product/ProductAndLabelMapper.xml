@@ -5,7 +5,7 @@
 
 <mapper namespace="com.qiong.handshaker.moduie.product.mapper.ProductAndLabelMapper">
 
-    <resultMap id="one_by_label" type="com.qiong.handshaker.moduie.product.ProductAndLabel">
+    <resultMap id="one_by_label" type="com.qiong.handshaker.entity.moduie.product.ProductAndLabel">
         <id property="id" column="id" />
         <result property="label_sql_id" column="label_sql_id"/>
         <result property="product_sql_id" column="product_sql_id"/>

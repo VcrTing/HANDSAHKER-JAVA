@@ -1,15 +1,15 @@
 package com.qiong.handshaker.moduie.product.controller;
 
-import com.qiong.handshaker.anno.result.QResponseAdvice;
+import com.qiong.handshaker.utils.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterProduct;
 import com.qiong.handshaker.data.security.DataSecurityRoleConf;
-import com.qiong.handshaker.define.result.QResponse;
-import com.qiong.handshaker.moduie.product.Variation;
+import com.qiong.handshaker.utils.define.result.QResponse;
+import com.qiong.handshaker.entity.moduie.product.Variation;
 import com.qiong.handshaker.moduie.product.service.VariationAndStorehouseAndProductService;
 import com.qiong.handshaker.moduie.product.service.VariationService;
-import com.qiong.handshaker.tool.result.QResponseTool;
-import com.qiong.handshaker.utils.basic.QTypedUtil;
-import com.qiong.handshaker.vo.product.VoVariationOperaForm;
+import com.qiong.handshaker.utils.tool.result.QResponseTool;
+import com.qiong.handshaker.entity.vo.product.VoVariationOperaForm;
+import com.qiong.handshaker.utils.utils.basic.QTypedUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;

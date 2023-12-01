@@ -1,7 +1,7 @@
 package com.qiong.handshaker.moduie.sys.auth;
 
 import com.qiong.handshaker.data.security.DataSecurityRoleConf;
-import com.qiong.handshaker.moduie.sys.User;
+import com.qiong.handshaker.entity.moduie.sys.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,9 +39,6 @@ public class AuthUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        if (permissions != null)
-            permissions.forEach(s -> System.out.println(s.getAuthority()));
 
         if (permissions != null) return permissions;
 

@@ -1,8 +1,7 @@
 package com.qiong.handshaker.moduie.product.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.qiong.handshaker.moduie.base.Supplier;
-import com.qiong.handshaker.moduie.product.Label;
+import com.qiong.handshaker.entity.moduie.product.Label;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

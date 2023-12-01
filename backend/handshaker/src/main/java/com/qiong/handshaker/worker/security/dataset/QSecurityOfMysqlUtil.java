@@ -2,9 +2,9 @@ package com.qiong.handshaker.worker.security.dataset;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.qiong.handshaker.moduie.sys.User;
+import com.qiong.handshaker.entity.moduie.sys.User;
 import com.qiong.handshaker.moduie.sys.auth.AuthUser;
-import com.qiong.handshaker.utils.usefull.QJsonUtil;
+import com.qiong.handshaker.utils.utils.usefull.QJsonUtil;
 import com.qiong.handshaker.worker.security.dataset.entity.QToken;
 import com.qiong.handshaker.worker.security.dataset.mapper.QTokenMapper;
 import org.springframework.beans.factory.annotation.Autowired;

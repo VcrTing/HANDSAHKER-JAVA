@@ -1,7 +1,7 @@
 package com.qiong.handshaker.worker.mvc.response;
 
-import com.qiong.handshaker.anno.result.QResponseAdvice;
-import com.qiong.handshaker.define.result.QResponse;
+import com.qiong.handshaker.utils.anno.result.QResponseAdvice;
+import com.qiong.handshaker.utils.define.result.QResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @RestControllerAdvice
 public class WebResponseBodyAdvice implements ResponseBodyAdvice<Object> {
+
+
 
     // 启用 判断
     final static boolean ENABLE_ADVICE_JUDGE = true;
@@ -45,11 +47,11 @@ public class WebResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             QResponse<Object> res = (QResponse) body;
             HttpStatus code = HttpStatus.resolve(res.getCode());
             response.setStatusCode(code == null ? HttpStatus.BAD_REQUEST : code );
-            System.out.println("最终返回值 = " + res.getData());
+            // System.out.println("最终返回值 = " + res.getData());
             return res.getData();
         }
 
-        System.out.println("最终返回值(无 Q RES) = " + body);
+        // System.out.println("最终返回值(无 Q RES) = " + body);
         return body;
     }
 }

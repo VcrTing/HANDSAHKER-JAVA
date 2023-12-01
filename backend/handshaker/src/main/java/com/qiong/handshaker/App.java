@@ -4,8 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-// scanBasePackages = "com.qiong.handshaker"
-@SpringBootApplication(scanBasePackages = "com.qiong")
+@SpringBootApplication(scanBasePackages = "com.qiong.handshaker")
 @EnableTransactionManagement
 public class App {
 

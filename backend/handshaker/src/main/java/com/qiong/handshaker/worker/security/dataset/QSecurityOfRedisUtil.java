@@ -2,7 +2,7 @@ package com.qiong.handshaker.worker.security.dataset;
 
 import cn.hutool.json.JSONUtil;
 import com.qiong.handshaker.data.properties.PropertiesMy;
-import com.qiong.handshaker.moduie.sys.User;
+import com.qiong.handshaker.entity.moduie.sys.User;
 import com.qiong.handshaker.moduie.sys.auth.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

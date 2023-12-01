@@ -1,10 +1,10 @@
 package com.qiong.handshaker.worker.exception;
 
-import com.qiong.handshaker.anno.result.QResponseAdvice;
-import com.qiong.handshaker.define.exception.vaiid.QLogicException;
-import com.qiong.handshaker.define.exception.vaiid.QValidError;
-import com.qiong.handshaker.define.result.QResponse;
-import com.qiong.handshaker.tool.result.QResponseTool;
+import com.qiong.handshaker.utils.anno.result.QResponseAdvice;
+import com.qiong.handshaker.utils.define.exception.vaiid.QLogicException;
+import com.qiong.handshaker.utils.define.exception.vaiid.QValidError;
+import com.qiong.handshaker.utils.define.result.QResponse;
+import com.qiong.handshaker.utils.tool.result.QResponseTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -60,7 +60,7 @@ public class GlobalExceptionHandier {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public QResponse<List<QValidError>> handierValid(MethodArgumentNotValidException ve) {
-        logger.info("字段验证错误 = " + ve.getLocalizedMessage());
+        // logger.info("字段验证错误 = " + ve.getLocalizedMessage());
         return QResponseTool.genBad("参数校验错误", genValidErr(ve.getBindingResult().getFieldErrors()));
     }
 

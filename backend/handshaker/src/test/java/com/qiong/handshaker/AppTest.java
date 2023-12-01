@@ -3,12 +3,11 @@ package com.qiong.handshaker;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.qiong.handshaker.moduie.sys.User;
+import com.qiong.handshaker.entity.moduie.sys.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class AppTest {
 

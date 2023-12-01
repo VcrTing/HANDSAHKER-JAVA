@@ -6,7 +6,7 @@
 <mapper namespace="com.qiong.handshaker.moduie.product.mapper.BrokenMapper">
 
     <!-- 多对一 -->
-    <resultMap id="many_with_deep" type="com.qiong.handshaker.moduie.product.Broken">
+    <resultMap id="many_with_deep" type="com.qiong.handshaker.entity.moduie.product.Broken">
         <id column="id" jdbcType="INTEGER" property="id" />
         
         <result column="storehouse_sql_id" property="storehouse_sql_id"/>

@@ -7,19 +7,19 @@
 
 
     <!-- 深度 -->
-    <resultMap id="one_deep" type="com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct">
+    <resultMap id="one_deep" type="com.qiong.handshaker.entity.moduie.product.VariationAndStorehouseAndProduct">
         <id property="id" column="me_id" />
         <result property="quantity" column="me_quantity" />
         <result property="product_sql_id" column="me_product_sql_id" />
         <result property="variation_sql_id" column="me_variation_sql_id" />
         <result property="storehouse_sql_id" column="me_storehouse_sql_id" />
 
-        <association property="variation" javaType="com.qiong.handshaker.moduie.product.Variation">
+        <association property="variation" javaType="com.qiong.handshaker.entity.moduie.product.Variation">
             <id property="id" column="v_id" />
             <result property="name" column="v_name"/>
         </association>
 
-        <association property="storehouse" javaType="com.qiong.handshaker.moduie.base.Storehouse">
+        <association property="storehouse" javaType="com.qiong.handshaker.entity.moduie.base.Storehouse">
             <id property="id" column="s_id" />
             <result property="name" column="s_name"/>
             <result property="address" column="s_address"/>
@@ -48,9 +48,9 @@
     </select>
 
     <!-- 浅层 -->
-    <resultMap id="one" type="com.qiong.handshaker.moduie.product.VariationAndStorehouseAndProduct">
+    <resultMap id="one" type="com.qiong.handshaker.entity.moduie.product.VariationAndStorehouseAndProduct">
         <id property="id" column="id" />
-        <association property="variation" javaType="com.qiong.handshaker.moduie.product.Variation">
+        <association property="variation" javaType="com.qiong.handshaker.entity.moduie.product.Variation">
             <id property="id" column="v_id" />
             <result property="name" column="v_name"/>
         </association>

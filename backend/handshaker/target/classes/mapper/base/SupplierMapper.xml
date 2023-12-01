@@ -6,7 +6,7 @@
 <mapper namespace="com.qiong.handshaker.moduie.base.mapper.SupplierMapper">
 
     <!-- 原来的 -->
-    <resultMap id="one_with_deep" type="com.qiong.handshaker.moduie.base.Supplier">
+    <resultMap id="one_with_deep" type="com.qiong.handshaker.entity.moduie.base.Supplier">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="supplier_id" property="supplier_id"/>
         <result column="email" property="email"/>

@@ -6,7 +6,7 @@
 <mapper namespace="com.qiong.handshaker.moduie.order.mapper.ProfitMapper">
 
     <!-- many_with_custom_and_user -->
-    <resultMap id="many_with_custom_and_user" type="com.qiong.handshaker.moduie.order.OrderProfit">
+    <resultMap id="many_with_custom_and_user" type="com.qiong.handshaker.entity.moduie.order.OrderProfit">
         <id property="id" column="me_id" />
         <result property="order_id" column="me_order_id" />
         <result property="order_date" column="me_order_date" />
@@ -15,13 +15,13 @@
         <result property="origin_total_price" column="me_origin_total_price" />
         <result property="new_total_profit" column="me_new_total_profit" />
 
-        <association property="cashier" javaType="com.qiong.handshaker.moduie.sys.User">
+        <association property="cashier" javaType="com.qiong.handshaker.entity.moduie.sys.User">
             <id column="one_id" jdbcType="INTEGER" property="id" />
             <result property="email" column="one_email" />
             <result property="name" column="one_name" />
         </association>
 
-        <association property="member" javaType="com.qiong.handshaker.moduie.custom.Customer">
+        <association property="member" javaType="com.qiong.handshaker.entity.moduie.custom.Customer">
             <id column="two_id" jdbcType="INTEGER" property="id" />
             <result property="name" column="two_name" />
         </association>

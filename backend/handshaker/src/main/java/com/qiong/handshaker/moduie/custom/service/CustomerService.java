@@ -4,14 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qiong.handshaker.data.config.DataConfigHandshaker;
-import com.qiong.handshaker.define.result.QResponse;
-import com.qiong.handshaker.moduie.custom.Customer;
-import com.qiong.handshaker.moduie.custom.MemberLevel;
+import com.qiong.handshaker.utils.define.result.QResponse;
+import com.qiong.handshaker.entity.moduie.custom.Customer;
 import com.qiong.handshaker.moduie.custom.mapper.CustomerMapper;
-import com.qiong.handshaker.moduie.custom.mapper.MemberLevelMapper;
-import com.qiong.handshaker.moduie.sys.User;
-import com.qiong.handshaker.tool.result.QResponseTool;
-import com.qiong.handshaker.utils.basic.QTypedUtil;
+import com.qiong.handshaker.utils.tool.result.QResponseTool;
+import com.qiong.handshaker.utils.utils.basic.QTypedUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

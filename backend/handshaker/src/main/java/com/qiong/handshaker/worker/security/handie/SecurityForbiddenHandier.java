@@ -1,6 +1,6 @@
 package com.qiong.handshaker.worker.security.handie;
 
-import com.qiong.handshaker.utils.result.QHttpResponseResultUtil;
+import com.qiong.handshaker.utils.utils.result.QHttpResponseResultUtil;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;

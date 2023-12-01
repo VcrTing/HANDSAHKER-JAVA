@@ -6,7 +6,7 @@
 <mapper namespace="com.qiong.handshaker.test.product.TestProductMapper">
 
     <!-- 多对多 -->
-    <resultMap id="many_with_label" type="com.qiong.handshaker.moduie.product.Product">
+    <resultMap id="many_with_label" type="com.qiong.handshaker.entity.moduie.product.Product">
         <id column="p_id" jdbcType="INTEGER" property="id" />
         <result column="p_name" property="name"/>
 
@@ -14,7 +14,7 @@
         <result column="product_id" property="product_id"/>
         <result column="remarks" property="remarks"/>
 
-        <collection property="labels" column="label_sql_id" ofType="com.qiong.handshaker.moduie.product.Label">
+        <collection property="labels" column="label_sql_id" ofType="com.qiong.handshaker.entity.moduie.product.Label">
             <id column="l_id" jdbcType="INTEGER" property="id" />
             <result column="l_name" property="name"/>
         </collection>

@@ -3,14 +3,15 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!-- 继承自 app 项目 -->
+  <!-- 父工程 继承自 spring boot -->
   <parent>
-    <groupId>org.qiong</groupId>
-    <artifactId>app</artifactId>
-    <version>1.0</version>
-    <relativePath>../app/pom.xml</relativePath>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.17</version>
+    <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
-  <groupId>org.qiong</groupId>
+  <groupId>com.qiong</groupId>
   <artifactId>handshaker</artifactId>
   <version>1.0</version>
 
@@ -20,24 +21,17 @@
   <url>http://maven.apache.org</url>
 
   <properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+    <lombok.v>1.18.28</lombok.v>
     <druid.v>1.2.18</druid.v>
+    <junit.v>3.8.2</junit.v>
+    <mybp.v>3.5.3.1</mybp.v>
   </properties>
 
   <dependencies>
-
-    <!-- 我的 -->
-    <dependency>
-      <groupId>org.qiong</groupId>
-      <artifactId>entity</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.qiong</groupId>
-      <artifactId>utils</artifactId>
-      <version>1.0</version>
-    </dependency>
 
     <!-- SPRING BOOT -->
     <dependency>
@@ -72,6 +66,118 @@
       <artifactId>spring-boot-configuration-processor</artifactId>
       <optional>true</optional>
     </dependency>
+
+    <!-- LOMBOK -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.v}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- SPRING BOOT -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- SECURITY -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <!-- MYSQL -->
+    <dependency>
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>${mybp.v}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.5.13</version>
+    </dependency>
+
+    <!-- REDIS -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+    </dependency>
+
+    <!-- LOG -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+
+    <!-- TEST -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.v}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!--
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+     -->
+
+    <!-- 验证 -->
+    <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+      <version>2.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>6.2.5.Final</version>
+    </dependency>
+
+    <!-- HuTool -->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.8.22</version>
+    </dependency>
+
+    <!-- 文档 -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>5.2.4</version>
+    </dependency>
+
+    <!-- 文件系统 -->
+    <dependency>
+      <groupId>io.minio</groupId>
+      <artifactId>minio</artifactId>
+      <version>8.5.7</version>
+    </dependency>
+
+    <!-- JWT -->
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>4.4.0</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -84,5 +190,4 @@
   </build>
 
   <!-- 打包 -->
-
 </project>

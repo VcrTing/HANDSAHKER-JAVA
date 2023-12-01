@@ -4,14 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.qiong.handshaker.define.result.QPager;
-import com.qiong.handshaker.moduie.product.Broken;
+import com.qiong.handshaker.utils.define.result.QPager;
+import com.qiong.handshaker.entity.moduie.product.Broken;
 import com.qiong.handshaker.moduie.product.mapper.BrokenMapper;
-import com.qiong.handshaker.view.product.ViewBrokenResultForm;
+import com.qiong.handshaker.entity.view.product.ViewBrokenResultForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

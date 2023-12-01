@@ -4,19 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.qiong.handshaker.define.exception.vaiid.QLogicException;
-import com.qiong.handshaker.define.result.QResponse;
-import com.qiong.handshaker.moduie.sys.User;
+import com.qiong.handshaker.utils.define.exception.vaiid.QLogicException;
+import com.qiong.handshaker.utils.define.result.QResponse;
+import com.qiong.handshaker.entity.moduie.sys.User;
 import com.qiong.handshaker.moduie.sys.mapper.UserMapper;
-import com.qiong.handshaker.tool.result.QResponseTool;
-import com.qiong.handshaker.tool.security.QSecurityMvcTool;
-import com.qiong.handshaker.utils.basic.QTypedUtil;
-import com.qiong.handshaker.vo.sys.VoUserOptionForm;
+import com.qiong.handshaker.utils.tool.result.QResponseTool;
+import com.qiong.handshaker.utils.tool.security.QSecurityMvcTool;
+import com.qiong.handshaker.utils.utils.basic.QTypedUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
-import java.util.List;
 
 @Service
 public class UserService extends ServiceImpl<UserMapper, User> {

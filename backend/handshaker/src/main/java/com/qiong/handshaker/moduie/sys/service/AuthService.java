@@ -1,15 +1,12 @@
 package com.qiong.handshaker.moduie.sys.service;
 
-import com.qiong.handshaker.moduie.sys.User;
+import com.qiong.handshaker.entity.moduie.sys.User;
 import com.qiong.handshaker.moduie.sys.auth.AuthUser;
 import com.qiong.handshaker.moduie.sys.mapper.UserMapper;
-import com.qiong.handshaker.tool.security.QSecurityDatasetTool;
-import com.qiong.handshaker.tool.security.QSecurityTool;
+import com.qiong.handshaker.utils.tool.security.QSecurityTool;
+import com.qiong.handshaker.utils.utils.security.QJwtUtil;
 import com.qiong.handshaker.worker.security.dataset.QSecurityOfMysqlUtil;
 import com.qiong.handshaker.worker.security.dataset.QSecurityOfRedisUtil;
-import com.qiong.handshaker.worker.security.dataset.entity.QToken;
-import com.qiong.handshaker.utils.security.QJwtUtil;
-import com.qiong.handshaker.utils.usefull.QJsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -60,7 +57,7 @@ public class AuthService {
     public Object login(String name, String pass) {
         UsernamePasswordAuthenticationToken authenticationToken = QSecurityTool.genNamePassToken(name, pass);
         Authentication authentication = manager.authenticate(authenticationToken);
-        System.out.println("驗證通过 = " + authenticationToken);
+        // System.out.println("驗證通过 = " + authenticationToken);
         if (authentication == null) return "NAME OR PASS 错误，认证失败";
         Object authUser = authentication.getPrincipal();
         return (authUser == null) ? "NAME OR PASS 错误，认证失败" : groupLoginUser((AuthUser) authUser);

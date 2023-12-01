@@ -1,8 +1,6 @@
 package com.qiong.handshaker.moduie.product.controller;
 
-import com.qiong.handshaker.anno.result.QResponseAdvice;
-import com.qiong.handshaker.moduie.product.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.qiong.handshaker.utils.anno.result.QResponseAdvice;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

@@ -7,7 +7,7 @@
 
 
     <!-- many_with_storehouse -->
-    <resultMap id="many_with_storehouse" type="com.qiong.handshaker.moduie.order.Order">
+    <resultMap id="many_with_storehouse" type="com.qiong.handshaker.entity.moduie.order.Order">
         <id property="id" column="me_id" />
         <result property="order_id" column="me_order_id" />
         <result property="order_date" column="me_order_date" />
@@ -15,14 +15,14 @@
         <result property="order_status" column="me_order_status" />
         <result property="storehouse_sql_id" column="me_storehouse_sql_id" />
 
-        <association property="storehouse" javaType="com.qiong.handshaker.moduie.base.Storehouse">
+        <association property="storehouse" javaType="com.qiong.handshaker.entity.moduie.base.Storehouse">
             <id column="one_id" jdbcType="INTEGER" property="id" />
             <result property="phone_no" column="one_phone_no" />
             <result property="address" column="one_address" />
             <result property="name" column="one_name" />
         </association>
 
-        <association property="member" javaType="com.qiong.handshaker.moduie.custom.Customer">
+        <association property="member" javaType="com.qiong.handshaker.entity.moduie.custom.Customer">
             <id column="two_id" jdbcType="INTEGER" property="id" />
             <result property="name" column="two_name" />
         </association>

@@ -6,12 +6,12 @@
 <mapper namespace="com.qiong.handshaker.moduie.custom.mapper.CustomerMapper">
 
     <!-- 最后一个 -->
-    <select id="lastEntity" resultType="com.qiong.handshaker.moduie.custom.Customer">
+    <select id="lastEntity" resultType="com.qiong.handshaker.entity.moduie.custom.Customer">
         SELECT * FROM custom_customer ORDER BY id DESC LIMIT 1;
     </select>
 
     <!-- 多对一 -->
-    <resultMap id="many_with_deep" type="com.qiong.handshaker.moduie.custom.Customer">
+    <resultMap id="many_with_deep" type="com.qiong.handshaker.entity.moduie.custom.Customer">
         <id column="id" jdbcType="INTEGER" property="id" />
 
         <result property="phone_no" column="phone_no"/>

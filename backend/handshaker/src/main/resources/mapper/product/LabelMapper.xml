@@ -6,11 +6,11 @@
 <mapper namespace="com.qiong.handshaker.moduie.product.mapper.ProductMapper">
 
 
-    <resultMap id="one_with_deep" type="com.qiong.handshaker.moduie.product.Label">
+    <resultMap id="one_with_deep" type="com.qiong.handshaker.entity.moduie.product.Label">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result property="name" column="name"/>
         <result property="isShow" column="is_show"/>
-        <collection property="products" javaType="com.qiong.handshaker.moduie.product.Product">
+        <collection property="products" javaType="com.qiong.handshaker.entity.moduie.product.Product">
             <id column="id" jdbcType="INTEGER" property="id" />
             <result property="product_id" column="product_id" />
             <result property="name" column="name" />

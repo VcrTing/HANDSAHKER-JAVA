@@ -2,27 +2,25 @@ package com.qiong.handshaker.moduie.product.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.qiong.handshaker.anno.result.QResponseAdvice;
+import com.qiong.handshaker.utils.anno.result.QResponseAdvice;
 import com.qiong.handshaker.data.router.DataRouterProduct;
 import com.qiong.handshaker.data.security.DataSecurityRoleConf;
-import com.qiong.handshaker.define.dataset.EntityDefineDataset;
-import com.qiong.handshaker.define.query.QLikes;
-import com.qiong.handshaker.define.query.QPage;
-import com.qiong.handshaker.define.query.QSort;
-import com.qiong.handshaker.define.result.QPager;
-import com.qiong.handshaker.define.result.QResponse;
-import com.qiong.handshaker.moduie.product.Product;
-import com.qiong.handshaker.moduie.product.Variation;
+import com.qiong.handshaker.entity.define.dataset.EntityDefineDataset;
+import com.qiong.handshaker.utils.define.query.QLikes;
+import com.qiong.handshaker.utils.define.query.QPage;
+import com.qiong.handshaker.utils.define.query.QSort;
+import com.qiong.handshaker.utils.define.result.QPager;
+import com.qiong.handshaker.utils.define.result.QResponse;
+import com.qiong.handshaker.entity.moduie.product.Product;
+import com.qiong.handshaker.entity.moduie.product.Variation;
 import com.qiong.handshaker.moduie.product.service.ProductAndLabelService;
 import com.qiong.handshaker.moduie.product.service.ProductService;
 import com.qiong.handshaker.moduie.product.service.VariationAndStorehouseAndProductService;
-import com.qiong.handshaker.moduie.sys.auth.AuthUser;
-import com.qiong.handshaker.tool.result.QResponseTool;
-import com.qiong.handshaker.tool.security.QSecurityMvcTool;
-import com.qiong.handshaker.tool.security.QSecurityTool;
-import com.qiong.handshaker.view.product.ViewProductResultForm;
-import com.qiong.handshaker.vo.product.VoProductPatchForm;
-import com.qiong.handshaker.vo.product.VoProductPostForm;
+import com.qiong.handshaker.utils.tool.result.QResponseTool;
+import com.qiong.handshaker.utils.tool.security.QSecurityMvcTool;
+import com.qiong.handshaker.entity.view.product.ViewProductResultForm;
+import com.qiong.handshaker.entity.vo.product.VoProductPatchForm;
+import com.qiong.handshaker.entity.vo.product.VoProductPostForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +28,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 
 @RestController
 @QResponseAdvice
