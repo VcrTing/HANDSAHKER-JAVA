@@ -10,12 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1acf3336-50fb-4e07-92e2-9915497a6097" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/handshaker/src/main/resources/application-pro.yml" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/src/main/resources/application-pro.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/handshaker/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handshaker/target/handshaker-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/target/handshaker-1.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handshaker/target/handshaker-1.0.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/target/handshaker-1.0.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handshaker/target/surefire-reports/TEST-com.qiong.handshaker.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/target/surefire-reports/TEST-com.qiong.handshaker.AppTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handshaker/target/surefire-reports/TEST-com.qiong.handshaker.UtilTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/target/surefire-reports/TEST-com.qiong.handshaker.UtilTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handshaker/target/surefire-reports/com.qiong.handshaker.UtilTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/target/surefire-reports/com.qiong.handshaker.UtilTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../vue3code" beforeDir="false" afterPath="$PROJECT_DIR$/../vue3code" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../文檔/nginx/front_nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/../文檔/nginx/front_nginx.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,29 +40,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/zengyingqiong/JAVAS/SpringBoot/MY_PROJECT/HANDSHAKER/backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15551181",
-    "project.structure.side.proportion": "0.11600928",
-    "spring.configuration.checksum": "06e10442a1a36df6850a26e24ccfcda0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zengyingqiong/JAVAS/SpringBoot/MY_PROJECT/HANDSHAKER/backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15551181&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.11600928&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;06e10442a1a36df6850a26e24ccfcda0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="handshaker" />
@@ -83,6 +83,7 @@
       <workItem from="1701403978638" duration="255000" />
       <workItem from="1701411174878" duration="5098000" />
       <workItem from="1701656946329" duration="150000" />
+      <workItem from="1701657268486" duration="46000" />
     </task>
     <servers />
   </component>
