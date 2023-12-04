@@ -2,7 +2,7 @@
 # SPRING
 spring:
   profiles:
-    active: dev
+    active: pro
 
   main:
     banner-mode: off

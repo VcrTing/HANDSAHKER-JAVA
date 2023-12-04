@@ -10,7 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1acf3336-50fb-4e07-92e2-9915497a6097" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../front" beforeDir="false" afterPath="$PROJECT_DIR$/../front" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handshaker/src/main/resources/application-pro.yml" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/src/main/resources/application-pro.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handshaker/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handshaker/target/handshaker-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/target/handshaker-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handshaker/target/handshaker-1.0.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/handshaker/target/handshaker-1.0.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue3code" beforeDir="false" afterPath="$PROJECT_DIR$/../vue3code" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../文檔/nginx/front_nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/../文檔/nginx/front_nginx.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +59,7 @@
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15551181",
     "project.structure.side.proportion": "0.11600928",
-    "spring.configuration.checksum": "2eb2f5d0d21918cfad8eb06c7457993d",
+    "spring.configuration.checksum": "06e10442a1a36df6850a26e24ccfcda0",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -77,6 +82,7 @@
       <updated>1701403977862</updated>
       <workItem from="1701403978638" duration="255000" />
       <workItem from="1701411174878" duration="5098000" />
+      <workItem from="1701656946329" duration="150000" />
     </task>
     <servers />
   </component>
