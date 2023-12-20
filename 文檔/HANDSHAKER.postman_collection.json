@@ -1,0 +1,1947 @@
+{
+	"info": {
+		"_postman_id": "a14e9480-fbea-4ad9-b84b-1a96708f3f2b",
+		"name": "HANDSHAKER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5475597"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "登录",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true,
+							"accept": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:5173",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://localhost:5173",
+								"type": "text"
+							},
+							{
+								"key": "Access-Control-Allow-Credentials",
+								"value": "true",
+								"type": "text"
+							},
+							{
+								"key": "Access-Control-Allow-Origin",
+								"value": "http://localhost:5173",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"qiong@163.com\", \"identifier\": \"qiong@163.com\", \"password\": \"12345\"}"
+						},
+						"url": {
+							"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/auth/local",
+							"protocol": "{{HEAD}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"auth",
+								"local"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "創建 ADMIN",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true,
+							"accept": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Origin",
+								"value": "http://localhost:5173",
+								"type": "text"
+							},
+							{
+								"key": "Referer",
+								"value": "http://localhost:5173",
+								"type": "text"
+							},
+							{
+								"key": "Access-Control-Allow-Credentials",
+								"value": "true",
+								"type": "text"
+							},
+							{
+								"key": "Access-Control-Allow-Origin",
+								"value": "http://localhost:5173",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"identifier\": \"qiong@163.com\",\n    \"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/auth/register",
+							"protocol": "{{HEAD}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "測試",
+			"item": [
+				{
+					"name": "测试產品和產品庫存列表",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/products_many_to_many/?label=&supplier=&new_restock_date=&search=&page=1&size=25&sort=id:desc",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"products_many_to_many",
+								""
+							],
+							"query": [
+								{
+									"key": "label",
+									"value": ""
+								},
+								{
+									"key": "supplier",
+									"value": ""
+								},
+								{
+									"key": "new_restock_date",
+									"value": ""
+								},
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "25"
+								},
+								{
+									"key": "sort",
+									"value": "id:desc"
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API_V1",
+			"item": [
+				{
+					"name": "base",
+					"item": [
+						{
+							"name": "供应商 列表",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/suppliers/?search=&page=1&size=1&sort=id:desc",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"suppliers",
+										""
+									],
+									"query": [
+										{
+											"key": "label",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "supplier",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "new_restock_date",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "1"
+										},
+										{
+											"key": "sort",
+											"value": "id:desc"
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "一個 供應商",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/suppliers/1",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"suppliers",
+										"1"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "id:ASC",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "新增 供應商",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"contact_person\": \"流星\",\n    \"create_date\": \"2023-11-30\",\n    \"email\": \"vcrting@123.com\",\n    \"factory_address\": \"這裡是供應商工廠的地址\",\n    \"level\": \"undefined\",\n    \"name\": \"香港公司\",\n    \"office_address\": \"這裡是供應商公司的地址\",\n    \"phone_no\": \"13577669988\",\n    \"remarks\": \"這裡是香港公司香港公司香港公司\",\n    \"supplier_id\": \"HK0001\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/suppliers/",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"suppliers",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改 供應商",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"contact_person\": \"流星雨\",\n    \"create_date\": \"2023-11-11\",\n    \"email\": \"vcrting@123.com\",\n    \"factory_address\": \"這裡是供應商工廠的地址\",\n    \"name\": \"香港公司\",\n    \"office_address\": \"這裡是供應商公司的地址\",\n    \"phone_no\": \"13576639988\",\n    \"remarks\": \"這裡是香港公司香港公司香港公司\",\n    \"supplier_id\": \"HK0001\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/suppliers/1",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"suppliers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "倉庫 列表",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/storehouses/?page=1&size=25&sort=id:desc&",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"storehouses",
+										""
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "25"
+										},
+										{
+											"key": "sort",
+											"value": "id:desc"
+										},
+										{
+											"key": "",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "一個 倉庫",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/storehouses/1",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"storehouses",
+										"1"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "id:ASC",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "新增 倉庫",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"address\": \"這裡是倉庫地址\",\n    \"contact_person\": \"冷靜啊\",\n    \"facebook\": \"AAA11111\",\n    \"name\": \"天虹\",\n    \"phone_no\": \"123123123\",\n    \"remark\": \"這裡是備註 / 條款\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/storehouses/",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"storehouses",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改 倉庫",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"address\": \"這裡是倉庫地址\",\n    \"contact_person\": \"掌權者\",\n    \"facebook\": \"BBBB2222\",\n    \"name\": \"天虹\",\n    \"phone_no\": \"44443333\",\n    \"remark\": \"這裡是備註 / 條款\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/storehouses/1",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"storehouses",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "custom",
+					"item": [
+						{
+							"name": "顧客 列表",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/members/?page=1&size=10&sort=id:ASC",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"members",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "sort",
+											"value": "id:ASC"
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "一个 顧客",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/members/8",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"members",
+										"8"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "id:ASC",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "新增 顧客",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"address\": \"AAAAA\",\n    \"birthdate\": \"2000-01-01\",\n    \"create_date\": \"2023-11-10\",\n    \"discount\": 1,\n    \"email\": \"qiong@163.com\",\n    \"member_id\": \"HK0001\",\n    \"member_level\": \"5\",\n    \"name\": \"劉漪琳\",\n    \"phone_no\": \"998883\",\n    \"remarks\": \"XXXXXXXXXXXX\",\n    \"sex\": \"F\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/members/",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"members",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改 顧客",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"address\": \"XXXXXXXXXXXX\",\n    \"birthdate\": \"2000-01-01\",\n    \"create_date\": \"2023-11-10\",\n    \"discount\": 1,\n    \"email\": \"qiong@163.com\",\n    \"member_id\": \"HK0001\",\n    \"member_level\": \"5\",\n    \"name\": \"穹天使\",\n    \"phone_no\": \"12131231\",\n    \"remarks\": \"\",\n    \"sex\": \"F\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/members/8",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"members",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "顧客等級 列表",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/member-levels/?page=1&size=10&sort=id:ASC",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"member-levels",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "sort",
+											"value": "id:ASC"
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "一個 顧客等級",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/member-levels/1",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"member-levels",
+										"1"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "id:ASC",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "新增 顧客等級",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"普通會員\",\n    \"discount\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/member-levels/",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"member-levels",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改 顧客等級",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"一級會員\",\n    \"discount\": 0.95\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/member-levels/1",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"member-levels",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "product",
+					"item": [
+						{
+							"name": "产品",
+							"item": [
+								{
+									"name": "产品列表",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNzAwOTA2MTk0fQ.Hii8rWfv_IWVavtqJER2TeX6UbfhNYA7Ph7528e8sbM",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/products/?label=&supplier=&new_restock_date=&search=&page=1&size=1&sort=id:desc",
+											"protocol": "{{HEAD}}",
+											"host": [
+												"{{HOST}}"
+											],
+											"port": "{{PORT}}",
+											"path": [
+												"products",
+												""
+											],
+											"query": [
+												{
+													"key": "label",
+													"value": ""
+												},
+												{
+													"key": "supplier",
+													"value": ""
+												},
+												{
+													"key": "new_restock_date",
+													"value": ""
+												},
+												{
+													"key": "search",
+													"value": ""
+												},
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "size",
+													"value": "1"
+												},
+												{
+													"key": "sort",
+													"value": "id:desc"
+												},
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "一个产品 ( id )",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/products/8",
+											"protocol": "{{HEAD}}",
+											"host": [
+												"{{HOST}}"
+											],
+											"port": "{{PORT}}",
+											"path": [
+												"products",
+												"8"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1",
+													"disabled": true
+												},
+												{
+													"key": "size",
+													"value": "10",
+													"disabled": true
+												},
+												{
+													"key": "sort",
+													"value": "id:ASC",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "一个产品 ( product_id )",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/products/HK-02",
+											"protocol": "{{HEAD}}",
+											"host": [
+												"{{HOST}}"
+											],
+											"port": "{{PORT}}",
+											"path": [
+												"products",
+												"HK-02"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1",
+													"disabled": true
+												},
+												{
+													"key": "size",
+													"value": "10",
+													"disabled": true
+												},
+												{
+													"key": "sort",
+													"value": "id:ASC",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "标签",
+							"item": [
+								{
+									"name": "标签列表",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/labels/?label=&supplier=&new_restock_date=&search=&page=1&size=2&sort=id:asc",
+											"protocol": "{{HEAD}}",
+											"host": [
+												"{{HOST}}"
+											],
+											"port": "{{PORT}}",
+											"path": [
+												"labels",
+												""
+											],
+											"query": [
+												{
+													"key": "label",
+													"value": ""
+												},
+												{
+													"key": "supplier",
+													"value": ""
+												},
+												{
+													"key": "new_restock_date",
+													"value": ""
+												},
+												{
+													"key": "search",
+													"value": ""
+												},
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "size",
+													"value": "2"
+												},
+												{
+													"key": "sort",
+													"value": "id:asc"
+												},
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "一个 标签",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/labels/1",
+											"protocol": "{{HEAD}}",
+											"host": [
+												"{{HOST}}"
+											],
+											"port": "{{PORT}}",
+											"path": [
+												"labels",
+												"1"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1",
+													"disabled": true
+												},
+												{
+													"key": "size",
+													"value": "10",
+													"disabled": true
+												},
+												{
+													"key": "sort",
+													"value": "id:ASC",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "入货",
+							"item": [
+								{
+									"name": "添加入货信息",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"address\": \"AAAAA\",\n    \"birthdate\": \"2000-01-01\",\n    \"create_date\": \"2023-11-10\",\n    \"discount\": 1,\n    \"email\": \"qiong@163.com\",\n    \"member_id\": \"HK0001\",\n    \"member_level\": \"5\",\n    \"name\": \"劉漪琳\",\n    \"phone_no\": \"998883\",\n    \"remarks\": \"XXXXXXXXXXXX\",\n    \"sex\": \"F\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/members/",
+											"protocol": "{{HEAD}}",
+											"host": [
+												"{{HOST}}"
+											],
+											"port": "{{PORT}}",
+											"path": [
+												"members",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "壞貨",
+							"item": [
+								{
+									"name": "壞貨列表",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/broken-products/?page=1&size=10&sort=id:ASC",
+											"protocol": "{{HEAD}}",
+											"host": [
+												"{{HOST}}"
+											],
+											"port": "{{PORT}}",
+											"path": [
+												"broken-products",
+												""
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "size",
+													"value": "10"
+												},
+												{
+													"key": "sort",
+													"value": "id:ASC"
+												},
+												{
+													"key": "",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "刪除壞貨",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/broken-products/4",
+											"protocol": "{{HEAD}}",
+											"host": [
+												"{{HOST}}"
+											],
+											"port": "{{PORT}}",
+											"path": [
+												"broken-products",
+												"4"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1",
+													"disabled": true
+												},
+												{
+													"key": "size",
+													"value": "10",
+													"disabled": true
+												},
+												{
+													"key": "sort",
+													"value": "id:ASC",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "导出产品EXCEL文件",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNzAwOTIxMDQ1fQ.a-3tjE1eZ9fLOFLAJrcZR5nsQrcPoNalTAkMc69vZAw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/export_excel_product",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"export_excel_product"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "访问导出产品EXCEL文件",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/upload/统计表_20231121.xlsx",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"upload",
+										"统计表_20231121.xlsx"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "cashier",
+					"item": [
+						{
+							"name": "收銀員产品列表",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/cashier_products/?label=&supplier=&new_restock_date=&search=&page=1&size=1&sort=id:desc",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"cashier_products",
+										""
+									],
+									"query": [
+										{
+											"key": "label",
+											"value": ""
+										},
+										{
+											"key": "supplier",
+											"value": ""
+										},
+										{
+											"key": "new_restock_date",
+											"value": ""
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "1"
+										},
+										{
+											"key": "sort",
+											"value": "id:desc"
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "收银员订单列表",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/cashier_orders/?time_period=3&date=&status=&search=&cashier=2&member=&order_id=&sort=id:desc&page=1&size=12&",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"cashier_orders",
+										""
+									],
+									"query": [
+										{
+											"key": "time_period",
+											"value": "3"
+										},
+										{
+											"key": "date",
+											"value": ""
+										},
+										{
+											"key": "status",
+											"value": ""
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "cashier",
+											"value": "2"
+										},
+										{
+											"key": "member",
+											"value": ""
+										},
+										{
+											"key": "order_id",
+											"value": ""
+										},
+										{
+											"key": "sort",
+											"value": "id:desc"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "12"
+										},
+										{
+											"key": "",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "order",
+					"item": [
+						{
+							"name": "新增订单",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNzAwNDY3NTU2fQ.TscJDrJZcVTWBp1p26NPeaSKUvcmq67lV6BfN0lJKoM",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"discount\": [\n        {\n            \"type\": \"會員優惠\",\n            \"discount_deduction\": 0\n        },\n        {\n            \"type\": \"全單減價\",\n            \"discount_deduction\": 1\n        }\n    ],\n    \"member\": \"\",\n    \"ordered_product\": [\n        {\n            \"product\": 8,\n            \"variation\": 5,\n            \"quantity\": 1,\n            \"discount_deduction\": 1\n        }\n    ],\n    \"payment_method\": [\n        {\n            \"name\": \"微信支付\",\n            \"price\": 10\n        }\n    ],\n    \"status\": \"paid\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/orders",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "订单列表",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/orders/?label=&supplier=&new_restock_date=&search=&page=1&size=2&sort=id:desc",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"orders",
+										""
+									],
+									"query": [
+										{
+											"key": "label",
+											"value": ""
+										},
+										{
+											"key": "supplier",
+											"value": ""
+										},
+										{
+											"key": "new_restock_date",
+											"value": ""
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										},
+										{
+											"key": "sort",
+											"value": "id:desc"
+										},
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "订单详情",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/orders/7",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"orders",
+										"7"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "订单退款",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refunded_info\": {\n        \"refunded_price\": 11,\n        \"refunded_quantity\": 1,\n        \"product\": 8,\n        \"variation\": 5\n    },\n    \"refunded_remarks\": \"测试退款\",\n    \"storehouse\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/order_refund/6",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"order_refund",
+										"6"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "毛利率列表",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/order_profit_list/?time_period=&status=&cashier=&order_id=&startDate=&endDate=&date=&page=1&size=25&sort=id:desc&",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"order_profit_list",
+										""
+									],
+									"query": [
+										{
+											"key": "time_period",
+											"value": ""
+										},
+										{
+											"key": "status",
+											"value": ""
+										},
+										{
+											"key": "cashier",
+											"value": ""
+										},
+										{
+											"key": "order_id",
+											"value": ""
+										},
+										{
+											"key": "startDate",
+											"value": ""
+										},
+										{
+											"key": "endDate",
+											"value": ""
+										},
+										{
+											"key": "date",
+											"value": ""
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "25"
+										},
+										{
+											"key": "sort",
+											"value": "id:desc"
+										},
+										{
+											"key": "",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "sys",
+					"item": [
+						{
+							"name": "新增用户",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true,
+									"accept": true,
+									"user-agent": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:5173",
+										"type": "text"
+									},
+									{
+										"key": "Referer",
+										"value": "http://localhost:5173",
+										"type": "text"
+									},
+									{
+										"key": "Access-Control-Allow-Credentials",
+										"value": "true",
+										"type": "text"
+									},
+									{
+										"key": "Access-Control-Allow-Origin",
+										"value": "http://localhost:5173",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"qweqwe@123.com\",\n    \"isAdmin\": true,\n    \"name\": \"qweqwe\",\n    \"password\": \"qweqwe\",\n    \"phone_no\": \"1231231\",\n    \"storehouse\": 2\n}"
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/users/",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "修改用户",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"content-type": true,
+									"accept": true,
+									"user-agent": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNjk5NzAzNjM5fQ.7wscQRyqr00PDYbEBFS-rgq577-ocX9VxA-G-Xl-jYU",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Origin",
+										"value": "http://localhost:5173",
+										"type": "text"
+									},
+									{
+										"key": "Referer",
+										"value": "http://localhost:5173",
+										"type": "text"
+									},
+									{
+										"key": "Access-Control-Allow-Credentials",
+										"value": "true",
+										"type": "text"
+									},
+									{
+										"key": "Access-Control-Allow-Origin",
+										"value": "http://localhost:5173",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"qiong3@163.com\",\n    \"isAdmin\": true,\n    \"name\": \"沙天使\",\n    \"phone_no\": \"13576638899\",\n    \"storehouse\": 2\n}"
+								},
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/users-permissions/users/5",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"users-permissions",
+										"users",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "用戶登錄後的信息",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{HEAD}}://{{HOST}}:{{PORT}}/users-permissions/current_user/?",
+									"protocol": "{{HEAD}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"port": "{{PORT}}",
+									"path": [
+										"users-permissions",
+										"current_user",
+										""
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJxaW9uZ0AxNjMuY29tIiwiZXhwIjoxNzAxNTg3ODA2fQ.KU7xTV6KUQHe7pHXqBGQIIm6v1k3NfGdDOj2YrWyOtc",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "42.192.15.218",
+			"type": "string"
+		},
+		{
+			"key": "PORT",
+			"value": "8081",
+			"type": "string"
+		},
+		{
+			"key": "HEAD",
+			"value": "http",
+			"type": "string"
+		}
+	]
+}

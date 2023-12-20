@@ -21,7 +21,6 @@ public class Refunded extends BaseEntity {
     private Long profit_sql_id;
     private Long storehouse_sql_id;
 
-
     private String refunded_remarks;
 
     // 退款金额、数量

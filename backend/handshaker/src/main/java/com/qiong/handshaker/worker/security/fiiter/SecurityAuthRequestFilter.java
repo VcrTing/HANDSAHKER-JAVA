@@ -28,8 +28,8 @@ public class SecurityAuthRequestFilter extends OncePerRequestFilter {
     @Autowired
     QSecurityOfMysqlUtil mysqlUtil;
 
-    @Autowired
-    QSecurityOfRedisUtil redisUtil;
+    // @Autowired
+    // QSecurityOfRedisUtil redisUtil;
 
     /**
     * 无 TOKEN，用于测试 方法
@@ -51,13 +51,11 @@ public class SecurityAuthRequestFilter extends OncePerRequestFilter {
     */
     protected Object getUserFromStore(Long uid) {
         // 从 REDIS
-        return redisUtil.getAuthUserFromRedis(uid);
-        /*
+        // return redisUtil.getAuthUserFromRedis(uid);
         try {
             // 从 MYSQL
             return mysqlUtil.getAuthUserFromMysql(uid);
         } catch (Exception e) { return null; }
-        */
     }
 
     /**

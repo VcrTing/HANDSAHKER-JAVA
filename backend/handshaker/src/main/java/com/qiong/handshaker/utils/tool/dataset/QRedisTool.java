@@ -1,5 +1,12 @@
 package com.qiong.handshaker.utils.tool.dataset;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+public class QRedisTool { }
+
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -36,3 +43,6 @@ public class QRedisTool {
 
     public void dei(String key) { rt.delete(key); }
 }
+
+
+ */

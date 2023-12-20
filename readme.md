@@ -13,3 +13,7 @@ springboot
 
 ### 項目地址  
 git clone https://github.com/VcrTing/HANDSAHKER-TESTING.git
+
+### 注意事項
+1. 不能使用 order 作為 數據庫名稱
+2. 最好不能使用 status 作為 數據庫 字段

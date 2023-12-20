@@ -26,8 +26,8 @@ public class AuthService {
     @Autowired
     QSecurityOfMysqlUtil mysqlUtil;
 
-    @Autowired
-    QSecurityOfRedisUtil redisUtil;
+    // @Autowired
+    // QSecurityOfRedisUtil redisUtil;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -35,9 +35,9 @@ public class AuthService {
     // 储存 用户 到 缓存 内
     protected AuthUser storeUser(AuthUser user) {
         // REDIS
-        return redisUtil.setAuthUserToRedis(user);
+        // return redisUtil.setAuthUserToRedis(user);
         // MYSQL
-        // return mysqlUtil.setAuthUserToMysql(user);
+        return mysqlUtil.setAuthUserToMysql(user);
     }
 
     public AuthUser groupLoginUser(AuthUser user) {

@@ -58,7 +58,6 @@ public class Order extends BaseEntity {
 
     // JSON 裝 產品 購買 信息
     private String ordered_product;
-    // private List<OrderProduct> ordered_product;
 
     // 退貨 備註
     private String refunded_remarks;

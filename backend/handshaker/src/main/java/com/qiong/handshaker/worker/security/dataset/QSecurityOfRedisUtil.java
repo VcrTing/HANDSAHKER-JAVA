@@ -5,15 +5,15 @@ import com.qiong.handshaker.data.properties.PropertiesMy;
 import com.qiong.handshaker.entity.moduie.sys.User;
 import com.qiong.handshaker.moduie.sys.auth.AuthUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+// import org.springframework.data.redis.core.RedisTemplate;
+// import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
-@Component
+// @Component
 public class QSecurityOfRedisUtil {
-
+    /*
     static String NAMESPACE = "HANDSHAKE_AUTH_USER_";
 
     @Autowired
@@ -29,25 +29,25 @@ public class QSecurityOfRedisUtil {
         // System.out.println("propertiesMy = " + propertiesMy);
         // System.out.println("存活时间" + propertiesMy.getSecurity().getTokenSurvivalTime());
         return propertiesMy.getSecurity().getTokenSurvivalTime(); }
-
+    */
     /**
     * 储存 登录 用户: User 对象，设定储存时间为 TokenSurvivalTime 小时
     * @params
     * @return
-    */
+
     public AuthUser setAuthUserToRedis(AuthUser authUser) {
         User u = authUser.getUser();
         if (u == null) return null;
         ValueOperations<String, Object> ops = redisTemplate.opsForValue();
         ops.set(genSaveKey(u.getId()), JSONUtil.toJsonStr(u), getLiveTime(), TimeUnit.HOURS);
         return authUser;
-    }
+    }*/
 
     /**
     * 获取 登录 用户: User 对象
     * @params
     * @return
-    */
+
     public AuthUser getAuthUserFromRedis(Long uid) {
         ValueOperations<String, Object> ops = redisTemplate.opsForValue();
         Object authUser = ops.get(genSaveKey(uid));
@@ -56,5 +56,5 @@ public class QSecurityOfRedisUtil {
             return new AuthUser("", u, AuthUser.genAuthorities(u.getIsAdmin()));
         }
         return null;
-    }
+    }*/
 }
