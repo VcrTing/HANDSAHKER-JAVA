@@ -25,6 +25,7 @@ import java.util.HashMap;
 
 @RestController
 public class UserController {
+
     @Autowired
     UserService service;
 
